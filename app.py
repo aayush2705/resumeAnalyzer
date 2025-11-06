@@ -51,11 +51,18 @@ app.secret_key = "your_secret_key"
 bcrypt = Bcrypt(app)
 
 # ---------------- DATABASE CONFIG ---------------- #
-LOCAL_DB_URI = "mysql+pymysql://flask_user:root@localhost/resume_analyzer"
+# ✅ Local fallback (for testing locally)
+LOCAL_DB_URI = "sqlite:///resume_analyzer.db"
+
+# ✅ Use Render PostgreSQL connection in production
 DATABASE_URL = os.environ.get("DATABASE_URL", LOCAL_DB_URI)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# 🛠️ SQLAlchemy requires the prefix "postgresql+psycopg2://" instead of "postgres://"
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 @app.route('/add_courses')
