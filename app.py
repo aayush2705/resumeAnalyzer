@@ -51,12 +51,10 @@ app.secret_key = "your_secret_key"
 bcrypt = Bcrypt(app)
 
 # ---------------- DATABASE CONFIG ---------------- #
-DB_USER = 'flask_user'
-DB_PASSWORD = 'root'
-DB_HOST = 'localhost'
-DB_NAME = 'resume_analyzer'
+LOCAL_DB_URI = "mysql+pymysql://flask_user:root@localhost/resume_analyzer"
+DATABASE_URL = os.environ.get("DATABASE_URL", LOCAL_DB_URI)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
