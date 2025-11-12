@@ -15,34 +15,157 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.units import inch
 from reportlab.lib.enums import TA_CENTER
+from reportlab.platypus import Image as RLImage
+from reportlab.platypus import Image as RLImage, PageBreak
+from reportlab.lib.styles import ParagraphStyle
 from models import Course
 import json
 
 # ---------------- ROADMAP DATA ----------------
 ROADMAPS = {
-   'Android Development': {
-    'title': 'Android Development Roadmap',
-    'steps': [
-        'Learn Java or Kotlin',
-        'Understand Android Studio and XML Layouts',
-        'Learn Android Jetpack Components',
-        'Work with APIs and Databases',
-        'Publish Your First App on Play Store'
-    ],
-    'image': 'static/roadmaps/android_development_roadmap.png'
-},
-'iOS Development': {
-    'title': 'iOS Development Roadmap',
-    'steps': [
-        'Learn Swift Programming Language',
-        'Understand Xcode and Storyboards',
-        'Learn UIKit and SwiftUI',
-        'Implement Core Data and Networking',
-        'Publish App on App Store'
-    ],
-    'image': 'static/roadmaps/ios_development_roadmap.png'
-},
-
+    'Data Science': {
+        'title': 'Data Science Roadmap',
+        'steps': [
+            'Learn Python and Statistics Fundamentals',
+            'Master Data Wrangling and Visualization with Pandas & Matplotlib',
+            'Understand Machine Learning Algorithms',
+            'Practice with Real-World Datasets (Kaggle)',
+            'Build and Deploy End-to-End Data Science Projects'
+        ],
+        'image': 'static/roadmaps/data_science_roadmap.png'
+    },
+    'Web Development': {
+        'title': 'Web Development Roadmap',
+        'steps': [
+            'Learn HTML, CSS, and JavaScript Basics',
+            'Understand Frontend Frameworks like React or Angular',
+            'Master Backend with Node.js, Django, or Flask',
+            'Work with Databases like MySQL or MongoDB',
+            'Deploy Full Stack Applications on Cloud Platforms'
+        ],
+        'image': 'static/roadmaps/web_development_roadmap.png'
+    },
+    'Android Development': {
+        'title': 'Android Development Roadmap',
+        'steps': [
+            'Learn Java or Kotlin for Android',
+            'Understand Android Studio and XML Layouts',
+            'Learn Android Jetpack Components and APIs',
+            'Integrate SQLite and Firebase for Data Management',
+            'Publish Your First App on Google Play Store'
+        ],
+        'image': 'static/roadmaps/android_development_roadmap.png'
+    },
+    'iOS Development': {
+        'title': 'iOS Development Roadmap',
+        'steps': [
+            'Learn Swift and Xcode IDE',
+            'Understand UIKit and SwiftUI Frameworks',
+            'Implement Core Data and API Networking',
+            'Build UI/UX for iOS Devices',
+            'Publish Your First App on Apple App Store'
+        ],
+        'image': 'static/roadmaps/ios_development_roadmap.png'
+    },
+    'UI/UX Design': {
+        'title': 'UI/UX Design Roadmap',
+        'steps': [
+            'Understand Design Thinking Process',
+            'Learn Wireframing and Prototyping with Figma/Adobe XD',
+            'Master Visual Design Principles',
+            'Test and Iterate User Experience Flows',
+            'Build a Professional UI/UX Design Portfolio'
+        ],
+        'image': 'static/roadmaps/ui_ux_design_roadmap.png'
+    },
+    'Data Analyst': {
+        'title': 'Data Analyst Roadmap',
+        'steps': [
+            'Learn Excel, SQL, and Power BI/Tableau',
+            'Understand Data Cleaning and Transformation',
+            'Master Data Visualization Tools',
+            'Learn Statistics and Basic Python Analysis',
+            'Work on Business-Oriented Dashboards and Reports'
+        ],
+        'image': 'static/roadmaps/data_analyst_roadmap.png'
+    },
+    'Cloud & DevOps': {
+        'title': 'Cloud & DevOps Roadmap',
+        'steps': [
+            'Learn Linux, Networking, and Shell Scripting',
+            'Understand Cloud Platforms (AWS, Azure, GCP)',
+            'Work with Docker and Kubernetes',
+            'Implement CI/CD Pipelines and Infrastructure as Code',
+            'Monitor and Optimize Deployments'
+        ],
+        'image': 'static/roadmaps/cloud_devops_roadmap.png'
+    },
+    'Cybersecurity': {
+        'title': 'Cybersecurity Roadmap',
+        'steps': [
+            'Understand Networking and Operating Systems',
+            'Learn Ethical Hacking Tools (Nmap, Burp Suite)',
+            'Master Security Concepts: Firewalls, Encryption, SIEM',
+            'Explore Vulnerability Management and Incident Response',
+            'Pursue CEH or CompTIA Security+ Certification'
+        ],
+        'image': 'static/roadmaps/cybersecurity_roadmap.png'
+    },
+    'Quality Assurance': {
+        'title': 'Quality Assurance Roadmap',
+        'steps': [
+            'Understand Software Testing Fundamentals',
+            'Learn Manual and Automated Testing (Selenium/Postman)',
+            'Master API and UI Testing Frameworks',
+            'Integrate Testing into CI/CD Pipelines',
+            'Explore QA Tools like JIRA and TestNG'
+        ],
+        'image': 'static/roadmaps/qa_roadmap.png'
+    },
+    'Business Analyst': {
+        'title': 'Business Analyst Roadmap',
+        'steps': [
+            'Learn Requirement Gathering and Documentation',
+            'Understand Agile and Scrum Methodologies',
+            'Develop Analytical Thinking and Communication Skills',
+            'Use Tools like Excel, JIRA, Power BI',
+            'Collaborate on Project Reports and Stakeholder Analysis'
+        ],
+        'image': 'static/roadmaps/business_analyst_roadmap.png'
+    },
+    'Database Administrator': {
+        'title': 'Database Administrator Roadmap',
+        'steps': [
+            'Learn SQL Fundamentals and Normalization',
+            'Understand Database Design and Modeling',
+            'Manage Backups, Recovery, and Performance Tuning',
+            'Work with Oracle, PostgreSQL, or MySQL',
+            'Secure and Monitor Database Systems'
+        ],
+        'image': 'static/roadmaps/database_admin_roadmap.png'
+    },
+    'AI / NLP Engineer': {
+        'title': 'AI / NLP Engineer Roadmap',
+        'steps': [
+            'Understand NLP Fundamentals and Text Processing',
+            'Learn Machine Learning and Deep Learning Basics',
+            'Work with Transformers, BERT, and GPT Models',
+            'Use Libraries like Hugging Face and SpaCy',
+            'Deploy NLP Models into Production Environments'
+        ],
+        'image': 'static/roadmaps/nlp_engineer_roadmap.png'
+    },
+    'Product Manager': {
+        'title': 'Product Manager Roadmap',
+        'steps': [
+            'Understand Product Lifecycle and Market Research',
+            'Develop Communication and Leadership Skills',
+            'Learn Agile and Scrum Frameworks',
+            'Use Tools like JIRA, Notion, and Trello',
+            'Work on Real Product Strategy and Launch Projects'
+        ],
+        'image': 'static/roadmaps/product_manager_roadmap.png'
+    }
 }
 
 # ---------------- APP SETUP ---------------- #
@@ -150,12 +273,99 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# ---------------- HELPER KEYWORDS ---------------- #
-DS_KEYWORD = {'tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit', 'scikit-learn'}
-WEB_KEYWORD = {'react', 'django', 'node js', 'node', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#', 'asp.net'}
-ANDROID_KEYWORD = {'android', 'flutter', 'kotlin', 'xml', 'kivy', 'java'}
-IOS_KEYWORD = {'ios', 'swift', 'cocoa', 'xcode', 'objective-c'}
-UIUX_KEYWORD = {'ux', 'adobe xd', 'figma', 'balsamiq', 'ui', 'prototyping', 'wireframes'}
+# # ---------------- HELPER KEYWORDS ---------------- #
+# DS_KEYWORD = {'tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit', 'scikit-learn'}
+# WEB_KEYWORD = {'react', 'django', 'node js', 'node', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#', 'asp.net'}
+# ANDROID_KEYWORD = {'android', 'flutter', 'kotlin', 'xml', 'kivy', 'java'}
+# IOS_KEYWORD = {'ios', 'swift', 'cocoa', 'xcode', 'objective-c'}
+# UIUX_KEYWORD = {'ux', 'adobe xd', 'figma', 'balsamiq', 'ui', 'prototyping', 'wireframes'}
+# ---------------- EXISTING ROLES ----------------
+DS_KEYWORD = {
+    'tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning',
+    'flask', 'streamlit', 'scikit-learn', 'pandas', 'numpy', 'matplotlib',
+    'seaborn', 'data analysis', 'data visualization', 'ai', 'nlp', 'opencv'
+}
+
+WEB_KEYWORD = {
+    'react', 'django', 'node js', 'node', 'php', 'laravel', 'magento', 'wordpress',
+    'javascript', 'angular js', 'angular', 'typescript', 'html', 'css', 'bootstrap',
+    'express', 'mongodb', 'mysql', 'nextjs', 'rest api', 'frontend', 'backend'
+}
+
+ANDROID_KEYWORD = {
+    'android', 'flutter', 'kotlin', 'xml', 'kivy', 'java', 'jetpack compose',
+    'firebase', 'android studio'
+}
+
+IOS_KEYWORD = {
+    'ios', 'swift', 'cocoa', 'xcode', 'objective-c', 'swiftui', 'uikit'
+}
+
+UIUX_KEYWORD = {
+    'ux', 'adobe xd', 'figma', 'balsamiq', 'ui', 'prototyping', 'wireframes',
+    'user experience', 'user interface', 'mockups', 'usability testing'
+}
+
+# ---------------- NEWLY ADDED ROLES ----------------
+
+DATA_ANALYST_KEYWORD = {
+    'excel', 'power bi', 'tableau', 'sql', 'data cleaning', 'data visualization',
+    'pandas', 'numpy', 'statistics', 'analytics', 'matplotlib', 'seaborn'
+}
+
+CLOUD_DEVOPS_KEYWORD = {
+    'aws', 'azure', 'gcp', 'docker', 'kubernetes', 'terraform', 'jenkins',
+    'ci/cd', 'linux', 'bash', 'ansible', 'devops', 'cloud', 'infrastructure'
+}
+
+CYBER_KEYWORD = {
+    'cybersecurity', 'ethical hacking', 'penetration testing', 'network security',
+    'firewall', 'siem', 'nmap', 'burp suite', 'kali linux', 'cryptography',
+    'vulnerability assessment'
+}
+
+QA_KEYWORD = {
+    'manual testing', 'automation testing', 'selenium', 'cypress', 'postman',
+    'api testing', 'jira', 'test cases', 'bug tracking', 'pytest', 'quality assurance'
+}
+
+BA_KEYWORD = {
+    'business analysis', 'requirement gathering', 'documentation', 'excel',
+    'communication', 'agile', 'scrum', 'jira', 'project management', 'stakeholder'
+}
+
+DBA_KEYWORD = {
+    'sql', 'pl/sql', 'oracle', 'mysql', 'postgresql', 'database', 'normalization',
+    'backup', 'recovery', 'performance tuning', 'rds'
+}
+
+AI_NLP_KEYWORD = {
+    'nlp', 'transformers', 'huggingface', 'bert', 'gpt', 'text classification',
+    'chatbot', 'speech recognition', 'language model', 'ai', 'deep learning'
+}
+
+PRODUCT_MANAGER_KEYWORD = {
+    'product management', 'roadmap', 'market research', 'communication',
+    'analytics', 'data-driven', 'leadership', 'jira', 'notion', 'scrum'
+}
+
+# ---------------- COMBINED JOB KEYWORDS ----------------
+JOB_KEYWORDS = {
+    'Data Science': DS_KEYWORD,
+    'Web Development': WEB_KEYWORD,
+    'Android Development': ANDROID_KEYWORD,
+    'iOS Development': IOS_KEYWORD,
+    'UI/UX Design': UIUX_KEYWORD,
+    'Data Analyst': DATA_ANALYST_KEYWORD,
+    'Cloud & DevOps': CLOUD_DEVOPS_KEYWORD,
+    'Cybersecurity': CYBER_KEYWORD,
+    'Quality Assurance': QA_KEYWORD,
+    'Business Analyst': BA_KEYWORD,
+    'Database Administrator': DBA_KEYWORD,
+    'AI / NLP Engineer': AI_NLP_KEYWORD,
+    'Product Manager': PRODUCT_MANAGER_KEYWORD
+}
+
 
 # ---------------- HOME ---------------- #
 @app.route('/')
@@ -294,48 +504,147 @@ def view_resume(resume_id):
             cand_level = "Experienced"
 
         skills_list = analysis.get('skills_found', [])
-        predicted_role, recommended_skills, courses = None, [], []
+        predicted_role = None
+        recommended_skills = []
+        courses = []
 
         # ---------- ROLE PREDICTION ----------
-        if any(skill.lower() in DS_KEYWORD for skill in skills_list):
-            predicted_role = 'Data Science'
-            recommended_skills = ['Tensorflow', 'Keras', 'Pytorch', 'Flask', 'Streamlit']
+        for role, keywords in JOB_KEYWORDS.items():
+            if any(skill.lower() in keywords for skill in skills_list):
+                predicted_role = role
+                break
+
+        # ---------- RECOMMENDED SKILLS & COURSES ----------
+        if predicted_role == 'Data Science':
+            recommended_skills = ['Pandas', 'NumPy', 'Matplotlib', 'Flask', 'Streamlit']
             courses = [
                 {"name": "Machine Learning Crash Course (Google)", "link": "https://developers.google.com/machine-learning/crash-course"},
-                {"name": "Deep Learning Specialization (Coursera)", "link": "https://www.coursera.org/specializations/deep-learning"}
+                {"name": "Deep Learning Specialization (Coursera)", "link": "https://www.coursera.org/specializations/deep-learning"},
+                {"name": "Python for Data Science (Coursera)", "link": "https://www.coursera.org/learn/python-for-data-science"},
+                {"name": "Data Scientist with Python (DataCamp)", "link": "https://www.datacamp.com/tracks/data-scientist-with-python"},
+                {"name": "Applied Data Science (Coursera)", "link": "https://www.coursera.org/specializations/applied-data-science"}
             ]
 
-        elif any(skill.lower() in WEB_KEYWORD for skill in skills_list):
-            predicted_role = 'Web Development'
-            recommended_skills = ['React', 'Node JS', 'Django', 'PHP', 'Laravel']
+        elif predicted_role == 'Web Development':
+            recommended_skills = ['React', 'Node.js', 'Django', 'Flask', 'MySQL']
             courses = [
-                {"name": "Full-Stack Web Dev (Udemy)", "link": "https://www.udemy.com/course/the-complete-web-developer-course-2/"},
-                {"name": "JavaScript Essentials (freeCodeCamp)", "link": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"}
+                {"name": "The Complete Web Developer Bootcamp (Udemy)", "link": "https://www.udemy.com/course/the-complete-web-developer-course-2/"},
+                {"name": "JavaScript Algorithms and Data Structures (freeCodeCamp)", "link": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"},
+                {"name": "React JS Frontend Web Development (Coursera)", "link": "https://www.coursera.org/learn/react"},
+                {"name": "Django for Beginners (Udemy)", "link": "https://www.udemy.com/course/django-for-beginners/"},
+                {"name": "Full Stack Open (University of Helsinki)", "link": "https://fullstackopen.com/en/"}
             ]
 
-        elif any(skill.lower() in ANDROID_KEYWORD for skill in skills_list):
-            predicted_role = 'Android Development'
+        elif predicted_role == 'Android Development':
             recommended_skills = ['Kotlin', 'Flutter', 'XML', 'SQLite', 'Firebase']
             courses = [
                 {"name": "Android App Development (Google)", "link": "https://developer.android.com/courses"},
-                {"name": "Flutter Bootcamp (Udemy)", "link": "https://www.udemy.com/course/flutter-bootcamp-with-dart/"}
+                {"name": "Flutter Bootcamp (Udemy)", "link": "https://www.udemy.com/course/flutter-bootcamp-with-dart/"},
+                {"name": "Android Development for Beginners (YouTube)", "link": "https://youtu.be/fis26HvvDII"},
+                {"name": "Kotlin for Android Developers (Coursera)", "link": "https://www.coursera.org/learn/kotlin-for-java-developers"},
+                {"name": "Build Native Mobile Apps with Flutter (Coursera)", "link": "https://www.coursera.org/specializations/app-development-with-flutter"}
             ]
 
-        elif any(skill.lower() in IOS_KEYWORD for skill in skills_list):
-            predicted_role = 'iOS Development'
-            recommended_skills = ['Swift', 'Xcode', 'Cocoa Touch', 'Auto Layout']
+        elif predicted_role == 'iOS Development':
+            recommended_skills = ['Swift', 'Xcode', 'UIKit', 'Core Data', 'SwiftUI']
             courses = [
-                {"name": "iOS Development with Swift (Udemy)", "link": "https://www.udemy.com/course/ios-13-app-development-bootcamp/"}
+                {"name": "iOS App Development with Swift (Udemy)", "link": "https://www.udemy.com/course/ios-13-app-development-bootcamp/"},
+                {"name": "SwiftUI Essentials (Apple)", "link": "https://developer.apple.com/tutorials/swiftui"},
+                {"name": "iOS Development for Beginners (Coursera)", "link": "https://www.coursera.org/learn/ios-app-development-basics"},
+                {"name": "Mobile App Development with Swift (edX)", "link": "https://www.edx.org/professional-certificate/curtinx-mobile-app-development-with-swift"},
+                {"name": "Swift Programming Language (Codecademy)", "link": "https://www.codecademy.com/learn/learn-swift"}
             ]
 
-        elif any(skill.lower() in UIUX_KEYWORD for skill in skills_list):
-            predicted_role = 'UI/UX Design'
-            recommended_skills = ['Figma', 'Adobe XD', 'Wireframes', 'Prototyping']
+        elif predicted_role == 'UI/UX Design':
+            recommended_skills = ['Figma', 'Adobe XD', 'Prototyping', 'Wireframes', 'Usability Testing']
             courses = [
+                {"name": "Google UX Design Professional Certificate", "link": "https://www.coursera.org/professional-certificates/google-ux-design"},
                 {"name": "UI/UX Design Essentials (Udemy)", "link": "https://www.udemy.com/course/ui-ux-web-design-using-adobe-xd/"},
-                {"name": "Design Thinking (Coursera)", "link": "https://www.coursera.org/learn/uva-darden-design-thinking-innovation"}
+                {"name": "Design Thinking (Coursera)", "link": "https://www.coursera.org/learn/uva-darden-design-thinking-innovation"},
+                {"name": "Figma for UX Design (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/figma-for-ux-design"},
+                {"name": "User Experience Design Fundamentals (Skillshare)", "link": "https://www.skillshare.com/en/classes/user-experience-design-fundamentals/87920879"}
             ]
-            
+
+        elif predicted_role == 'Data Analyst':
+            recommended_skills = ['Excel', 'Power BI', 'SQL', 'Pandas', 'Visualization']
+            courses = [
+                {"name": "Google Data Analytics Professional Certificate", "link": "https://www.coursera.org/professional-certificates/google-data-analytics"},
+                {"name": "Data Analyst with Python (DataCamp)", "link": "https://www.datacamp.com/tracks/data-analyst-with-python"},
+                {"name": "Excel to MySQL: Analytics Techniques (Coursera)", "link": "https://www.coursera.org/specializations/excel-mysql"},
+                {"name": "Tableau for Beginners (Udemy)", "link": "https://www.udemy.com/course/tableau10/"},
+                {"name": "Power BI Fundamentals (Microsoft Learn)", "link": "https://learn.microsoft.com/en-us/training/paths/get-started-power-bi/"}
+            ]
+
+        elif predicted_role == 'Cloud & DevOps':
+            recommended_skills = ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD']
+            courses = [
+                {"name": "AWS Cloud Practitioner Essentials", "link": "https://www.aws.training/Details/eLearning?id=60697"},
+                {"name": "Docker & Kubernetes for Beginners (Udemy)", "link": "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/"},
+                {"name": "DevOps Foundations (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/devops-foundations"},
+                {"name": "Azure DevOps Fundamentals (Microsoft)", "link": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-devops/"},
+                {"name": "Terraform for Beginners (HashiCorp)", "link": "https://learn.hashicorp.com/collections/terraform/aws-get-started"}
+            ]
+
+        elif predicted_role == 'Cybersecurity':
+            recommended_skills = ['Network Security', 'Ethical Hacking', 'SIEM', 'Firewalls', 'Vulnerability Assessment']
+            courses = [
+                {"name": "Cybersecurity Fundamentals (Coursera)", "link": "https://www.coursera.org/specializations/ibm-cybersecurity-analyst"},
+                {"name": "Certified Ethical Hacker (EC-Council)", "link": "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/"},
+                {"name": "Introduction to Cybersecurity (Cisco)", "link": "https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity"},
+                {"name": "Network Security Fundamentals (Udemy)", "link": "https://www.udemy.com/course/network-security-fundamentals/"},
+                {"name": "Google Cybersecurity Certificate", "link": "https://www.coursera.org/professional-certificates/google-cybersecurity"}
+            ]
+
+        elif predicted_role == 'Quality Assurance':
+            recommended_skills = ['Manual Testing', 'Automation', 'Selenium', 'Postman', 'Bug Tracking']
+            courses = [
+                {"name": "Software Testing Fundamentals (Coursera)", "link": "https://www.coursera.org/learn/software-testing"},
+                {"name": "Selenium WebDriver with Python (Udemy)", "link": "https://www.udemy.com/course/selenium-webdriver-with-python/"},
+                {"name": "API Testing with Postman (Udemy)", "link": "https://www.udemy.com/course/postman-the-complete-guide/"},
+                {"name": "Test Automation University", "link": "https://testautomationu.applitools.com/"},
+                {"name": "Agile Testing Foundations (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/agile-testing-foundations"}
+            ]
+
+        elif predicted_role == 'Business Analyst':
+            recommended_skills = ['Excel', 'Agile', 'Documentation', 'JIRA', 'Communication']
+            courses = [
+                {"name": "Business Analysis Fundamentals (Udemy)", "link": "https://www.udemy.com/course/business-analysis-fundamentals/"},
+                {"name": "Agile Business Analyst (Coursera)", "link": "https://www.coursera.org/learn/agile-business-analyst"},
+                {"name": "Excel Skills for Business (Coursera)", "link": "https://www.coursera.org/specializations/excel"},
+                {"name": "Project Management Foundations (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/project-management-foundations"},
+                {"name": "Business Analytics Specialization (Coursera)", "link": "https://www.coursera.org/specializations/business-analytics"}
+            ]
+
+        elif predicted_role == 'Database Administrator':
+            recommended_skills = ['SQL', 'Backup', 'Performance Tuning', 'PostgreSQL', 'Oracle']
+            courses = [
+                {"name": "Oracle SQL Database Administration (Udemy)", "link": "https://www.udemy.com/course/oracle-sql-database-administration/"},
+                {"name": "PostgreSQL for Everybody (Coursera)", "link": "https://www.coursera.org/specializations/postgresql-for-everybody"},
+                {"name": "Database Management Essentials (Coursera)", "link": "https://www.coursera.org/learn/database-management"},
+                {"name": "Microsoft SQL Server Essentials (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/sql-server-essential-training"},
+                {"name": "MySQL for Data Analytics (Udemy)", "link": "https://www.udemy.com/course/mysql-for-data-analytics-and-business-intelligence/"}
+            ]
+
+        elif predicted_role == 'AI / NLP Engineer':
+            recommended_skills = ['NLP', 'Transformers', 'Hugging Face', 'BERT', 'GPT']
+            courses = [
+                {"name": "Natural Language Processing (Coursera)", "link": "https://www.coursera.org/learn/language-processing"},
+                {"name": "Hugging Face NLP Course", "link": "https://huggingface.co/learn/nlp-course"},
+                {"name": "Deep Learning for NLP (Udemy)", "link": "https://www.udemy.com/course/nlp-natural-language-processing-with-python/"},
+                {"name": "Applied Text Mining in Python (Coursera)", "link": "https://www.coursera.org/learn/python-text-mining"},
+                {"name": "Transformers and BERT Models (YouTube)", "link": "https://youtu.be/kCc8FmEb1nY"}
+            ]
+
+        elif predicted_role == 'Product Manager':
+            recommended_skills = ['Leadership', 'Agile', 'Market Research', 'Analytics', 'Roadmapping']
+            courses = [
+                {"name": "Digital Product Management (Coursera)", "link": "https://www.coursera.org/learn/uva-darden-digital-product-management"},
+                {"name": "Product Management 101 (Udemy)", "link": "https://www.udemy.com/course/product-management-101/"},
+                {"name": "Agile Product Owner Role (LinkedIn Learning)", "link": "https://www.linkedin.com/learning/agile-product-owner-role"},
+                {"name": "Product Strategy (Northwestern University)", "link": "https://www.coursera.org/learn/product-strategy"},
+                {"name": "Business Strategy for PMs (edX)", "link": "https://www.edx.org/course/business-strategy"}
+            ]
+
 
         # ---------- RESUME SCORING ----------
         sections = {
@@ -397,9 +706,10 @@ def view_resume(resume_id):
         recommended_skills = []
 
     tips = resume.tips.split("\n") if resume.tips else []
-    
-      # ---------- ADD ROADMAP ----------
+
+    # ---------- ADD ROADMAP ----------
     roadmap = ROADMAPS.get(resume.predicted_role)
+
     # ---------- RENDER TEMPLATE ----------
     return render_template(
         "view_resume.html",
@@ -414,9 +724,10 @@ def view_resume(resume_id):
             "tips": tips,
             "score": resume.resume_score or 0,
             "courses": courses,
-            "roadmap": roadmap  # 👈 Added roadmap
+            "roadmap": roadmap
         }
     )
+
 
 @app.route('/download_resume_pdf/<int:resume_id>')
 def download_resume_pdf(resume_id):
@@ -425,7 +736,14 @@ def download_resume_pdf(resume_id):
 
     # Create an in-memory PDF
     buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=A4,
+        rightMargin=35,
+        leftMargin=35,
+        topMargin=40,
+        bottomMargin=40
+    )
     styles = getSampleStyleSheet()
     content = []
 
@@ -433,36 +751,37 @@ def download_resume_pdf(resume_id):
     title_style = styles['Title']
     title_style.alignment = TA_CENTER
     content.append(Paragraph("Resume Analysis Report", title_style))
-    content.append(Spacer(1, 0.3 * inch))
+    content.append(Spacer(1, 0.2 * inch))
 
     # ------------------- CANDIDATE INFO -------------------
-    user = resume.user  # via relationship
-    content.append(Paragraph(f"<b>Candidate Name:</b> {user.name}", styles["Normal"]))
-    content.append(Paragraph(f"<b>Candidate Email:</b> {user.email}", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    user = resume.user
+    info_style = ParagraphStyle('info', parent=styles["Normal"], spaceAfter=3)
+    content.append(Paragraph(f"<b>Candidate Name:</b> {user.name}", info_style))
+    content.append(Paragraph(f"<b>Candidate Email:</b> {user.email}", info_style))
+    content.append(Spacer(1, 0.15 * inch))
 
-    # ------------------- SUMMARY -------------------
+    # ------------------- ANALYSIS SUMMARY -------------------
     content.append(Paragraph("<b>Analysis Summary:</b>", styles["Heading3"]))
-    content.append(Paragraph(resume.parsed_text or "No summary available.", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    summary_text = resume.parsed_text or "No summary available."
+    content.append(Paragraph(summary_text, styles["Normal"]))
+    content.append(Spacer(1, 0.15 * inch))
 
-    # ------------------- SKILLS -------------------
+    # ------------------- CURRENT SKILLS -------------------
     content.append(Paragraph("<b>Current Skills:</b>", styles["Heading3"]))
     if resume.skills:
         if isinstance(resume.skills, str):
             skills_text = resume.skills
         else:
-            # if stored as list in JSON form
             skills_text = ", ".join(json.loads(resume.skills))
         content.append(Paragraph(skills_text, styles["Normal"]))
     else:
         content.append(Paragraph("No skills found.", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    content.append(Spacer(1, 0.15 * inch))
 
     # ------------------- PREDICTED ROLE -------------------
     content.append(Paragraph("<b>Predicted Job Role:</b>", styles["Heading3"]))
     content.append(Paragraph(resume.predicted_role or "Not available.", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    content.append(Spacer(1, 0.15 * inch))
 
     # ------------------- RECOMMENDED SKILLS -------------------
     content.append(Paragraph("<b>Recommended Skills:</b>", styles["Heading3"]))
@@ -472,10 +791,10 @@ def download_resume_pdf(resume_id):
         else:
             recommended_skills = resume.recommended_skills
         for skill in recommended_skills:
-            content.append(Paragraph(f"- {skill}", styles["Normal"]))
+            content.append(Paragraph(f"• {skill}", styles["Normal"]))
     else:
         content.append(Paragraph("No recommendations available.", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    content.append(Spacer(1, 0.15 * inch))
 
     # ------------------- COURSES -------------------
     content.append(Paragraph("<b>Courses & Certifications:</b>", styles["Heading3"]))
@@ -484,13 +803,50 @@ def download_resume_pdf(resume_id):
             course_names = json.loads(resume.courses)
             course_links = json.loads(resume.course_links or "[]")
             for name, link in zip(course_names, course_links):
-                content.append(Paragraph(f"- <a href='{link}'>{name}</a>", styles["Normal"]))
+                content.append(Paragraph(f"• <a href='{link}'>{name}</a>", styles["Normal"]))
         except Exception:
-            # fallback if data not JSON encoded
             content.append(Paragraph(resume.courses, styles["Normal"]))
     else:
         content.append(Paragraph("No course recommendations available.", styles["Normal"]))
     content.append(Spacer(1, 0.2 * inch))
+
+    # ------------------- ROADMAP IMAGE (FIRST PAGE) -------------------
+    if resume.predicted_role and resume.predicted_role in ROADMAPS:
+        roadmap_info = ROADMAPS[resume.predicted_role]
+        roadmap_title = roadmap_info.get('title', '')
+        roadmap_image = roadmap_info.get('image', '')
+
+        if roadmap_image and os.path.exists(roadmap_image):
+            try:
+                roadmap_title_style = ParagraphStyle(
+                    'roadmap_title',
+                    parent=styles["Heading3"],
+                    alignment=TA_CENTER,
+                    spaceAfter=6,
+                    fontSize=12,
+                    textColor=colors.HexColor('#0d47a1')
+                )
+                content.append(Paragraph(roadmap_title, roadmap_title_style))
+                content.append(Spacer(1, 0.1 * inch))
+
+                img = RLImage(roadmap_image)
+                max_width = 5.6 * inch
+                if img.drawWidth > max_width:
+                    scale = max_width / float(img.drawWidth)
+                    img.drawWidth *= scale
+                    img.drawHeight *= scale
+
+                img.hAlign = 'CENTER'
+                content.append(img)
+                content.append(Spacer(1, 0.15 * inch))
+            except Exception as e:
+                content.append(Paragraph(f"⚠️ Error displaying roadmap image: {str(e)}", styles["Normal"]))
+        else:
+            content.append(Paragraph("Roadmap image not found for this role.", styles["Normal"]))
+    else:
+        content.append(Paragraph("No roadmap available for this role.", styles["Normal"]))
+
+    content.append(Spacer(1, 0.15 * inch))
 
     # ------------------- TIPS -------------------
     content.append(Paragraph("<b>Resume Tips:</b>", styles["Heading3"]))
@@ -501,11 +857,23 @@ def download_resume_pdf(resume_id):
             content.append(Paragraph(f'<font color="{color}">{tip}</font>', styles["Normal"]))
     else:
         content.append(Paragraph("No tips available.", styles["Normal"]))
-    content.append(Spacer(1, 0.2 * inch))
+    content.append(Spacer(1, 0.15 * inch))
 
     # ------------------- SCORE -------------------
     content.append(Paragraph("<b>Overall Resume Score:</b>", styles["Heading3"]))
-    content.append(Paragraph(f"{resume.resume_score or 'N/A'} / 100", styles["Normal"]))
+    content.append(Paragraph(f"<b>{resume.resume_score or 'N/A'} / 100</b>", styles["Normal"]))
+
+    # ------------------- FOOTER -------------------
+    footer_style = ParagraphStyle(
+        'footer',
+        parent=styles["Normal"],
+        alignment=TA_CENTER,
+        textColor=colors.grey,
+        fontSize=8,
+        spaceBefore=15
+    )
+    content.append(Spacer(1, 0.1 * inch))
+    content.append(Paragraph("Generated by AI Resume Analyzer", footer_style))
 
     # ------------------- BUILD PDF -------------------
     doc.build(content)
@@ -517,6 +885,8 @@ def download_resume_pdf(resume_id):
         download_name=f"{user.name}_Resume_Analysis.pdf",
         mimetype="application/pdf"
     )
+
+
 
 # ---------------- ADMIN DASHBOARD ---------------- #
 @app.route('/admin')
@@ -752,8 +1122,17 @@ def show_roadmaps():
         {"name": "Android Development", "image": "roadmaps/android_development_roadmap.png"},
         {"name": "iOS Development", "image": "roadmaps/ios_development_roadmap.png"},
         {"name": "UI/UX Design", "image": "roadmaps/ui_ux_design_roadmap.png"},
+        {"name": "Data Analyst", "image": "roadmaps/data_analyst_roadmap.png"},
+        {"name": "Cloud & DevOps", "image": "roadmaps/cloud_devops_roadmap.png"},
+        {"name": "Cybersecurity", "image": "roadmaps/cybersecurity_roadmap.png"},
+        {"name": "Quality Assurance", "image": "roadmaps/quality_assurance_roadmap.png"},
+        {"name": "Business Analyst", "image": "roadmaps/business_analyst_roadmap.png"},
+        {"name": "Database Administrator", "image": "roadmaps/database_administrator_roadmap.png"},
+        {"name": "AI / NLP Engineer", "image": "roadmaps/ai___nlp_engineer_roadmap.png"},
+        {"name": "Product Manager", "image": "roadmaps/product_manager_roadmap.png"}
     ]
     return render_template("roadmap.html", roadmaps=roadmaps)
+
 
 # ---------------- LOGOUT ---------------- #
 @app.route('/logout')
@@ -764,7 +1143,6 @@ def logout():
 
 # ---------------- MAIN ---------------- #
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
     with app.app_context():
         db.create_all()
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
