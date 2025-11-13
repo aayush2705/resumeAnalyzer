@@ -5,97 +5,161 @@ import re
 # ---------- DEFINE ALL ROADMAPS ----------
 ROADMAPS = {
     'Data Science': [
-        'Learn Python and Statistics Fundamentals',
-        'Master Data Wrangling and Visualization with Pandas & Matplotlib',
+        'Learn Python, Statistics, and Probability',
+        'Master Pandas, NumPy, and Data Visualization',
         'Understand Machine Learning Algorithms',
-        'Practice with Real-World Datasets (Kaggle)',
-        'Build and Deploy End-to-End Data Science Projects'
+        'Work on Kaggle and Real ML Projects',
+        'Build and Deploy End-to-End ML Pipelines'
     ],
     'Web Development': [
         'Learn HTML, CSS, and JavaScript',
-        'Understand Frontend Frameworks like React or Angular',
-        'Master Backend with Node.js, Django, or Flask',
-        'Work with Databases like MySQL or MongoDB',
-        'Deploy Full Stack Applications on Cloud Platforms'
+        'Master Frontend Frameworks (React/Angular)',
+        'Learn Backend (Node.js, Django, Laravel)',
+        'Work with Databases like MySQL, MongoDB',
+        'Deploy Full Stack Apps to Cloud'
     ],
     'Android Development': [
-        'Learn Java or Kotlin for Android',
-        'Understand Android Studio and XML Layouts',
-        'Learn Android Jetpack Components and APIs',
-        'Integrate SQLite and Firebase for Data Management',
-        'Publish Your First App on Google Play Store'
+        'Learn Java/Kotlin and Android Studio',
+        'Understand XML Layouts and Jetpack Components',
+        'Use APIs, SQLite, and Firebase',
+        'Build Responsive Android UI/UX',
+        'Publish Apps to Google Play Store'
     ],
     'iOS Development': [
-        'Learn Swift and Xcode IDE',
-        'Understand UIKit and SwiftUI Frameworks',
-        'Implement Core Data and API Networking',
-        'Build UI/UX for iOS Devices',
-        'Publish Your First App on Apple App Store'
+        'Learn Swift and Xcode',
+        'Master UIKit and SwiftUI',
+        'Understand API Integration and Core Data',
+        'Build Production-Level iOS Apps',
+        'Publish App on Apple App Store'
     ],
     'UI/UX Design': [
-        'Understand Design Thinking Process',
-        'Learn Wireframing and Prototyping with Figma/Adobe XD',
-        'Master Visual Design Principles',
-        'Test and Iterate User Experience Flows',
-        'Build a Professional UI/UX Design Portfolio'
+        'Learn Design Thinking Process',
+        'Practice Wireframing and Prototyping',
+        'Master Figma and Adobe XD Tools',
+        'Conduct Usability Testing',
+        'Build and Publish Your UI/UX Portfolio'
     ],
     'Data Analyst': [
-        'Learn Excel, SQL, and Power BI/Tableau',
-        'Understand Data Cleaning and Transformation',
-        'Master Data Visualization Tools',
-        'Learn Statistics and Basic Python Analysis',
-        'Work on Business-Oriented Dashboards and Reports'
+        'Master Excel, SQL, and Power BI/Tableau',
+        'Understand Data Cleaning and Preparation',
+        'Learn Data Visualization Techniques',
+        'Perform Statistical and Business Analysis',
+        'Create Dashboards and Real Reports'
     ],
     'Cloud & DevOps': [
-        'Learn Linux, Networking, and Shell Scripting',
-        'Understand Cloud Platforms (AWS, Azure, GCP)',
+        'Learn Linux and Cloud Fundamentals',
+        'Master AWS, Azure, or Google Cloud',
         'Work with Docker and Kubernetes',
-        'Implement CI/CD Pipelines and Infrastructure as Code',
-        'Monitor and Optimize Deployments'
+        'Build CI/CD Pipelines with Jenkins',
+        'Implement Infrastructure as Code (Terraform)'
     ],
     'Cybersecurity': [
-        'Understand Networking and Operating Systems',
-        'Learn Ethical Hacking Tools (Nmap, Burp Suite)',
-        'Master Security Concepts: Firewalls, Encryption, SIEM',
-        'Explore Vulnerability Management and Incident Response',
-        'Pursue CEH or CompTIA Security+ Certification'
+        'Learn Networking, OS, and Protocols',
+        'Master Tools (Nmap, Burp Suite, Wireshark)',
+        'Understand Firewalls, SIEM, IDS/IPS',
+        'Perform Vulnerability Assessment & PenTesting',
+        'Prepare for CEH/Security+ Certification'
     ],
     'Quality Assurance': [
-        'Understand Software Testing Fundamentals',
-        'Learn Manual and Automated Testing (Selenium/Postman)',
-        'Master API and UI Testing Frameworks',
-        'Integrate Testing into CI/CD Pipelines',
-        'Explore QA Tools like JIRA and TestNG'
+        'Learn Software Testing Fundamentals',
+        'Master Manual & Automation Testing',
+        'Work with Selenium, Cypress, and Postman',
+        'Write Test Cases & Bug Reports (JIRA)',
+        'Integrate QA with CI/CD Pipelines'
     ],
     'Business Analyst': [
-        'Learn Requirement Gathering and Documentation',
-        'Understand Agile and Scrum Methodologies',
-        'Develop Analytical Thinking and Communication Skills',
-        'Use Tools like Excel, JIRA, Power BI',
-        'Collaborate on Project Reports and Stakeholder Analysis'
+        'Learn Business Analysis Fundamentals',
+        'Understand Requirement Gathering & SDLC',
+        'Master Excel, SQL, and Documentation',
+        'Use Tools like JIRA, Power BI',
+        'Work with Stakeholders & Agile Teams'
     ],
     'Database Administrator': [
-        'Learn SQL Fundamentals and Normalization',
-        'Understand Database Design and Modeling',
-        'Manage Backups, Recovery, and Performance Tuning',
-        'Work with Oracle, PostgreSQL, or MySQL',
-        'Secure and Monitor Database Systems'
+        'Learn SQL & Database Fundamentals',
+        'Master Database Architecture & Normalization',
+        'Work with Oracle, PostgreSQL, MySQL',
+        'Handle Backups, Recovery, and Security',
+        'Optimize Performance & Indexing'
     ],
     'AI / NLP Engineer': [
-        'Understand NLP Fundamentals and Text Processing',
-        'Learn Machine Learning and Deep Learning Basics',
-        'Work with Transformers, BERT, and GPT Models',
-        'Use Libraries like Hugging Face and SpaCy',
-        'Deploy NLP Models into Production Environments'
+        'Learn NLP Basics and Text Processing',
+        'Master ML & Deep Learning Concepts',
+        'Work with BERT, GPT, Transformers',
+        'Use HuggingFace, SpaCy, NLTK',
+        'Deploy NLP Models at Scale'
     ],
     'Product Manager': [
-        'Understand Product Lifecycle and Market Research',
-        'Develop Communication and Leadership Skills',
-        'Learn Agile and Scrum Frameworks',
-        'Use Tools like JIRA, Notion, and Trello',
-        'Work on Real Product Strategy and Launch Projects'
+        'Understand Product Lifecycle',
+        'Learn Market Research & Strategy',
+        'Master Agile, Scrum & Roadmapping',
+        'Use Tools like JIRA, Notion, Trello',
+        'Deliver Real Product Launches'
+    ],
+    'Python Developer': [
+        'Learn Core Python and OOP',
+        'Master Django or Flask Frameworks',
+        'Work with REST APIs and Databases',
+        'Learn Testing, Debugging, Deployment',
+        'Build Real-World Python Applications'
+    ],
+    'Java Developer': [
+        'Master Core Java & OOP',
+        'Learn Spring & Spring Boot',
+        'Work with Hibernate & Microservices',
+        'Build Secure REST APIs',
+        'Deploy Java Apps to Cloud'
+    ],
+    'C/C++ Developer': [
+        'Learn C/C++ Fundamentals',
+        'Master Memory Management & Pointers',
+        'Work with STL and OOP Concepts',
+        'Practice OS & Linux Programming',
+        'Build High-Performance Applications'
+    ],
+    '.NET Developer': [
+        'Learn C# Programming',
+        'Master ASP.NET Core & MVC',
+        'Work with Entity Framework & LINQ',
+        'Build REST APIs using .NET',
+        'Deploy .NET Projects to Cloud'
+    ],
+    'PHP Developer': [
+        'Learn Core PHP & OOP',
+        'Master Laravel Framework',
+        'Work with MySQL & REST APIs',
+        'Learn Authentication & Security',
+        'Deploy Scalable PHP Applications'
+    ],
+    'JavaScript Developer': [
+        'Master Core JavaScript & DOM',
+        'Understand Async JS, Promises, Event Loop',
+        'Learn TypeScript and Modern ES6+',
+        'Build Real Projects with Vanilla JS',
+        'Deploy JS Apps to Production'
+    ],
+    'Full Stack Developer': [
+        'Learn Frontend (HTML, CSS, JS, React)',
+        'Master Backend (Node/Django/PHP)',
+        'Work with Databases (SQL/NoSQL)',
+        'Learn Git, API Design, and Testing',
+        'Deploy Full Stack Projects'
+    ],
+    'Backend Developer': [
+        'Learn Server-Side Languages',
+        'Master REST API Development',
+        'Work with Redis, Authentication, JWT',
+        'Use SQL + NoSQL Databases',
+        'Implement Caching & Deployments'
+    ],
+    'Frontend Developer': [
+        'Master HTML, CSS, and JavaScript',
+        'Learn Frameworks (React, Vue)',
+        'Build Responsive UI with Tailwind/Bootstrap',
+        'Learn Web Accessibility & Performance',
+        'Deploy Frontend Apps to Cloud'
     ]
 }
+
 
 # ---------- OUTPUT FOLDER ----------
 output_dir = os.path.join('static', 'roadmaps')

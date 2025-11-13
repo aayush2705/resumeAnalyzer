@@ -24,6 +24,9 @@ import json
 
 # ---------------- ROADMAP DATA ----------------
 ROADMAPS = {
+
+    # ================= OLD ROLES =====================
+
     'Data Science': {
         'title': 'Data Science Roadmap',
         'steps': [
@@ -35,6 +38,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/data_science_roadmap.png'
     },
+
     'Web Development': {
         'title': 'Web Development Roadmap',
         'steps': [
@@ -46,6 +50,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/web_development_roadmap.png'
     },
+
     'Android Development': {
         'title': 'Android Development Roadmap',
         'steps': [
@@ -57,6 +62,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/android_development_roadmap.png'
     },
+
     'iOS Development': {
         'title': 'iOS Development Roadmap',
         'steps': [
@@ -68,6 +74,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/ios_development_roadmap.png'
     },
+
     'UI/UX Design': {
         'title': 'UI/UX Design Roadmap',
         'steps': [
@@ -79,6 +86,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/ui_ux_design_roadmap.png'
     },
+
     'Data Analyst': {
         'title': 'Data Analyst Roadmap',
         'steps': [
@@ -90,6 +98,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/data_analyst_roadmap.png'
     },
+
     'Cloud & DevOps': {
         'title': 'Cloud & DevOps Roadmap',
         'steps': [
@@ -99,8 +108,9 @@ ROADMAPS = {
             'Implement CI/CD Pipelines and Infrastructure as Code',
             'Monitor and Optimize Deployments'
         ],
-        'image': 'static/roadmaps/cloud_devops_roadmap.png'
+        'image': 'static/roadmaps/cloud___devops_roadmap.png'
     },
+
     'Cybersecurity': {
         'title': 'Cybersecurity Roadmap',
         'steps': [
@@ -112,6 +122,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/cybersecurity_roadmap.png'
     },
+
     'Quality Assurance': {
         'title': 'Quality Assurance Roadmap',
         'steps': [
@@ -121,8 +132,9 @@ ROADMAPS = {
             'Integrate Testing into CI/CD Pipelines',
             'Explore QA Tools like JIRA and TestNG'
         ],
-        'image': 'static/roadmaps/qa_roadmap.png'
+        'image': 'static/roadmaps/quality_assurance_roadmap.png'
     },
+
     'Business Analyst': {
         'title': 'Business Analyst Roadmap',
         'steps': [
@@ -134,6 +146,7 @@ ROADMAPS = {
         ],
         'image': 'static/roadmaps/business_analyst_roadmap.png'
     },
+
     'Database Administrator': {
         'title': 'Database Administrator Roadmap',
         'steps': [
@@ -143,8 +156,9 @@ ROADMAPS = {
             'Work with Oracle, PostgreSQL, or MySQL',
             'Secure and Monitor Database Systems'
         ],
-        'image': 'static/roadmaps/database_admin_roadmap.png'
+        'image': 'static/roadmaps/database_administrator_roadmap.png'
     },
+
     'AI / NLP Engineer': {
         'title': 'AI / NLP Engineer Roadmap',
         'steps': [
@@ -154,8 +168,9 @@ ROADMAPS = {
             'Use Libraries like Hugging Face and SpaCy',
             'Deploy NLP Models into Production Environments'
         ],
-        'image': 'static/roadmaps/nlp_engineer_roadmap.png'
+        'image': 'static/roadmaps/ai__nlp_engineer_roadmap.png'
     },
+
     'Product Manager': {
         'title': 'Product Manager Roadmap',
         'steps': [
@@ -166,8 +181,143 @@ ROADMAPS = {
             'Work on Real Product Strategy and Launch Projects'
         ],
         'image': 'static/roadmaps/product_manager_roadmap.png'
+    },
+
+    # ================= NEW ROLES =====================
+
+    'Python Developer': {
+        'title': 'Python Developer Roadmap',
+        'steps': [
+            'Learn Core Python and OOP',
+            'Master Django or Flask Frameworks',
+            'Work with REST APIs and Databases',
+            'Learn Testing and Deployment',
+            'Build Real-World Python Applications'
+        ],
+        'image': 'static/roadmaps/python_developer_roadmap.png'
+    },
+
+    'Java Developer': {
+        'title': 'Java Developer Roadmap',
+        'steps': [
+            'Master Core Java and OOP',
+            'Learn Spring and Spring Boot',
+            'Work with Hibernate and Microservices',
+            'Build Secure REST APIs',
+            'Deploy Java Applications to Cloud'
+        ],
+        'image': 'static/roadmaps/java_developer_roadmap.png'
+    },
+
+    'C/C++ Developer': {
+        'title': 'C/C++ Developer Roadmap',
+        'steps': [
+            'Learn C/C++ Fundamentals',
+            'Master Memory Management and Pointers',
+            'Understand STL and OOP Concepts',
+            'Practice Linux & OS-Level Programming',
+            'Build High-Performance Applications'
+        ],
+        'image': 'static/roadmaps/c_c___developer_roadmap.png'
+    },
+
+    '.NET Developer': {
+        'title': '.NET Developer Roadmap',
+        'steps': [
+            'Learn C# and .NET Basics',
+            'Master ASP.NET Core and MVC',
+            'Work with Entity Framework and LINQ',
+            'Build REST APIs with .NET',
+            'Deploy .NET Applications to Cloud'
+        ],
+        'image': 'static/roadmaps/_net_developer_roadmap.png'
+    },
+
+    'PHP Developer': {
+        'title': 'PHP Developer Roadmap',
+        'steps': [
+            'Learn Core PHP and OOP',
+            'Master Laravel Framework',
+            'Work with MySQL and REST APIs',
+            'Learn Authentication & Security',
+            'Deploy Scalable PHP Applications'
+        ],
+        'image': 'static/roadmaps/php_developer_roadmap.png'
+    },
+
+    'JavaScript Developer': {
+        'title': 'JavaScript Developer Roadmap',
+        'steps': [
+            'Master Core JavaScript and DOM',
+            'Understand Async JS and Event Loop',
+            'Learn TypeScript and ES6+ Features',
+            'Build Real Projects with JavaScript',
+            'Deploy JS Applications'
+        ],
+        'image': 'static/roadmaps/javascript_developer_roadmap.png'
+    },
+
+    'Full Stack Developer': {
+        'title': 'Full Stack Developer Roadmap',
+        'steps': [
+            'Learn Frontend (HTML, CSS, JS, React)',
+            'Master Backend (Node.js, Django, PHP)',
+            'Understand Databases (SQL/NoSQL)',
+            'Learn Git, API Design, Testing',
+            'Deploy Full Stack Applications'
+        ],
+        'image': 'static/roadmaps/full_stack_developer_roadmap.png'
+    },
+
+    'Software Engineer': {
+        'title': 'Software Engineer Roadmap',
+        'steps': [
+            'Learn DSA and Problem Solving',
+            'Master OOP and Design Patterns',
+            'Understand System Design',
+            'Work with APIs and Databases',
+            'Build Scalable Software Projects'
+        ],
+        'image': 'static/roadmaps/software_engineer_roadmap.png'
+    },
+
+    'ML Engineer': {
+        'title': 'ML Engineer Roadmap',
+        'steps': [
+            'Master ML Algorithms and Math',
+            'Learn TensorFlow and PyTorch',
+            'Perform Feature Engineering',
+            'Deploy ML Models (MLOps)',
+            'Build End-to-End ML Pipelines'
+        ],
+        'image': 'static/roadmaps/ml_engineer_roadmap.png'
+    },
+
+    'Backend Developer': {
+        'title': 'Backend Developer Roadmap',
+        'steps': [
+            'Learn Server-Side Languages',
+            'Build REST APIs and Microservices',
+            'Use Databases (SQL + NoSQL)',
+            'Master Authentication & Caching',
+            'Deploy and Scale Backend Systems'
+        ],
+        'image': 'static/roadmaps/backend_developer_roadmap.png'
+    },
+
+    'Frontend Developer': {
+        'title': 'Frontend Developer Roadmap',
+        'steps': [
+            'Master HTML, CSS, JavaScript',
+            'Learn React, Vue, or Angular',
+            'Build Responsive UI with Tailwind',
+            'Understand Web Performance & Accessibility',
+            'Deploy Frontend Apps'
+        ],
+        'image': 'static/roadmaps/frontend_developer_roadmap.png'
     }
 }
+
 
 # ---------------- APP SETUP ---------------- #
 app = Flask(__name__)
@@ -189,72 +339,336 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
+
 @app.route('/add_courses')
 def add_courses():
     from models import Course
 
-    # Define your course data
     courses_data = {
-        'Data Science': [
-            ['Machine Learning Crash Course by Google [Free]', 'https://developers.google.com/machine-learning/crash-course'],
-            ['Machine Learning A-Z by Udemy','https://www.udemy.com/course/machinelearning/'],
-            ['Machine Learning by Andrew NG','https://www.coursera.org/learn/machine-learning'],
-            ['Data Scientist Master Program of Simplilearn (IBM)','https://www.simplilearn.com/big-data-and-analytics/senior-data-scientist-masters-program-training'],
-            ['Data Science Foundations: Fundamentals by LinkedIn','https://www.linkedin.com/learning/data-science-foundations-fundamentals-5'],
-            ['Data Scientist with Python','https://www.datacamp.com/tracks/data-scientist-with-python'],
-            ['Programming for Data Science with Python','https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104'],
-            ['Programming for Data Science with R','https://www.udacity.com/course/programming-for-data-science-nanodegree-with-R--nd118'],
-            ['Introduction to Data Science','https://www.udacity.com/course/introduction-to-data-science--cd0017'],
-            ['Intro to Machine Learning with TensorFlow','https://www.udacity.com/course/intro-to-machine-learning-with-tensorflow-nanodegree--nd230']
-        ],
-        'Web Development': [
-            ['Django Crash course [Free]','https://youtu.be/e1IyzVyrLSU'],
-            ['Python and Django Full Stack Web Developer Bootcamp','https://www.udemy.com/course/python-and-django-full-stack-web-developer-bootcamp'],
-            ['React Crash Course [Free]','https://youtu.be/Dorf8i6lCuk'],
-            ['ReactJS Project Development Training','https://www.dotnettricks.com/training/masters-program/reactjs-certification-training'],
-            ['Full Stack Web Developer - MEAN Stack','https://www.simplilearn.com/full-stack-web-developer-mean-stack-certification-training'],
-            ['Node.js and Express.js [Free]','https://youtu.be/Oe421EPjeBE'],
-            ['Flask: Develop Web Applications in Python','https://www.educative.io/courses/flask-develop-web-applications-in-python'],
-            ['Full Stack Web Developer by Udacity','https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044'],
-            ['Front End Web Developer by Udacity','https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011'],
-            ['Become a React Developer by Udacity','https://www.udacity.com/course/react-nanodegree--nd019']
-        ],
-        'Android Development': [
-            ['Android Development for Beginners [Free]','https://youtu.be/fis26HvvDII'],
-            ['Android App Development Specialization','https://www.coursera.org/specializations/android-app-development'],
-            ['Associate Android Developer Certification','https://grow.google/androiddev/#?modal_active=none'],
-            ['Become an Android Kotlin Developer by Udacity','https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940'],
-            ['Android Basics by Google','https://www.udacity.com/course/android-basics-nanodegree-by-google--nd803'],
-            ['The Complete Android Developer Course','https://www.udemy.com/course/complete-android-n-developer-course/'],
-            ['Building an Android App with Architecture Components','https://www.linkedin.com/learning/building-an-android-app-with-architecture-components'],
-            ['Android App Development Masterclass using Kotlin','https://www.udemy.com/course/android-oreo-kotlin-app-masterclass/'],
-            ['Flutter & Dart - The Complete Flutter App Development Course','https://www.udemy.com/course/flutter-dart-the-complete-flutter-app-development-course/'],
-            ['Flutter App Development Course [Free]','https://youtu.be/rZLR5olMR64']
-        ],
-        'iOS Development': [
-            ['IOS App Development by LinkedIn','https://www.linkedin.com/learning/subscription/topics/ios'],
-            ['iOS & Swift - The Complete iOS App Development Bootcamp','https://www.udemy.com/course/ios-13-app-development-bootcamp/'],
-            ['Become an iOS Developer','https://www.udacity.com/course/ios-developer-nanodegree--nd003'],
-            ['iOS App Development with Swift Specialization','https://www.coursera.org/specializations/app-development'],
-            ['Mobile App Development with Swift','https://www.edx.org/professional-certificate/curtinx-mobile-app-development-with-swift'],
-            ['Swift Course by LinkedIn','https://www.linkedin.com/learning/subscription/topics/swift-2'],
-            ['Objective-C Crash Course for Swift Developers','https://www.udemy.com/course/objectivec/'],
-            ['Learn Swift by Codecademy','https://www.codecademy.com/learn/learn-swift'],
-            ['Swift Tutorial - Full Course for Beginners [Free]','https://youtu.be/comQ1-x2a1Q'],
-            ['Learn Swift Fast - [Free]','https://youtu.be/FcsY1YPBwzQ']
-        ],
-        'UI/UX Design': [
-            ['Google UX Design Professional Certificate','https://www.coursera.org/professional-certificates/google-ux-design'],
-            ['UI / UX Design Specialization','https://www.coursera.org/specializations/ui-ux-design'],
-            ['The Complete App Design Course - UX, UI and Design Thinking','https://www.udemy.com/course/the-complete-app-design-course-ux-and-ui-design/'],
-            ['UX & Web Design Master Course: Strategy, Design, Development','https://www.udemy.com/course/ux-web-design-master-course-strategy-design-development/'],
-            ['DESIGN RULES: Principles + Practices for Great UI Design','https://www.udemy.com/course/design-rules/'],
-            ['Become a UX Designer by Udacity','https://www.udacity.com/course/ux-designer-nanodegree--nd578'],
-            ['Adobe XD Tutorial: User Experience Design Course [Free]','https://youtu.be/68w2VwalD5w'],
-            ['Adobe XD for Beginners [Free]','https://youtu.be/WEljsc2jorI'],
-            ['Adobe XD in Simple Way','https://learnux.io/course/adobe-xd']
-        ]
-    }
+
+# ================================================================
+# OLD ROLES (10 COURSES EACH)
+# ================================================================
+
+'Data Science': [
+    ['Machine Learning Crash Course – Google (FREE)', 'https://developers.google.com/machine-learning/crash-course'],
+    ['Machine Learning – Andrew Ng', 'https://www.coursera.org/learn/machine-learning'],
+    ['Data Science Roadmap – freeCodeCamp (FREE)', 'https://youtu.be/X3paOmcrTjQ'],
+    ['Deep Learning Specialization – Andrew Ng', 'https://www.coursera.org/specializations/deep-learning'],
+    ['Python for Data Science – Coursera', 'https://www.coursera.org/learn/python-for-data-science'],
+    ['Data Scientist with Python – DataCamp', 'https://www.datacamp.com/tracks/data-scientist-with-python'],
+    ['Data Science Bootcamp – Udemy', 'https://www.udemy.com/course/data-science-and-machine-learning-bootcamp-with-python/'],
+    ['Statistics for Data Science – Udemy', 'https://www.udemy.com/course/statistics-for-data-science-and-business-analysis/'],
+    ['Intro to Machine Learning – Kaggle (FREE)', 'https://www.kaggle.com/learn/intro-to-machine-learning'],
+    ['AI for Everyone – Andrew Ng', 'https://www.coursera.org/learn/ai-for-everyone']
+],
+
+'Web Development': [
+    ['The Odin Project (FREE Full Stack)', 'https://www.theodinproject.com'],
+    ['HTML & CSS Crash Course – freeCodeCamp (FREE)', 'https://www.freecodecamp.org/learn/responsive-web-design/'],
+    ['JavaScript Full Course – freeCodeCamp (FREE)', 'https://youtu.be/jS4aFq5-91M'],
+    ['React – Codecademy', 'https://www.codecademy.com/learn/react-101'],
+    ['Node.js Crash Course – freeCodeCamp (FREE)', 'https://youtu.be/Oe421EPjeBE'],
+    ['Full Stack Web Dev – Udacity', 'https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044'],
+    ['Django for Everyone – Coursera', 'https://www.coursera.org/specializations/django'],
+    ['Complete Web Dev Bootcamp – Udemy', 'https://www.udemy.com/course/the-complete-web-development-bootcamp/'],
+    ['Next.js Full Tutorial – freeCodeCamp (FREE)', 'https://youtu.be/Y6KDk5iyrYE'],
+    ['Frontend Developer Roadmap – Roadmap.sh (FREE)', 'https://roadmap.sh/frontend']
+],
+
+'Android Development': [
+    ['Android Basics by Google (FREE)', 'https://www.udacity.com/course/android-basics--nd803'],
+    ['Android Kotlin Developer – Udacity', 'https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940'],
+    ['Android Studio Masterclass – Udemy', 'https://www.udemy.com/course/android-oreo-kotlin-app-masterclass/'],
+    ['Kotlin Bootcamp – Google (FREE)', 'https://developer.android.com/courses/android-basics-kotlin/course'],
+    ['Flutter Full Course – freeCodeCamp (FREE)', 'https://youtu.be/VPvVD8t02U8'],
+    ['Jetpack Compose Tutorial – Google', 'https://developer.android.com/jetpack/compose'],
+    ['Android App Development Specialization – Coursera', 'https://www.coursera.org/specializations/android-app-development'],
+    ['Flutter & Dart Bootcamp – Udemy', 'https://www.udemy.com/course/flutter-dart-the-complete-flutter-app-development-course/'],
+    ['Kotlin Essentials – JetBrains (FREE)', 'https://play.kotlinlang.org/koans/overview'],
+    ['Android Clean Architecture Course', 'https://youtu.be/EOfCEhWq8sg']
+],
+
+'iOS Development': [
+    ['Swift Full Course – freeCodeCamp (FREE)', 'https://youtu.be/comQ1-x2a1Q'],
+    ['SwiftUI Essentials – Apple', 'https://developer.apple.com/tutorials/swiftui'],
+    ['iOS & Swift Bootcamp – Udemy', 'https://www.udemy.com/course/ios-13-app-development-bootcamp/'],
+    ['Become an iOS Developer – Udacity', 'https://www.udacity.com/course/ios-developer-nanodegree--nd003'],
+    ['Swift Programming – Codecademy', 'https://www.codecademy.com/learn/learn-swift'],
+    ['Swift Specialization – Coursera', 'https://www.coursera.org/specializations/app-development'],
+    ['Objective-C Crash Course – Udemy', 'https://www.udemy.com/course/objectivec/'],
+    ['iOS App Architecture – Udemy', 'https://www.udemy.com/course/ios-architecture/'],
+    ['SwiftUI Masterclass', 'https://www.udemy.com/course/swiftui-masterclass-course-ios-development-with-swift/'],
+    ['Intro to iOS App Development – LinkedIn', 'https://www.linkedin.com/learning/topics/ios']
+],
+
+'UI/UX Design': [
+    ['Google UX Design Certificate', 'https://www.coursera.org/professional-certificates/google-ux-design'],
+    ['Figma Full Course – FreeCodeCamp (FREE)', 'https://youtu.be/jwCt4DCa2Ek'],
+    ['UI/UX Specialization – Coursera', 'https://www.coursera.org/specializations/ui-ux-design'],
+    ['Adobe XD Full Course – Free (YouTube)', 'https://youtu.be/68w2VwalD5w'],
+    ['UX Design for Beginners – Udemy', 'https://www.udemy.com/course/ux-design-fundamentals/'],
+    ['Design Thinking – Coursera', 'https://www.coursera.org/learn/uva-darden-design-thinking-innovation'],
+    ['UI Design Principles – Udemy', 'https://www.udemy.com/course/design-rules/'],
+    ['UX Research at Scale – Coursera', 'https://www.coursera.org/learn/ux-research-at-scale'],
+    ['Interaction Design Foundation Courses', 'https://www.interaction-design.org/courses'],
+    ['Become a UX Designer – Udacity', 'https://www.udacity.com/course/ux-designer-nanodegree--nd578']
+],
+
+'Data Analyst': [
+    ['Google Data Analytics Certificate', 'https://www.coursera.org/professional-certificates/google-data-analytics'],
+    ['Excel to MySQL – Coursera', 'https://www.coursera.org/specializations/excel-mysql'],
+    ['Data Analyst with Python – DataCamp', 'https://www.datacamp.com/tracks/data-analyst-with-python'],
+    ['Power BI Full Course – freeCodeCamp (FREE)', 'https://youtu.be/0tAzpi3fXw4'],
+    ['Tableau Training – Udemy', 'https://www.udemy.com/course/tableau10/'],
+    ['Statistics for Data Analysis – Udemy', 'https://www.udemy.com/course/statistics-for-data-science-and-business-analysis/'],
+    ['Pandas Tutorial – freeCodeCamp (FREE)', 'https://youtu.be/vmEHCJofslg'],
+    ['SQL for Data Analysis – Coursera', 'https://www.coursera.org/specializations/data-analysis-sql'],
+    ['Excel Essential Training – LinkedIn', 'https://www.linkedin.com/learning/excel-essential-training-2019'],
+    ['Data Analytics Bootcamp – Udemy', 'https://www.udemy.com/course/data-analytics-real-world-projects/']
+],
+
+'Cloud & DevOps': [
+    ['AWS Cloud Practitioner (FREE)', 'https://www.aws.training/Details/eLearning?id=60697'],
+    ['Docker + Kubernetes – Udemy', 'https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/'],
+    ['Terraform for Beginners', 'https://learn.hashicorp.com/collections/terraform/aws-get-started'],
+    ['Azure DevOps Tutorial – Microsoft', 'https://learn.microsoft.com/en-us/training/modules/introduction-to-devops/'],
+    ['DevOps Foundations – LinkedIn', 'https://www.linkedin.com/learning/devops-foundations'],
+    ['Linux Administration – Udemy', 'https://www.udemy.com/course/linux-admin-bootcamp/'],
+    ['GCP Associate Cloud Engineer – Coursera', 'https://www.coursera.org/professional-certificates/gcp-cloud-engineering'],
+    ['Kubernetes Bootcamp – FreeCodeCamp (FREE)', 'https://youtu.be/X48VuDVv0do'],
+    ['Jenkins Full Course – Udemy', 'https://www.udemy.com/course/jenkins-from-zero-to-hero/'],
+    ['Ansible for Beginners – Udemy', 'https://www.udemy.com/course/ansible-for-the-absolute-beginner/']
+],
+
+'Cybersecurity': [
+    ['Intro to Cybersecurity – Cisco', 'https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity'],
+    ['Google Cybersecurity Certificate', 'https://www.coursera.org/professional-certificates/google-cybersecurity'],
+    ['Ethical Hacking – CEH Prep', 'https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/'],
+    ['Cybersecurity Full Course – FreeCodeCamp (FREE)', 'https://youtu.be/3Kq1MIfTWCE'],
+    ['Kali Linux Beginner Course', 'https://www.udemy.com/course/ethical-hacking-beginners/'],
+    ['Network Security – LinkedIn', 'https://www.linkedin.com/learning/topics/network-security'],
+    ['Burp Suite Course – Udemy', 'https://www.udemy.com/course/burp-suite-mastering-bug-bounty/'],
+    ['Pentesting with Nmap – Udemy', 'https://www.udemy.com/course/nmap-complete-guide/'],
+    ['Intro to Cryptography – Coursera', 'https://www.coursera.org/learn/cryptography'],
+    ['Malware Analysis – Udemy', 'https://www.udemy.com/course/malware-analysis/']
+],
+
+'Quality Assurance': [
+    ['Manual Testing Complete Course – Udemy', 'https://www.udemy.com/course/manual-testing-with-tutorial/'],
+    ['Selenium with Python – Udemy', 'https://www.udemy.com/course/selenium-webdriver-with-python/'],
+    ['Cypress Automation Course – Udemy', 'https://www.udemy.com/course/cypress-tutorial/'],
+    ['API Testing with Postman – Udemy', 'https://www.udemy.com/course/postman-the-complete-guide/'],
+    ['QA Testing Full Course – freeCodeCamp (FREE)', 'https://youtu.be/XkW6OVv1kwA'],
+    ['JIRA Crash Course – LinkedIn', 'https://www.linkedin.com/learning/jira-service-management'],
+    ['Automation Testing Bootcamp – Coursera', 'https://www.coursera.org/specializations/automated-software-testing'],
+    ['Unit Testing in Python – Udemy', 'https://www.udemy.com/course/python-unit-testing-automation/'],
+    ['Test Automation University (FREE)', 'https://testautomationu.applitools.com/'],
+    ['Bug Tracking & Reporting Course', 'https://www.udemy.com/course/bug-reporting/']
+],
+
+'Business Analyst': [
+    ['BA Fundamentals – Udemy', 'https://www.udemy.com/course/business-analysis-fundamentals/'],
+    ['Agile Business Analysis – Coursera', 'https://www.coursera.org/learn/agile-business-analyst'],
+    ['Business Analytics Specialization – Coursera', 'https://www.coursera.org/specializations/business-analytics'],
+    ['Excel for Business Analysts – Coursera', 'https://www.coursera.org/learn/excel-data-analysis'],
+    ['JIRA for Business Analysts – Udemy', 'https://www.udemy.com/course/jira-agile-project-management/'],
+    ['Project Management Essentials – LinkedIn', 'https://www.linkedin.com/learning/project-management-foundations'],
+    ['Requirement Engineering – Udemy', 'https://www.udemy.com/course/requirements-engineering/'],
+    ['Business Communication – Coursera', 'https://www.coursera.org/specializations/business-communication'],
+    ['Data Analytics for Business – Udemy', 'https://www.udemy.com/course/business-data-science/'],
+    ['SDLC Complete Guide – Udemy', 'https://www.udemy.com/course/software-development-life-cycle/']
+],
+
+'Database Administrator': [
+    ['PostgreSQL Masterclass – Udemy', 'https://www.udemy.com/course/postgresql-database-administration/'],
+    ['SQL for Data Engineering – Coursera', 'https://www.coursera.org/learn/data-eng-sql'],
+    ['MySQL Complete Course – freeCodeCamp (FREE)', 'https://youtu.be/7S_tz1z_5bA'],
+    ['Oracle SQL Admin – Udemy', 'https://www.udemy.com/course/oracle-sql-database-administration/'],
+    ['DBMS Full Course – Gate Smashers (FREE)', 'https://youtu.be/4xCynWHbn8w'],
+    ['PL/SQL Bootcamp – Udemy', 'https://www.udemy.com/course/oracle-plsql-programming/'],
+    ['Database Design Course – Coursera', 'https://www.coursera.org/learn/database-design'],
+    ['SQL Server Training – LinkedIn', 'https://www.linkedin.com/learning/learning-sql-server'],
+    ['Normalization & DB Design – Udemy', 'https://www.udemy.com/course/database-design-and-management/'],
+    ['NoSQL Essentials – Coursera', 'https://www.coursera.org/learn/nosql-databases']
+],
+
+'AI / NLP Engineer': [
+    ['NLP Specialization – Coursera', 'https://www.coursera.org/specializations/nlp'],
+    ['HuggingFace Transformers Course (FREE)', 'https://huggingface.co/course/chapter1'],
+    ['Deep Learning for NLP – Udemy', 'https://www.udemy.com/course/nlp-natural-language-processing-with-python/'],
+    ['BERT & GPT Hands-on – Udemy', 'https://www.udemy.com/course/bert-transformers-nlp/'],
+    ['Speech Recognition – Coursera', 'https://www.coursera.org/learn/audio-processing'],
+    ['Intro to NLP – freeCodeCamp (FREE)', 'https://youtu.be/fNxaJsNG3-s'],
+    ['Natural Language Processing – Stanford', 'http://web.stanford.edu/class/cs224n/'],
+    ['Transformers in Python – YouTube', 'https://youtu.be/tiuPHWB1gkA'],
+    ['AI for Everyone – Coursera', 'https://www.coursera.org/learn/ai-for-everyone'],
+    ['Neural Networks – Coursera', 'https://www.coursera.org/learn/neural-networks-deep-learning']
+],
+
+'Product Manager': [
+    ['Digital Product Management – Coursera', 'https://www.coursera.org/learn/uva-darden-digital-product-management'],
+    ['Product Management 101 – Udemy', 'https://www.udemy.com/course/product-management-101/'],
+    ['Agile Product Owner Role – LinkedIn', 'https://www.linkedin.com/learning/agile-product-owner-role'],
+    ['Product Strategy – Coursera', 'https://www.coursera.org/learn/product-strategy'],
+    ['Product Management Crash Course (FREE)', 'https://youtu.be/sJ14cWjrNzs'],
+    ['Roadmapping for PMs – Udemy', 'https://www.udemy.com/course/product-roadmaps/'],
+    ['Business Strategy – Coursera', 'https://www.coursera.org/specializations/business-strategy'],
+    ['User Story Writing – Udemy', 'https://www.udemy.com/course/user-story/'],
+    ['Notion for Productivity – YouTube', 'https://youtu.be/pvJScuVF4TU'],
+    ['PM Interview Prep – Udemy', 'https://www.udemy.com/course/product-management-interview-crash-course/']
+],
+
+
+# ================================================================
+# NEW ROLES (10 COURSES EACH)
+# ================================================================
+
+'Python Developer': [
+    ['Python for Everybody – Coursera', 'https://www.coursera.org/specializations/python'],
+    ['Automate the Boring Stuff (FREE)', 'https://automatetheboringstuff.com/'],
+    ['Django Full Course – freeCodeCamp (FREE)', 'https://youtu.be/F5mRW0jo-U4'],
+    ['FastAPI Full Course (FREE)', 'https://youtu.be/0sOvCWFmrtA'],
+    ['Python OOP – Udemy', 'https://www.udemy.com/course/python-object-oriented-programming/'],
+    ['Python Bootcamp – Udemy', 'https://www.udemy.com/course/complete-python-bootcamp/'],
+    ['Flask Web Development – Udemy', 'https://www.udemy.com/course/python-and-flask-bootcamp/'],
+    ['Data Structures in Python – Udemy', 'https://www.udemy.com/course/python-data-structures-and-algorithms/'],
+    ['Asyncio in Python – YouTube', 'https://youtu.be/3mbFky5M6dM'],
+    ['Build APIs with Django – Coursera', 'https://www.coursera.org/projects/django-rest-framework']
+],
+
+'Java Developer': [
+    ['Java Programming Masterclass – Udemy', 'https://www.udemy.com/course/java-the-complete-java-developer-course/'],
+    ['Java Full Course – freeCodeCamp (FREE)', 'https://youtu.be/A74TOX803D0'],
+    ['Spring Boot Full Course – Amigoscode (FREE)', 'https://youtu.be/9SGDpanrc8U'],
+    ['Hibernate Tutorial – Udemy', 'https://www.udemy.com/course/hibernate-course/'],
+    ['Java OOP Mastery – Udemy', 'https://www.udemy.com/course/java-object-oriented-programming/'],
+    ['Spring Security – Udemy', 'https://www.udemy.com/course/spring-security-core-beginner-to-guru/'],
+    ['Java Servlets & JSP – Udemy', 'https://www.udemy.com/course/jsp-servlet-free-course/'],
+    ['Microservices with Spring – Udemy', 'https://www.udemy.com/course/microservices-with-spring-boot/'],
+    ['DSA in Java – Coding Ninjas', 'https://www.codingninjas.com/courses/data-structures-and-algorithms-java'],
+    ['Java Multithreading – YouTube', 'https://youtu.be/h-T7XmyIHDE']
+],
+
+'C/C++ Developer': [
+    ['C Programming Full Course – freeCodeCamp (FREE)', 'https://youtu.be/KJgsSFOSQv0'],
+    ['C++ Full Course – freeCodeCamp (FREE)', 'https://youtu.be/8jLOx1hD3_o'],
+    ['Mastering Data Structures in C++ – Udemy', 'https://www.udemy.com/course/datastructurescncpp/'],
+    ['Advanced C++ – Udemy', 'https://www.udemy.com/course/advanced-c-programming/'],
+    ['Linux System Programming – Udemy', 'https://www.udemy.com/course/linux-system-programming-techniques/'],
+    ['Pointers in C – Udemy', 'https://www.udemy.com/course/c-pointers/'],
+    ['Competitive Programming in C++ – Codeforces', 'https://codeforces.com/edu'],
+    ['STL in C++ – YouTube', 'https://youtu.be/PwS4LlQ2kZQ'],
+    ['Operating Systems – Neso Academy (FREE)', 'https://youtu.be/_TpOHMCODXo'],
+    ['C++ OOP Course – Udemy', 'https://www.udemy.com/course/cpp-classes/']
+],
+
+'.NET Developer': [
+    ['C# Basics Tutorial – freeCodeCamp (FREE)', 'https://youtu.be/GhQdlIFylQ8'],
+    ['ASP.NET Core MVC Full Course – YouTube', 'https://youtu.be/BfEjDD8mWYg'],
+    ['Entity Framework Core – Pluralsight', 'https://www.pluralsight.com/courses/entity-framework-core-getting-started'],
+    ['C# Masterclass – Udemy', 'https://www.udemy.com/course/csharp-tutorial-for-beginners/'],
+    ['.NET API Development – Udemy', 'https://www.udemy.com/course/build-restful-apis-with-aspnet-core/'],
+    ['LINQ Tutorial – Microsoft', 'https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/'],
+    ['Microservices with .NET – Udemy', 'https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/'],
+    ['Blazor WebAssembly Course', 'https://learn.microsoft.com/en-us/aspnet/core/blazor'],
+    ['ASP.NET Razor Pages – Udemy', 'https://www.udemy.com/course/aspnet-core-razor-pages/'],
+    ['Clean Architecture in .NET – YouTube', 'https://youtu.be/fJjKQla-PgM']
+],
+
+'PHP Developer': [
+    ['PHP Full Course – freeCodeCamp (FREE)', 'https://youtu.be/OK_JCtrrv-c'],
+    ['Laravel From Scratch – Laracasts', 'https://laracasts.com/series/laravel-8-from-scratch'],
+    ['PHP with MySQL – Udemy', 'https://www.udemy.com/course/php-for-complete-beginners-includes-msql-object-oriented/'],
+    ['Object-Oriented PHP – Udemy', 'https://www.udemy.com/course/php-oop-object-oriented-programming/'],
+    ['Laravel REST API Course – YouTube', 'https://youtu.be/MT-GJQIY3EU'],
+    ['PHP Security Crash Course', 'https://www.udemy.com/course/php-security/'],
+    ['PHP MVC Framework Course', 'https://youtu.be/6ERdu4k62wI'],
+    ['PHP Deployment – Udemy', 'https://www.udemy.com/course/deploy-php-app/'],
+    ['MySQL Masterclass – Udemy', 'https://www.udemy.com/course/the-complete-sql-bootcamp/'],
+    ['Laravel Livewire Course', 'https://laravel-livewire.com/docs/2.x/quickstart']
+],
+
+'JavaScript Developer': [
+    ['JavaScript Full Course – freeCodeCamp (FREE)', 'https://youtu.be/HD13eq_Pmp8'],
+    ['Async JavaScript Mastery – Udemy', 'https://www.udemy.com/course/asynchronous-javascript/'],
+    ['JavaScript DOM Mastery – YouTube', 'https://youtu.be/0ik6X4DJKCc'],
+    ['JavaScript Algorithms – freeCodeCamp (FREE)', 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/'],
+    ['TypeScript Full Course – freeCodeCamp (FREE)', 'https://youtu.be/30LWjhZzg50'],
+    ['Modern JavaScript Bootcamp – Udemy', 'https://www.udemy.com/course/javascript-beginners-complete-tutorial/'],
+    ['JavaScript Design Patterns – Udemy', 'https://www.udemy.com/course/learn-javascript-design-patterns/'],
+    ['ES6+ Modern JavaScript – Udemy', 'https://www.udemy.com/course/understand-javascript/'],
+    ['Event Loop & Async Deep Dive – YouTube', 'https://youtu.be/8aGhZQkoFbQ'],
+    ['Promises & Async/Await – MDN', 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous']
+],
+
+'Full Stack Developer': [
+    ['Full Stack Web Dev – Coursera', 'https://www.coursera.org/specializations/full-stack-mobile-app-development'],
+    ['MERN Stack Full Course – freeCodeCamp (FREE)', 'https://youtu.be/7CqJlxBYj-M'],
+    ['MEAN Stack Bootcamp – Udemy', 'https://www.udemy.com/course/full-stack-web-development-mega-pack/'],
+    ['System Design for Beginners – YouTube', 'https://youtu.be/l5zn6mP5uY8'],
+    ['Git & GitHub Bootcamp – Udemy', 'https://www.udemy.com/course/git-complete/'],
+    ['Backend Roadmap – Roadmap.sh (FREE)', 'https://roadmap.sh/backend'],
+    ['Frontend Roadmap – Roadmap.sh (FREE)', 'https://roadmap.sh/frontend'],
+    ['Docker for Developers – Udemy', 'https://www.udemy.com/course/docker-mastery/'],
+    ['APIs for Developers – LinkedIn', 'https://www.linkedin.com/learning/apis-for-developers'],
+    ['Full Stack Project Bootcamp – Udemy', 'https://www.udemy.com/course/100-days-of-web-development/']
+],
+
+'Software Engineer': [
+    ['DSA Specialization – Coursera', 'https://www.coursera.org/specializations/data-structures-algorithms'],
+    ['Cracking the Coding Interview Prep – Udemy', 'https://www.udemy.com/course/cracking-the-coding-interview/'],
+    ['Clean Code – Udemy', 'https://www.udemy.com/course/clean-code/'],
+    ['System Design Primer – freeCodeCamp (FREE)', 'https://youtu.be/UzLMhqg3_Wc'],
+    ['Object-Oriented Design – Coursera', 'https://www.coursera.org/learn/object-oriented-design'],
+    ['Design Patterns – Udemy', 'https://www.udemy.com/course/design-patterns-python/'],
+    ['Algorithms – MIT OpenCourseWare (FREE)', 'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/'],
+    ['Competitive Programming – CodeChef', 'https://www.codechef.com/learn/dsa'],
+    ['Problem Solving – HackerRank (FREE)', 'https://www.hackerrank.com/domains/algorithms'],
+    ['Software Engineering Essentials – Coursera', 'https://www.coursera.org/specializations/software-engineering']
+],
+
+'ML Engineer': [
+    ['MLOps Specialization – Coursera', 'https://www.coursera.org/specializations/mlops'],
+    ['TensorFlow in Practice – Coursera', 'https://www.coursera.org/specializations/tensorflow-in-practice'],
+    ['Feature Engineering – Coursera', 'https://www.coursera.org/learn/feature-engineering'],
+    ['ML Engineer Nanodegree – Udacity', 'https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009t'],
+    ['MLOps Bootcamp – Udemy', 'https://www.udemy.com/course/mlops-bootcamp/'],
+    ['Model Deployment Tutorial – YouTube', 'https://youtu.be/ay2C1hRPD00'],
+    ['ML System Design – YouTube', 'https://youtu.be/bP7mB6X1RZk'],
+    ['Kubeflow for MLOps – Coursera', 'https://www.coursera.org/projects/kubeflow-pipelines'],
+    ['Machine Learning with TensorFlow – Udemy', 'https://www.udemy.com/course/machinelearning/'],
+    ['Deep Learning Specialization', 'https://www.coursera.org/specializations/deep-learning']
+],
+
+'Backend Developer': [
+    ['Backend Development Roadmap – Roadmap.sh (FREE)', 'https://roadmap.sh/backend'],
+    ['REST API Crash Course – freeCodeCamp (FREE)', 'https://youtu.be/Q-BpqyOT3a8'],
+    ['Redis Crash Course – YouTube', 'https://youtu.be/Hbt56gFj998'],
+    ['Authentication & JWT – Net Ninja', 'https://youtu.be/7Q17ubqLfaM'],
+    ['Microservices Architecture – Udemy', 'https://www.udemy.com/course/microservices-with-node-js-and-react/'],
+    ['Node.js Backend Masterclass – Udemy', 'https://www.udemy.com/course/nodejs-the-complete-guide/'],
+    ['PostgreSQL Full Course – freeCodeCamp (FREE)', 'https://youtu.be/qw--VYLpxG4'],
+    ['API Rate Limiting & Caching – YouTube', 'https://youtu.be/jKdCmhVxD0E'],
+    ['Backend System Design – YouTube', 'https://youtu.be/hhAo4ZD3ou8'],
+    ['NGINX Essentials – Udemy', 'https://www.udemy.com/course/nginx-crash-course/']
+],
+
+'Frontend Developer': [
+    ['Frontend Development Roadmap – Roadmap.sh (FREE)', 'https://roadmap.sh/frontend'],
+    ['HTML/CSS Full Course – freeCodeCamp (FREE)', 'https://youtu.be/kUMe1FH4CHE'],
+    ['JavaScript Full Course – freeCodeCamp (FREE)', 'https://youtu.be/HD13eq_Pmp8'],
+    ['ReactJS Full Course – freeCodeCamp (FREE)', 'https://youtu.be/bMknfKXIFA8'],
+    ['Tailwind CSS Mastery – YouTube', 'https://youtu.be/pfaSUYaSgRo'],
+    ['CSS Flexbox & Grid – Scrimba (FREE)', 'https://scrimba.com/learn/flexbox'],
+    ['Vue.js Crash Course – YouTube', 'https://youtu.be/FXpIoQ_rT_c'],
+    ['Frontend Nanodegree – Udacity', 'https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011'],
+    ['Web Accessibility Course – Udacity', 'https://www.udacity.com/course/web-accessibility--ud891'],
+    ['UI Design for Developers – Udemy', 'https://www.udemy.com/course/ui-design-for-developers/']
+]
+
+}
+
 
     # Insert into DB
     for category, course_list in courses_data.items():
@@ -268,89 +682,132 @@ def add_courses():
 
 
 
-
 # ---------------- UPLOAD CONFIG ---------------- #
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# # ---------------- HELPER KEYWORDS ---------------- #
-# DS_KEYWORD = {'tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit', 'scikit-learn'}
-# WEB_KEYWORD = {'react', 'django', 'node js', 'node', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#', 'asp.net'}
-# ANDROID_KEYWORD = {'android', 'flutter', 'kotlin', 'xml', 'kivy', 'java'}
-# IOS_KEYWORD = {'ios', 'swift', 'cocoa', 'xcode', 'objective-c'}
-# UIUX_KEYWORD = {'ux', 'adobe xd', 'figma', 'balsamiq', 'ui', 'prototyping', 'wireframes'}
-# ---------------- EXISTING ROLES ----------------
+# ===============================================================
+#                  🚀 FINAL UNIQUE JOB KEYWORDS
+# ===============================================================
+
+# ------------------- OLD ROLES (CLEANED) ----------------------
+
 DS_KEYWORD = {
-    'tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning',
-    'flask', 'streamlit', 'scikit-learn', 'pandas', 'numpy', 'matplotlib',
-    'seaborn', 'data analysis', 'data visualization', 'ai', 'nlp', 'opencv'
+    'tensorflow', 'keras', 'pytorch', 'scikit-learn', 'machine learning',
+    'deep learning', 'streamlit', 'opencv', 'ai', 'nlp'
 }
 
 WEB_KEYWORD = {
-    'react', 'django', 'node js', 'node', 'php', 'laravel', 'magento', 'wordpress',
-    'javascript', 'angular js', 'angular', 'typescript', 'html', 'css', 'bootstrap',
-    'express', 'mongodb', 'mysql', 'nextjs', 'rest api', 'frontend', 'backend'
+    'php', 'wordpress', 'magento', 'laravel', 'express',
+    'rest api', 'mongodb', 'frontend', 'backend'
 }
 
 ANDROID_KEYWORD = {
-    'android', 'flutter', 'kotlin', 'xml', 'kivy', 'java', 'jetpack compose',
-    'firebase', 'android studio'
+    'android', 'kotlin', 'jetpack compose', 'android studio', 'firebase', 'kivy'
 }
 
 IOS_KEYWORD = {
-    'ios', 'swift', 'cocoa', 'xcode', 'objective-c', 'swiftui', 'uikit'
+    'ios', 'swift', 'swiftui', 'objective-c', 'xcode', 'uikit', 'cocoa'
 }
 
 UIUX_KEYWORD = {
-    'ux', 'adobe xd', 'figma', 'balsamiq', 'ui', 'prototyping', 'wireframes',
-    'user experience', 'user interface', 'mockups', 'usability testing'
+    'figma', 'adobe xd', 'balsamiq', 'prototyping', 'wireframes',
+    'mockups', 'usability testing', 'user interface', 'user experience'
 }
 
-# ---------------- NEWLY ADDED ROLES ----------------
-
 DATA_ANALYST_KEYWORD = {
-    'excel', 'power bi', 'tableau', 'sql', 'data cleaning', 'data visualization',
-    'pandas', 'numpy', 'statistics', 'analytics', 'matplotlib', 'seaborn'
+    'excel', 'power bi', 'tableau', 'data cleaning', 'analytics'
 }
 
 CLOUD_DEVOPS_KEYWORD = {
-    'aws', 'azure', 'gcp', 'docker', 'kubernetes', 'terraform', 'jenkins',
-    'ci/cd', 'linux', 'bash', 'ansible', 'devops', 'cloud', 'infrastructure'
+    'aws', 'gcp', 'docker', 'kubernetes', 'terraform', 'jenkins',
+    'ci/cd', 'ansible', 'infrastructure'
 }
 
 CYBER_KEYWORD = {
     'cybersecurity', 'ethical hacking', 'penetration testing', 'network security',
-    'firewall', 'siem', 'nmap', 'burp suite', 'kali linux', 'cryptography',
-    'vulnerability assessment'
+    'firewall', 'siem', 'burp suite', 'kali linux', 'vulnerability assessment'
 }
 
 QA_KEYWORD = {
-    'manual testing', 'automation testing', 'selenium', 'cypress', 'postman',
-    'api testing', 'jira', 'test cases', 'bug tracking', 'pytest', 'quality assurance'
+    'automation testing', 'selenium', 'cypress', 'api testing',
+    'bug tracking', 'pytest', 'quality assurance'
 }
 
 BA_KEYWORD = {
-    'business analysis', 'requirement gathering', 'documentation', 'excel',
-    'communication', 'agile', 'scrum', 'jira', 'project management', 'stakeholder'
+    'business analysis', 'requirement gathering', 'documentation',
+    'stakeholder', 'project management'
 }
 
 DBA_KEYWORD = {
-    'sql', 'pl/sql', 'oracle', 'mysql', 'postgresql', 'database', 'normalization',
-    'backup', 'recovery', 'performance tuning', 'rds'
+    'pl/sql', 'oracle', 'postgresql', 'normalization',
+    'backup', 'performance tuning', 'rds'
 }
 
 AI_NLP_KEYWORD = {
-    'nlp', 'transformers', 'huggingface', 'bert', 'gpt', 'text classification',
-    'chatbot', 'speech recognition', 'language model', 'ai', 'deep learning'
+    'transformers', 'huggingface', 'bert', 'gpt',
+    'text classification', 'language model', 'speech recognition'
 }
 
 PRODUCT_MANAGER_KEYWORD = {
-    'product management', 'roadmap', 'market research', 'communication',
-    'analytics', 'data-driven', 'leadership', 'jira', 'notion', 'scrum'
+    'product management', 'roadmap', 'market research',
+    'data-driven', 'leadership', 'notion'
 }
 
-# ---------------- COMBINED JOB KEYWORDS ----------------
+
+# ------------------- NEW ROLES (NO OVERLAP) ----------------------
+
+PYTHON_DEV_KEYWORD = {
+    'python', 'django', 'fastapi', 'tkinter',
+    'scripting', 'automation','flask'
+}
+
+JAVA_DEV_KEYWORD = {
+    'java', 'j2ee', 'spring', 'spring boot',
+    'hibernate', 'servlets', 'microservices'
+}
+
+CPP_DEV_KEYWORD = {
+    'c', 'c++', 'stl', 'memory management',
+    'linux programming'
+}
+
+DOTNET_KEYWORD = {
+    'c#', '.net', 'asp.net', 'entity framework', 'mvc', 'linq'
+}
+
+PHP_DEV_KEYWORD = {
+    'php developer',  # different from core PHP
+}
+
+JAVASCRIPT_DEV_KEYWORD = {
+    'ecmascript', 'dom', 'event loop', 'callbacks', 'promises', 'async', 'await'
+}
+
+FULLSTACK_KEYWORD = {
+    'full stack', 'system design', 'version control', 'git'
+}
+
+SOFTWARE_ENGINEER_KEYWORD = {
+    'data structures', 'algorithms', 'problem solving'
+}
+
+ML_ENGINEER_KEYWORD = {
+    'mlops', 'feature engineering', 'model training', 'model deployment'
+}
+
+BACKEND_DEV_KEYWORD = {
+    'authentication', 'authorization', 'redis'
+}
+
+FRONTEND_DEV_KEYWORD = {
+    'responsive design', 'ui design'
+}
+
+
+# ------------------- FINAL COMBINED NON-OVERLAPPING ROLES ----------------------
+
 JOB_KEYWORDS = {
     'Data Science': DS_KEYWORD,
     'Web Development': WEB_KEYWORD,
@@ -364,8 +821,23 @@ JOB_KEYWORDS = {
     'Business Analyst': BA_KEYWORD,
     'Database Administrator': DBA_KEYWORD,
     'AI / NLP Engineer': AI_NLP_KEYWORD,
-    'Product Manager': PRODUCT_MANAGER_KEYWORD
+    'Product Manager': PRODUCT_MANAGER_KEYWORD,
+
+    # NEW ROLES
+    'Python Developer': PYTHON_DEV_KEYWORD,
+    'Java Developer': JAVA_DEV_KEYWORD,
+    'C/C++ Developer': CPP_DEV_KEYWORD,
+    '.NET Developer': DOTNET_KEYWORD,
+    'PHP Developer': PHP_DEV_KEYWORD,
+    'JavaScript Developer': JAVASCRIPT_DEV_KEYWORD,
+    'Full Stack Developer': FULLSTACK_KEYWORD,
+    'Software Engineer': SOFTWARE_ENGINEER_KEYWORD,
+    'ML Engineer': ML_ENGINEER_KEYWORD,
+    'Backend Developer': BACKEND_DEV_KEYWORD,
+    'Frontend Developer': FRONTEND_DEV_KEYWORD
 }
+
+
 
 
 # ---------------- HOME ---------------- #
@@ -490,59 +962,51 @@ def view_resume(resume_id):
     resume = Resume.query.get_or_404(resume_id)
 
     # ---------- SECURITY CHECK ----------
-    # Candidate: can ONLY view their own resume
     if session.get('role') == 'candidate' and resume.user_id != session.get('user_id'):
         flash("You do not have permission to view this resume.", "danger")
         return redirect(url_for('candidate_dashboard'))
 
-    # Admin: can view any resume — NO restriction needed
-
     # ---------- FETCH RESUME OWNER ----------
     candidate = User.query.get(resume.user_id)
 
-        # ---------- EXTRACT NAME FROM RESUME ----------
+    # ---------- EXTRACT NAME FROM RESUME ----------
     def extract_candidate_name(text):
         lines = text.strip().split("\n")
 
-        # check top lines for full name
         for line in lines[:7]:
             clean = line.strip()
 
-            # skip long or empty lines
             if not clean or len(clean.split()) > 4:
                 continue
 
-            # If all words are alphabetic → likely a name
             if all(w.replace(".", "").isalpha() for w in clean.split()):
                 return clean
 
         return None
 
+    # ---------- PROCESSING ----------
     try:
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.file_name)
         text = extract_text(filepath)
 
         extracted_name = extract_candidate_name(text)
 
-        # 🔥 SAVE EXTRACTED NAME TO DATABASE
         if extracted_name:
             resume.candidate_name = extracted_name
         else:
             resume.candidate_name = candidate.name if candidate else "Unknown"
 
-        db.session.commit()   # SAVE NAME
+        db.session.commit()
 
     except Exception as e:
         print("Name extraction error:", e)
         resume.candidate_name = candidate.name if candidate else "Unknown"
         db.session.commit()
 
+    # ---------- ANALYZE RESUME ----------
     try:
-        # -------- Extract Resume Text -------- #
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.file_name)
         text = extract_text(filepath)
         analysis = analyze_resume(text)
-
         rt_lower = text.lower()
 
         # -------- Candidate Level -------- #
@@ -552,175 +1016,465 @@ def view_resume(resume_id):
         elif "experience" in rt_lower:
             cand_level = "Experienced"
 
-        # -------- Extract Skills Found -------- #
+        # -------- Skills from resume -------- #
         skills_list = analysis.get("skills_found", [])
+        skills_cleaned = [s.lower().strip() for s in skills_list]
 
-        # ----------------------------------------------------
-        # 🔥 FINAL ROLE PREDICTION — ONLY BEST MATCHING ROLE
-        # ----------------------------------------------------
+        # -------- BEST ROLE MATCHING -------- #
         role_scores = {}
+
         for role, keywords in JOB_KEYWORDS.items():
-            score = sum(1 for skill in skills_list if skill.lower() in keywords)
-            role_scores[role] = score
+            match_count = sum(1 for s in skills_cleaned if s in keywords)
+            role_scores[role] = match_count
 
-        predicted_role = max(role_scores, key=role_scores.get) if max(role_scores.values()) > 0 else None
+        best_role = max(role_scores, key=role_scores.get)
+        predicted_role = best_role if role_scores[best_role] > 0 else None
 
-        # ----------------------------------------------------
-        # ROLE DATA — Courses + Skills (ALL ROLES)
-        # ----------------------------------------------------
+        # ---------- ROLE DATA ----------- #
         ROLE_DATA = {
 
-            "Data Science": {
-                "skills": ['Pandas', 'NumPy', 'Matplotlib', 'Flask', 'Streamlit'],
-                "courses": [
-                    ("Machine Learning Crash Course (Google)", "https://developers.google.com/machine-learning/crash-course"),
-                    ("Deep Learning Specialization", "https://www.coursera.org/specializations/deep-learning"),
-                    ("Python for Data Science", "https://www.coursera.org/learn/python-for-data-science"),
-                    ("Data Scientist with Python", "https://www.datacamp.com/tracks/data-scientist-with-python"),
-                    ("Applied Data Science Specialization", "https://www.coursera.org/specializations/applied-data-science")
-                ]
-            },
+    # =========================================================
+    # 1) DATA SCIENCE
+    # =========================================================
+    "Data Science": {
+        "skills": ['tensorflow', 'keras', 'pytorch', 'scikit-learn', 'machine learning',
+                   'deep learning', 'streamlit', 'opencv', 'ai', 'nlp'],
+        "courses": [
+            ("Machine Learning Crash Course – Google (FREE)", "https://developers.google.com/machine-learning/crash-course"),
+            ("Machine Learning – Andrew Ng", "https://www.coursera.org/learn/machine-learning"),
+            ("Data Science Roadmap – freeCodeCamp (FREE)", "https://youtu.be/X3paOmcrTjQ"),
+            ("Deep Learning Specialization – Andrew Ng", "https://www.coursera.org/specializations/deep-learning"),
+            ("Python for Data Science – Coursera", "https://www.coursera.org/learn/python-for-data-science"),
+            ("Data Scientist with Python – DataCamp", "https://www.datacamp.com/tracks/data-scientist-with-python"),
+            ("Data Science Bootcamp – Udemy", "https://www.udemy.com/course/data-science-and-machine-learning-bootcamp-with-python/"),
+            ("Statistics for Data Science – Udemy", "https://www.udemy.com/course/statistics-for-data-science-and-business-analysis/"),
+            ("Intro to Machine Learning – Kaggle (FREE)", "https://www.kaggle.com/learn/intro-to-machine-learning"),
+            ("AI for Everyone – Andrew Ng", "https://www.coursera.org/learn/ai-for-everyone")
+        ]
+    },
 
-            "Web Development": {
-                "skills": ['React', 'Node.js', 'Django', 'Flask', 'MySQL'],
-                "courses": [
-                    ("Web Developer Bootcamp", "https://www.udemy.com/course/the-complete-web-developer-course-2/"),
-                    ("JavaScript Algorithms (freeCodeCamp)", "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"),
-                    ("React Frontend Course", "https://www.coursera.org/learn/react"),
-                    ("Django for Beginners", "https://www.udemy.com/course/django-for-beginners/"),
-                    ("Full Stack Open", "https://fullstackopen.com/en/")
-                ]
-            },
+    # =========================================================
+    # 2) WEB DEVELOPMENT
+    # =========================================================
+    "Web Development": {
+        "skills": ['php', 'wordpress', 'magento', 'laravel', 'express',
+                   'rest api', 'mongodb', 'frontend', 'backend'],
+        "courses": [
+            ("The Odin Project (FREE Full Stack)", "https://www.theodinproject.com"),
+            ("HTML & CSS Crash Course – freeCodeCamp (FREE)", "https://www.freecodecamp.org/learn/responsive-web-design/"),
+            ("JavaScript Full Course – freeCodeCamp (FREE)", "https://youtu.be/jS4aFq5-91M"),
+            ("React – Codecademy", "https://www.codecademy.com/learn/react-101"),
+            ("Node.js Crash Course – freeCodeCamp", "https://youtu.be/Oe421EPjeBE"),
+            ("Full Stack Web Dev – Udacity", "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044"),
+            ("Django for Everyone – Coursera", "https://www.coursera.org/specializations/django"),
+            ("Complete Web Dev Bootcamp – Udemy", "https://www.udemy.com/course/the-complete-web-development-bootcamp/"),
+            ("Next.js Full Tutorial – freeCodeCamp", "https://youtu.be/Y6KDk5iyrYE"),
+            ("Frontend Developer Roadmap – Roadmap.sh (FREE)", "https://roadmap.sh/frontend")
+        ]
+    },
 
-            "Android Development": {
-                "skills": ['Kotlin', 'Flutter', 'XML', 'SQLite', 'Firebase'],
-                "courses": [
-                    ("Android App Development (Google)", "https://developer.android.com/courses"),
-                    ("Flutter Bootcamp", "https://www.udemy.com/course/flutter-bootcamp-with-dart/"),
-                    ("Android for Beginners", "https://youtu.be/fis26HvvDII"),
-                    ("Kotlin for Android", "https://www.coursera.org/learn/kotlin-for-java-developers"),
-                    ("Flutter Specialization", "https://www.coursera.org/specializations/app-development-with-flutter")
-                ]
-            },
+    # =========================================================
+    # 3) ANDROID DEVELOPMENT
+    # =========================================================
+    "Android Development": {
+        "skills": ['android', 'kotlin', 'jetpack compose', 'android studio', 'firebase', 'kivy'],
+        "courses": [
+            ("Android Basics by Google (FREE)", "https://www.udacity.com/course/android-basics--nd803"),
+            ("Android Kotlin Developer – Udacity", "https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940"),
+            ("Android Studio Masterclass – Udemy", "https://www.udemy.com/course/android-oreo-kotlin-app-masterclass/"),
+            ("Kotlin Bootcamp – Google", "https://developer.android.com/courses/android-basics-kotlin/course"),
+            ("Flutter Full Course – freeCodeCamp", "https://youtu.be/VPvVD8t02U8"),
+            ("Jetpack Compose Tutorial – Google", "https://developer.android.com/jetpack/compose"),
+            ("Android Specialization – Coursera", "https://www.coursera.org/specializations/android-app-development"),
+            ("Flutter & Dart Bootcamp – Udemy", "https://www.udemy.com/course/flutter-dart-the-complete-flutter-app-development-course/"),
+            ("Kotlin Essentials – JetBrains", "https://play.kotlinlang.org/koans/overview"),
+            ("Android Clean Architecture Course", "https://youtu.be/EOfCEhWq8sg")
+        ]
+    },
 
-            "iOS Development": {
-                "skills": ['Swift', 'Xcode', 'UIKit', 'Core Data', 'SwiftUI'],
-                "courses": [
-                    ("iOS App Development Bootcamp", "https://www.udemy.com/course/ios-13-app-development-bootcamp/"),
-                    ("SwiftUI Essentials", "https://developer.apple.com/tutorials/swiftui"),
-                    ("iOS Basics", "https://www.coursera.org/learn/ios-app-development-basics"),
-                    ("Swift Developer Program", "https://www.edx.org/professional-certificate/curtinx-mobile-app-development-with-swift"),
-                    ("Swift Programming", "https://www.codecademy.com/learn/learn-swift")
-                ]
-            },
+    # =========================================================
+    # 4) iOS DEVELOPMENT
+    # =========================================================
+    "iOS Development": {
+        "skills": ['ios', 'swift', 'swiftui', 'objective-c', 'xcode', 'uikit', 'cocoa'],
+        "courses": [
+            ("Swift Full Course – freeCodeCamp", "https://youtu.be/comQ1-x2a1Q"),
+            ("SwiftUI Essentials – Apple", "https://developer.apple.com/tutorials/swiftui"),
+            ("iOS & Swift Bootcamp – Udemy", "https://www.udemy.com/course/ios-13-app-development-bootcamp/"),
+            ("Become an iOS Developer – Udacity", "https://www.udacity.com/course/ios-developer-nanodegree--nd003"),
+            ("Swift Programming – Codecademy", "https://www.codecademy.com/learn/learn-swift"),
+            ("iOS App Development Specialization – Coursera", "https://www.coursera.org/specializations/app-development"),
+            ("Objective-C Crash Course – Udemy", "https://www.udemy.com/course/objectivec/"),
+            ("iOS Architecture – Udemy", "https://www.udemy.com/course/ios-architecture/"),
+            ("SwiftUI Masterclass – Udemy", "https://www.udemy.com/course/swiftui-masterclass-course-ios-development-with-swift/"),
+            ("Intro to iOS – LinkedIn", "https://www.linkedin.com/learning/topics/ios")
+        ]
+    },
 
-            "UI/UX Design": {
-                "skills": ['Figma', 'Adobe XD', 'Prototyping', 'Wireframes', 'Usability Testing'],
-                "courses": [
-                    ("Google UX Design Certificate", "https://www.coursera.org/professional-certificates/google-ux-design"),
-                    ("UI/UX Design Essentials", "https://www.udemy.com/course/ui-ux-web-design-using-adobe-xd/"),
-                    ("Design Thinking Course", "https://www.coursera.org/learn/uva-darden-design-thinking-innovation"),
-                    ("Figma for UX", "https://www.linkedin.com/learning/figma-for-ux-design"),
-                    ("UX Fundamentals (Skillshare)", "https://www.skillshare.com/en/classes/user-experience-design-fundamentals/87920879")
-                ]
-            },
+    # =========================================================
+    # 5) UI/UX DESIGN
+    # =========================================================
+    "UI/UX Design": {
+        "skills": ['figma', 'adobe xd', 'balsamiq', 'prototyping', 'wireframes',
+                   'mockups', 'usability testing', 'user interface', 'user experience'],
+        "courses": [
+            ("Google UX Design Certificate", "https://www.coursera.org/professional-certificates/google-ux-design"),
+            ("Figma Full Course – freeCodeCamp", "https://youtu.be/jwCt4DCa2Ek"),
+            ("UI/UX Specialization – Coursera", "https://www.coursera.org/specializations/ui-ux-design"),
+            ("Adobe XD Full Course – YouTube", "https://youtu.be/68w2VwalD5w"),
+            ("UX Fundamentals – Udemy", "https://www.udemy.com/course/ux-design-fundamentals/"),
+            ("Design Thinking – Coursera", "https://www.coursera.org/learn/uva-darden-design-thinking-innovation"),
+            ("UI Design Principles – Udemy", "https://www.udemy.com/course/design-rules/"),
+            ("UX Research at Scale – Coursera", "https://www.coursera.org/learn/ux-research-at-scale"),
+            ("Interaction Design Foundation Courses", "https://www.interaction-design.org/courses"),
+            ("Become a UX Designer – Udacity", "https://www.udacity.com/course/ux-designer-nanodegree--nd578")
+        ]
+    },
 
-            "Data Analyst": {
-                "skills": ['Excel', 'Power BI', 'SQL', 'Pandas', 'Visualization'],
-                "courses": [
-                    ("Google Data Analytics Certificate", "https://www.coursera.org/professional-certificates/google-data-analytics"),
-                    ("Data Analyst with Python", "https://www.datacamp.com/tracks/data-analyst-with-python"),
-                    ("Excel to MySQL", "https://www.coursera.org/specializations/excel-mysql"),
-                    ("Tableau Beginner Course", "https://www.udemy.com/course/tableau10/"),
-                    ("Power BI Fundamentals", "https://learn.microsoft.com/en-us/training/paths/get-started-power-bi/")
-                ]
-            },
+    # =========================================================
+    # 6) DATA ANALYST
+    # =========================================================
+    "Data Analyst": {
+        "skills": ['excel', 'power bi', 'tableau', 'data cleaning', 'analytics'],
+        "courses": [
+            ("Google Data Analytics Certificate", "https://www.coursera.org/professional-certificates/google-data-analytics"),
+            ("Excel to MySQL – Coursera", "https://www.coursera.org/specializations/excel-mysql"),
+            ("Data Analyst with Python – DataCamp", "https://www.datacamp.com/tracks/data-analyst-with-python"),
+            ("Power BI Full Course – freeCodeCamp", "https://youtu.be/0tAzpi3fXw4"),
+            ("Tableau Training – Udemy", "https://www.udemy.com/course/tableau10/"),
+            ("Statistics for Data Analysis – Udemy", "https://www.udemy.com/course/statistics-for-data-science-and-business-analysis/"),
+            ("Pandas Tutorial – freeCodeCamp", "https://youtu.be/vmEHCJofslg"),
+            ("SQL for Data Analysis – Coursera", "https://www.coursera.org/specializations/data-analysis-sql"),
+            ("Excel Essential Training – LinkedIn", "https://www.linkedin.com/learning/excel-essential-training-2019"),
+            ("Data Analytics Bootcamp – Udemy", "https://www.udemy.com/course/data-analytics-real-world-projects/")
+        ]
+    },
 
-            "Cloud & DevOps": {
-                "skills": ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD'],
-                "courses": [
-                    ("AWS Cloud Practitioner", "https://www.aws.training/Details/eLearning?id=60697"),
-                    ("Docker & Kubernetes", "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/"),
-                    ("DevOps Foundations", "https://www.linkedin.com/learning/devops-foundations"),
-                    ("Azure DevOps Training", "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-devops/"),
-                    ("Terraform Beginner Track", "https://learn.hashicorp.com/collections/terraform/aws-get-started")
-                ]
-            },
+    # =========================================================
+    # 7) CLOUD & DEVOPS
+    # =========================================================
+    "Cloud & DevOps": {
+        "skills": ['aws', 'gcp', 'docker', 'kubernetes', 'terraform',
+                   'jenkins', 'ci/cd', 'ansible', 'infrastructure'],
+        "courses": [
+            ("AWS Cloud Practitioner", "https://www.aws.training/Details/eLearning?id=60697"),
+            ("Docker + Kubernetes – Udemy", "https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/"),
+            ("Terraform for Beginners", "https://learn.hashicorp.com/collections/terraform/aws-get-started"),
+            ("Azure DevOps Tutorial – Microsoft", "https://learn.microsoft.com/en-us/training/modules/introduction-to-devops/"),
+            ("DevOps Foundations – LinkedIn", "https://www.linkedin.com/learning/devops-foundations"),
+            ("Linux Administration – Udemy", "https://www.udemy.com/course/linux-admin-bootcamp/"),
+            ("GCP Cloud Engineer – Coursera", "https://www.coursera.org/professional-certificates/gcp-cloud-engineering"),
+            ("Kubernetes Bootcamp – freeCodeCamp", "https://youtu.be/X48VuDVv0do"),
+            ("Jenkins From Zero to Hero – Udemy", "https://www.udemy.com/course/jenkins-from-zero-to-hero/"),
+            ("Ansible for Beginners – Udemy", "https://www.udemy.com/course/ansible-for-the-absolute-beginner/")
+        ]
+    },
 
-            "Cybersecurity": {
-                "skills": ['Network Security', 'Ethical Hacking', 'SIEM', 'Firewalls', 'Vulnerability Assessment'],
-                "courses": [
-                    ("Cybersecurity Fundamentals", "https://www.coursera.org/specializations/ibm-cybersecurity-analyst"),
-                    ("Certified Ethical Hacker", "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/"),
-                    ("Intro to Cybersecurity (Cisco)", "https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity"),
-                    ("Network Security Basics", "https://www.udemy.com/course/network-security-fundamentals/"),
-                    ("Google Cybersecurity Certificate", "https://www.coursera.org/professional-certificates/google-cybersecurity")
-                ]
-            },
+    # =========================================================
+    # 8) CYBERSECURITY
+    # =========================================================
+    "Cybersecurity": {
+        "skills": ['cybersecurity', 'ethical hacking', 'penetration testing',
+                   'network security', 'firewall', 'siem', 'burp suite',
+                   'kali linux', 'vulnerability assessment'],
+        "courses": [
+            ("Intro to Cybersecurity – Cisco", "https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity"),
+            ("Google Cybersecurity Certificate", "https://www.coursera.org/professional-certificates/google-cybersecurity"),
+            ("Certified Ethical Hacker (CEH)", "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/"),
+            ("Cybersecurity Full Course – freeCodeCamp", "https://youtu.be/3Kq1MIfTWCE"),
+            ("Kali Linux for Hackers – Udemy", "https://www.udemy.com/course/ethical-hacking-beginners/"),
+            ("Network Security – LinkedIn", "https://www.linkedin.com/learning/topics/network-security"),
+            ("Burp Suite Masterclass – Udemy", "https://www.udemy.com/course/burp-suite-mastering-bug-bounty/"),
+            ("Pentesting with Nmap – Udemy", "https://www.udemy.com/course/nmap-complete-guide/"),
+            ("Cryptography – Coursera", "https://www.coursera.org/learn/cryptography"),
+            ("Malware Analysis – Udemy", "https://www.udemy.com/course/malware-analysis/")
+        ]
+    },
 
-            "Quality Assurance": {
-                "skills": ['Manual Testing', 'Automation', 'Selenium', 'Postman', 'Bug Tracking'],
-                "courses": [
-                    ("Software Testing Fundamentals", "https://www.coursera.org/learn/software-testing"),
-                    ("Selenium with Python", "https://www.udemy.com/course/selenium-webdriver-with-python/"),
-                    ("Postman API Testing", "https://www.udemy.com/course/postman-the-complete-guide/"),
-                    ("Test Automation University", "https://testautomationu.applitools.com/"),
-                    ("Agile Testing Foundations", "https://www.linkedin.com/learning/agile-testing-foundations")
-                ]
-            },
+    # =========================================================
+    # 9) QUALITY ASSURANCE (QA)
+    # =========================================================
+    "Quality Assurance": {
+        "skills": ['automation testing', 'selenium', 'cypress', 'api testing',
+                   'bug tracking', 'pytest', 'quality assurance'],
+        "courses": [
+            ("Manual Testing – Udemy", "https://www.udemy.com/course/manual-testing-with-tutorial/"),
+            ("Selenium with Python – Udemy", "https://www.udemy.com/course/selenium-webdriver-with-python/"),
+            ("Cypress Automation – Udemy", "https://www.udemy.com/course/cypress-tutorial/"),
+            ("API Testing with Postman – Udemy", "https://www.udemy.com/course/postman-the-complete-guide/"),
+            ("QA Testing Full Course – freeCodeCamp", "https://youtu.be/XkW6OVv1kwA"),
+            ("JIRA Crash Course – LinkedIn", "https://www.linkedin.com/learning/jira-service-management"),
+            ("Automated Testing Specialization – Coursera", "https://www.coursera.org/specializations/automated-software-testing"),
+            ("Unit Testing in Python – Udemy", "https://www.udemy.com/course/python-unit-testing-automation/"),
+            ("Test Automation University (FREE)", "https://testautomationu.applitools.com/"),
+            ("Bug Tracking & Reporting – Udemy", "https://www.udemy.com/course/bug-reporting/")
+        ]
+    },
 
-            "Business Analyst": {
-                "skills": ['Excel', 'Agile', 'Documentation', 'JIRA', 'Communication'],
-                "courses": [
-                    ("Business Analysis Fundamentals", "https://www.udemy.com/course/business-analysis-fundamentals/"),
-                    ("Agile Business Analyst", "https://www.coursera.org/learn/agile-business-analyst"),
-                    ("Excel for Business", "https://www.coursera.org/specializations/excel"),
-                    ("Project Management Foundations", "https://www.linkedin.com/learning/project-management-foundations"),
-                    ("Business Analytics Specialization", "https://www.coursera.org/specializations/business-analytics")
-                ]
-            },
+    # =========================================================
+    # 10) BUSINESS ANALYST
+    # =========================================================
+    "Business Analyst": {
+        "skills": ['business analysis', 'requirement gathering', 'documentation',
+                   'stakeholder', 'project management'],
+        "courses": [
+            ("BA Fundamentals – Udemy", "https://www.udemy.com/course/business-analysis-fundamentals/"),
+            ("Agile Business Analyst – Coursera", "https://www.coursera.org/learn/agile-business-analyst"),
+            ("Business Analytics – Coursera", "https://www.coursera.org/specializations/business-analytics"),
+            ("Excel for Analysts – Coursera", "https://www.coursera.org/learn/excel-data-analysis"),
+            ("JIRA for BA – Udemy", "https://www.udemy.com/course/jira-agile-project-management/"),
+            ("Project Management Foundations – LinkedIn", "https://www.linkedin.com/learning/project-management-foundations"),
+            ("Requirement Engineering – Udemy", "https://www.udemy.com/course/requirements-engineering/"),
+            ("Business Communication – Coursera", "https://www.coursera.org/specializations/business-communication"),
+            ("Business Data Analytics – Udemy", "https://www.udemy.com/course/business-data-science/"),
+            ("SDLC Complete Guide – Udemy", "https://www.udemy.com/course/software-development-life-cycle/")
+        ]
+    },
 
-            "Database Administrator": {
-                "skills": ['SQL', 'Backup', 'Performance Tuning', 'PostgreSQL', 'Oracle'],
-                "courses": [
-                    ("Oracle SQL Admin", "https://www.udemy.com/course/oracle-sql-database-administration/"),
-                    ("PostgreSQL Specialization", "https://www.coursera.org/specializations/postgresql-for-everybody"),
-                    ("Database Management Essentials", "https://www.coursera.org/learn/database-management"),
-                    ("SQL Server Essentials", "https://www.linkedin.com/learning/sql-server-essential-training"),
-                    ("MySQL for Data Analytics", "https://www.udemy.com/course/mysql-for-data-analytics-and-business-intelligence/")
-                ]
-            },
+    # =========================================================
+    # 11) DATABASE ADMINISTRATOR (DBA)
+    # =========================================================
+    "Database Administrator": {
+        "skills": ['pl/sql', 'oracle', 'postgresql', 'normalization',
+                   'backup', 'performance tuning', 'rds'],
+        "courses": [
+            ("PostgreSQL Masterclass – Udemy", "https://www.udemy.com/course/postgresql-database-administration/"),
+            ("SQL for Data Engineering – Coursera", "https://www.coursera.org/learn/data-eng-sql"),
+            ("MySQL Full Course – freeCodeCamp", "https://youtu.be/7S_tz1z_5bA"),
+            ("Oracle SQL Admin – Udemy", "https://www.udemy.com/course/oracle-sql-database-administration/"),
+            ("DBMS Full Course – Gate Smashers", "https://youtu.be/4xCynWHbn8w"),
+            ("PL/SQL Bootcamp – Udemy", "https://www.udemy.com/course/oracle-plsql-programming/"),
+            ("Database Design – Coursera", "https://www.coursera.org/learn/database-design"),
+            ("SQL Server – LinkedIn", "https://www.linkedin.com/learning/learning-sql-server"),
+            ("Normalization & DB Design – Udemy", "https://www.udemy.com/course/database-design-and-management/"),
+            ("NoSQL Essentials – Coursera", "https://www.coursera.org/learn/nosql-databases")
+        ]
+    },
 
-            "AI / NLP Engineer": {
-                "skills": ['NLP', 'Transformers', 'Hugging Face', 'BERT', 'GPT'],
-                "courses": [
-                    ("NLP (Coursera)", "https://www.coursera.org/learn/language-processing"),
-                    ("Hugging Face NLP Course", "https://huggingface.co/learn/nlp-course"),
-                    ("Deep Learning for NLP", "https://www.udemy.com/course/nlp-natural-language-processing-with-python/"),
-                    ("Applied Text Mining", "https://www.coursera.org/learn/python-text-mining"),
-                    ("Transformers & BERT Video", "https://youtu.be/kCc8FmEb1nY")
-                ]
-            },
+    # =========================================================
+    # 12) AI / NLP ENGINEER
+    # =========================================================
+    "AI / NLP Engineer": {
+        "skills": ['transformers', 'huggingface', 'bert', 'gpt',
+                   'text classification', 'language model', 'speech recognition'],
+        "courses": [
+            ("NLP Specialization – Coursera", "https://www.coursera.org/specializations/nlp"),
+            ("HuggingFace Transformers Course – FREE", "https://huggingface.co/course/chapter1"),
+            ("Deep Learning for NLP – Udemy", "https://www.udemy.com/course/nlp-natural-language-processing-with-python/"),
+            ("BERT & GPT Hands-on – Udemy", "https://www.udemy.com/course/bert-transformers-nlp/"),
+            ("Speech Recognition – Coursera", "https://www.coursera.org/learn/audio-processing"),
+            ("Intro to NLP – freeCodeCamp", "https://youtu.be/fNxaJsNG3-s"),
+            ("Stanford NLP – CS224N", "http://web.stanford.edu/class/cs224n/"),
+            ("Transformers in Python – YouTube", "https://youtu.be/tiuPHWB1gkA"),
+            ("AI for Everyone – Coursera", "https://www.coursera.org/learn/ai-for-everyone"),
+            ("Neural Networks – Coursera", "https://www.coursera.org/learn/neural-networks-deep-learning")
+        ]
+    },
 
-            "Product Manager": {
-                "skills": ['Leadership', 'Agile', 'Market Research', 'Analytics', 'Roadmapping'],
-                "courses": [
-                    ("Digital Product Management", "https://www.coursera.org/learn/uva-darden-digital-product-management"),
-                    ("Product Management 101", "https://www.udemy.com/course/product-management-101/"),
-                    ("Agile Product Owner Role", "https://www.linkedin.com/learning/agile-product-owner-role"),
-                    ("Product Strategy (Northwestern)", "https://www.coursera.org/learn/product-strategy"),
-                    ("Business Strategy (edX)", "https://www.edx.org/course/business-strategy")
-                ]
-            }
-        }
+    # =========================================================
+    # 13) PRODUCT MANAGER
+    # =========================================================
+    "Product Manager": {
+        "skills": ['product management', 'roadmap', 'market research',
+                   'data-driven', 'leadership', 'notion'],
+        "courses": [
+            ("Digital Product Management – Coursera", "https://www.coursera.org/learn/uva-darden-digital-product-management"),
+            ("Product Management 101 – Udemy", "https://www.udemy.com/course/product-management-101/"),
+            ("Agile Product Owner Role – LinkedIn", "https://www.linkedin.com/learning/agile-product-owner-role"),
+            ("Product Strategy – Coursera", "https://www.coursera.org/learn/product-strategy"),
+            ("Product Management Crash Course", "https://youtu.be/sJ14cWjrNzs"),
+            ("Roadmapping for PMs – Udemy", "https://www.udemy.com/course/product-roadmaps/"),
+            ("Business Strategy – Coursera", "https://www.coursera.org/specializations/business-strategy"),
+            ("User Story Writing – Udemy", "https://www.udemy.com/course/user-story/"),
+            ("Notion Productivity Course – YouTube", "https://youtu.be/pvJScuVF4TU"),
+            ("PM Interview Prep – Udemy", "https://www.udemy.com/course/product-management-interview-crash-course/")
+        ]
+    },
 
-        # -------- Build Recommendations -------- #
+    # =========================================================
+    # 14) PYTHON DEVELOPER
+    # =========================================================
+    "Python Developer": {
+        "skills": ['python', 'django', 'fastapi', 'tkinter', 'scripting',
+                   'automation', 'flask'],
+        "courses": [
+            ("Python for Everybody – Coursera", "https://www.coursera.org/specializations/python"),
+            ("Automate the Boring Stuff (FREE)", "https://automatetheboringstuff.com/"),
+            ("Django Full Course – freeCodeCamp", "https://youtu.be/F5mRW0jo-U4"),
+            ("FastAPI Full Course – YouTube", "https://youtu.be/0sOvCWFmrtA"),
+            ("Python OOP – Udemy", "https://www.udemy.com/course/python-object-oriented-programming/"),
+            ("Python Bootcamp – Udemy", "https://www.udemy.com/course/complete-python-bootcamp/"),
+            ("Flask Web Development – Udemy", "https://www.udemy.com/course/python-and-flask-bootcamp/"),
+            ("Python DSA – Udemy", "https://www.udemy.com/course/python-data-structures-and-algorithms/"),
+            ("Asyncio in Python – YouTube", "https://youtu.be/3mbFky5M6dM"),
+            ("Django REST API – Coursera", "https://www.coursera.org/projects/django-rest-framework")
+        ]
+    },
+
+    # =========================================================
+    # 15) JAVA DEVELOPER
+    # =========================================================
+    "Java Developer": {
+        "skills": ['java', 'j2ee', 'spring', 'spring boot',
+                   'hibernate', 'servlets', 'microservices'],
+        "courses": [
+            ("Java Masterclass – Udemy", "https://www.udemy.com/course/java-the-complete-java-developer-course/"),
+            ("Java Full Course – freeCodeCamp", "https://youtu.be/A74TOX803D0"),
+            ("Spring Boot Full Course – YouTube", "https://youtu.be/9SGDpanrc8U"),
+            ("Hibernate Tutorial – Udemy", "https://www.udemy.com/course/hibernate-course/"),
+            ("Java OOP – Udemy", "https://www.udemy.com/course/java-object-oriented-programming/"),
+            ("Spring Security – Udemy", "https://www.udemy.com/course/spring-security-core-beginner-to-guru/"),
+            ("Java Servlets & JSP – Udemy", "https://www.udemy.com/course/jsp-servlet-free-course/"),
+            ("Spring Microservices – Udemy", "https://www.udemy.com/course/microservices-with-spring-boot/"),
+            ("DSA in Java – Coding Ninjas", "https://www.codingninjas.com/courses/data-structures-and-algorithms-java"),
+            ("Java Multithreading – YouTube", "https://youtu.be/h-T7XmyIHDE")
+        ]
+    },
+
+    # =========================================================
+    # 16) C/C++ DEVELOPER
+    # =========================================================
+    "C/C++ Developer": {
+        "skills": ['c', 'c++', 'stl', 'memory management', 'linux programming'],
+        "courses": [
+            ("C Programming Full Course – freeCodeCamp", "https://youtu.be/KJgsSFOSQv0"),
+            ("C++ Full Course – freeCodeCamp", "https://youtu.be/8jLOx1hD3_o"),
+            ("DSA in C++ – Udemy", "https://www.udemy.com/course/datastructurescncpp/"),
+            ("Advanced C++ – Udemy", "https://www.udemy.com/course/advanced-c-programming/"),
+            ("Linux System Programming – Udemy", "https://www.udemy.com/course/linux-system-programming-techniques/"),
+            ("Pointers in C – Udemy", "https://www.udemy.com/course/c-pointers/"),
+            ("Competitive Programming – Codeforces", "https://codeforces.com/edu"),
+            ("STL in C++ – YouTube", "https://youtu.be/PwS4LlQ2kZQ"),
+            ("Operating Systems – Neso Academy", "https://youtu.be/_TpOHMCODXo"),
+            ("C++ OOP Masterclass – Udemy", "https://www.udemy.com/course/cpp-classes/")
+        ]
+    },
+
+    # =========================================================
+    # 17) .NET DEVELOPER
+    # =========================================================
+    ".NET Developer": {
+        "skills": ['c#', '.net', 'asp.net', 'entity framework', 'mvc', 'linq'],
+        "courses": [
+            ("C# Basics – freeCodeCamp", "https://youtu.be/GhQdlIFylQ8"),
+            ("ASP.NET Core MVC – YouTube", "https://youtu.be/BfEjDD8mWYg"),
+            ("Entity Framework Core – Pluralsight", "https://www.pluralsight.com/courses/entity-framework-core-getting-started"),
+            ("C# Masterclass – Udemy", "https://www.udemy.com/course/csharp-tutorial-for-beginners/"),
+            (".NET API Development – Udemy", "https://www.udemy.com/course/build-restful-apis-with-aspnet-core/"),
+            ("LINQ Tutorial – Microsoft", "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/"),
+            ("Microservices in .NET – Udemy", "https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/"),
+            ("Blazor WebAssembly Course", "https://learn.microsoft.com/en-us/aspnet/core/blazor"),
+            ("ASP.NET Razor Pages – Udemy", "https://www.udemy.com/course/aspnet-core-razor-pages/"),
+            ("Clean Architecture in .NET – YouTube", "https://youtu.be/fJjKQla-PgM")
+        ]
+    },
+
+    # =========================================================
+    # 18) PHP DEVELOPER
+    # =========================================================
+    "PHP Developer": {
+        "skills": ['php developer'],  # special role
+        "courses": [
+            ("PHP Full Course – freeCodeCamp", "https://youtu.be/OK_JCtrrv-c"),
+            ("Laravel From Scratch – Laracasts", "https://laracasts.com/series/laravel-8-from-scratch"),
+            ("PHP with MySQL – Udemy", "https://www.udemy.com/course/php-for-complete-beginners-includes-msql-object-oriented/"),
+            ("Object-Oriented PHP – Udemy", "https://www.udemy.com/course/php-oop-object-oriented-programming/"),
+            ("Laravel REST API – YouTube", "https://youtu.be/MT-GJQIY3EU"),
+            ("PHP Security Crash Course – Udemy", "https://www.udemy.com/course/php-security/"),
+            ("PHP MVC Framework Course – YouTube", "https://youtu.be/6ERdu4k62wI"),
+            ("Deploying PHP Apps – Udemy", "https://www.udemy.com/course/deploy-php-app/"),
+            ("MySQL Masterclass – Udemy", "https://www.udemy.com/course/the-complete-sql-bootcamp/"),
+            ("Laravel Livewire Course", "https://laravel-livewire.com/docs/2.x/quickstart")
+        ]
+    },
+
+    # =========================================================
+    # 19) JAVASCRIPT DEVELOPER
+    # =========================================================
+    "JavaScript Developer": {
+        "skills": ['ecmascript', 'dom', 'event loop', 'callbacks',
+                   'promises', 'async', 'await'],
+        "courses": [
+            ("JavaScript Full Course – freeCodeCamp", "https://youtu.be/HD13eq_Pmp8"),
+            ("Async JS Mastery – Udemy", "https://www.udemy.com/course/asynchronous-javascript/"),
+            ("JavaScript DOM – YouTube", "https://youtu.be/0ik6X4DJKCc"),
+            ("JavaScript Algorithms – freeCodeCamp", "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"),
+            ("TypeScript Full Course – freeCodeCamp", "https://youtu.be/30LWjhZzg50"),
+            ("Modern JS Bootcamp – Udemy", "https://www.udemy.com/course/javascript-beginners-complete-tutorial/"),
+            ("JavaScript Design Patterns – Udemy", "https://www.udemy.com/course/learn-javascript-design-patterns/"),
+            ("ES6+ Mastery – Udemy", "https://www.udemy.com/course/understand-javascript/"),
+            ("Event Loop Deep Dive – YouTube", "https://youtu.be/8aGhZQkoFbQ"),
+            ("Async/Await Guide – MDN", "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous")
+        ]
+    },
+
+    # =========================================================
+    # 20) FULL STACK DEVELOPER
+    # =========================================================
+    "Full Stack Developer": {
+        "skills": ['full stack', 'system design', 'version control', 'git'],
+        "courses": [
+            ("Full Stack Web Dev – Coursera", "https://www.coursera.org/specializations/full-stack-mobile-app-development"),
+            ("MERN Stack Full Course – freeCodeCamp", "https://youtu.be/7CqJlxBYj-M"),
+            ("MEAN Stack Bootcamp – Udemy", "https://www.udemy.com/course/full-stack-web-development-mega-pack/"),
+            ("System Design for Beginners – YouTube", "https://youtu.be/l5zn6mP5uY8"),
+            ("Git & GitHub Bootcamp – Udemy", "https://www.udemy.com/course/git-complete/"),
+            ("Backend Roadmap – Roadmap.sh", "https://roadmap.sh/backend"),
+            ("Frontend Roadmap – Roadmap.sh", "https://roadmap.sh/frontend"),
+            ("Docker for Developers – Udemy", "https://www.udemy.com/course/docker-mastery/"),
+            ("APIs for Developers – LinkedIn", "https://www.linkedin.com/learning/apis-for-developers"),
+            ("Full Stack Project Bootcamp – Udemy", "https://www.udemy.com/course/100-days-of-web-development/")
+        ]
+    },
+
+    # =========================================================
+    # 21) BACKEND DEVELOPER
+    # =========================================================
+    "Backend Developer": {
+        "skills": ['authentication', 'authorization', 'redis'],
+        "courses": [
+            ("Backend Roadmap – Roadmap.sh", "https://roadmap.sh/backend"),
+            ("REST API Crash Course – freeCodeCamp", "https://youtu.be/Q-BpqyOT3a8"),
+            ("Redis Crash Course – YouTube", "https://youtu.be/Hbt56gFj998"),
+            ("JWT Authentication – Net Ninja", "https://youtu.be/7Q17ubqLfaM"),
+            ("Microservices Architecture – Udemy", "https://www.udemy.com/course/microservices-with-node-js-and-react/"),
+            ("Node.js Backend Masterclass – Udemy", "https://www.udemy.com/course/nodejs-the-complete-guide/"),
+            ("PostgreSQL Full Course – freeCodeCamp", "https://youtu.be/qw--VYLpxG4"),
+            ("API Rate Limiting & Caching – YouTube", "https://youtu.be/jKdCmhVxD0E"),
+            ("Backend System Design – YouTube", "https://youtu.be/hhAo4ZD3ou8"),
+            ("NGINX Essentials – Udemy", "https://www.udemy.com/course/nginx-crash-course/")
+        ]
+    },
+
+    # =========================================================
+    # 22) FRONTEND DEVELOPER
+    # =========================================================
+    "Frontend Developer": {
+        "skills": ['responsive design', 'ui design'],
+        "courses": [
+            ("Frontend Roadmap – Roadmap.sh", "https://roadmap.sh/frontend"),
+            ("HTML/CSS Full Course – freeCodeCamp", "https://youtu.be/kUMe1FH4CHE"),
+            ("JavaScript Full Course – freeCodeCamp", "https://youtu.be/HD13eq_Pmp8"),
+            ("React Full Course – freeCodeCamp", "https://youtu.be/bMknfKXIFA8"),
+            ("Tailwind CSS Mastery – YouTube", "https://youtu.be/pfaSUYaSgRo"),
+            ("CSS Flexbox & Grid – Scrimba", "https://scrimba.com/learn/flexbox"),
+            ("Vue.js Crash Course – YouTube", "https://youtu.be/FXpIoQ_rT_c"),
+            ("Frontend Nanodegree – Udacity", "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011"),
+            ("Web Accessibility – Udacity", "https://www.udacity.com/course/web-accessibility--ud891"),
+            ("UI Design for Developers – Udemy", "https://www.udemy.com/course/ui-design-for-developers/")
+        ]
+    }
+}
+
+
+        # ---------- BUILD RECOMMENDATIONS ----------
         recommended_skills = []
         courses = []
 
         if predicted_role in ROLE_DATA:
             recommended_skills = ROLE_DATA[predicted_role]["skills"]
-            courses = [{"name": n, "link": l} for n, l in ROLE_DATA[predicted_role]["courses"]]
+            courses = [{"name": n, "link": l}
+                       for n, l in ROLE_DATA[predicted_role]["courses"]]
 
         # ----------------------------------------------------
         # RESUME SCORING
@@ -749,26 +1503,22 @@ def view_resume(resume_id):
 
         resume_score = min(resume_score, 100)
 
-        # ----------------------------------------------------
-        # UPDATE DATABASE
-        # ----------------------------------------------------
+        # ---------- SAVE TO DATABASE ----------
         resume.predicted_role = predicted_role
         resume.resume_score = resume_score
         resume.tips = "\n".join(tips)
         resume.recommended_skills = ", ".join(recommended_skills)
         resume.courses = json.dumps([c["name"] for c in courses])
         resume.course_links = json.dumps([c["link"] for c in courses])
+        resume.candidate_level = cand_level
 
         db.session.commit()
-
-        
-        resume.candidate_level = cand_level
 
     except Exception as e:
         traceback.print_exc()
         flash(f"Error analyzing resume: {str(e)}", "danger")
 
-    # -------- Load Courses from DB -------- #
+    # ---------- Load Courses ----------
     courses = []
     if resume.courses and resume.course_links:
         try:
@@ -778,17 +1528,18 @@ def view_resume(resume_id):
         except:
             pass
 
-    # -------- Load Recommended Skills -------- #
+    # ---------- Load Recommended Skills ----------
     recommended_skills = []
     if resume.recommended_skills:
-        recommended_skills = [s.strip() for s in resume.recommended_skills.split(",")]
+        recommended_skills = [s.strip()
+                              for s in resume.recommended_skills.split(",")]
 
     tips = resume.tips.split("\n") if resume.tips else []
 
-    # -------- Roadmap -------- #
+    # ---------- Roadmap ----------
     roadmap = ROADMAPS.get(resume.predicted_role)
 
-    # -------- Render Template -------- #
+    # ---------- Render ----------
     return render_template(
         "view_resume.html",
         resume={
@@ -1204,15 +1955,30 @@ def show_roadmaps():
         {"name": "iOS Development", "image": "roadmaps/ios_development_roadmap.png"},
         {"name": "UI/UX Design", "image": "roadmaps/ui_ux_design_roadmap.png"},
         {"name": "Data Analyst", "image": "roadmaps/data_analyst_roadmap.png"},
-        {"name": "Cloud & DevOps", "image": "roadmaps/cloud_devops_roadmap.png"},
+        {"name": "Cloud & DevOps", "image": "roadmaps/cloud___devops_roadmap.png"},
         {"name": "Cybersecurity", "image": "roadmaps/cybersecurity_roadmap.png"},
         {"name": "Quality Assurance", "image": "roadmaps/quality_assurance_roadmap.png"},
         {"name": "Business Analyst", "image": "roadmaps/business_analyst_roadmap.png"},
         {"name": "Database Administrator", "image": "roadmaps/database_administrator_roadmap.png"},
         {"name": "AI / NLP Engineer", "image": "roadmaps/ai___nlp_engineer_roadmap.png"},
-        {"name": "Product Manager", "image": "roadmaps/product_manager_roadmap.png"}
+        {"name": "Product Manager", "image": "roadmaps/product_manager_roadmap.png"},
+
+        # ----------- NEW ROLES -----------
+        {"name": "Python Developer", "image": "roadmaps/python_developer_roadmap.png"},
+        {"name": "Java Developer", "image": "roadmaps/java_developer_roadmap.png"},
+        {"name": "C/C++ Developer", "image": "roadmaps/c_c___developer_roadmap.png"},
+        {"name": ".NET Developer", "image": "roadmaps/_net_developer_roadmap.png"},
+        {"name": "PHP Developer", "image": "roadmaps/php_developer_roadmap.png"},
+        {"name": "JavaScript Developer", "image": "roadmaps/javascript_developer_roadmap.png"},
+        {"name": "Full Stack Developer", "image": "roadmaps/fullstack_developer_roadmap.png"},
+        {"name": "Software Engineer", "image": "roadmaps/software_engineer_roadmap.png"},
+        {"name": "ML Engineer", "image": "roadmaps/ml_engineer_roadmap.png"},
+        {"name": "Backend Developer", "image": "roadmaps/backend_developer_roadmap.png"},
+        {"name": "Frontend Developer", "image": "roadmaps/frontend_developer_roadmap.png"}
     ]
+
     return render_template("roadmap.html", roadmaps=roadmaps)
+
 
 
 # ---------------- LOGOUT ---------------- #
