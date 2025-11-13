@@ -139,128 +139,135 @@
                     {% endif %}
                 </div>
 
-                <h5 class="section-title mt-4">Predicted Job Role</h5>
-                {% if resume.predicted_role %}
-                <div class="alert alert-success mb-0">
-                    <strong>{{ resume.predicted_role }}</strong>
-                </div>
-                {% else %}
-                <div class="alert alert-warning mb-0">
-                    <em>Job role prediction unavailable.</em>
-                </div>
-                {% endif %}
-            </div>
+                <!-- 🔥 Predicted Job Roles (Top 3) in Green Box -->
+                <div class="section-card mt-4">
+                    <h5 class="section-title">Predicted Job Roles</h5>
 
-            <!-- Recommended Skills -->
-            <div class="section-card">
-                <h5 class="section-title">Recommended Skills to Add</h5>
-                <div>
-                    {% if resume.recommended_skills %}
-                    {% for skill in resume.recommended_skills %}
-                    <span class="tag">{{ skill }}</span>
-                    {% endfor %}
+                    {% if resume.predicted_role %}
+                    <div class="alert alert-success mb-0">
+                        <strong>{{ resume.predicted_role }}</strong>
+                    </div>
                     {% else %}
-                    <span class="text-muted">No recommendations available.</span>
+                    <div class="alert alert-warning mb-0">
+                        <em>No job role predictions available.</em>
+                    </div>
                     {% endif %}
-                </div>
-            </div>
 
-            <!-- ✅ Corrected Courses & Certifications Section -->
-            <div class="section-card">
-                <h5 class="section-title">Courses & Certifications</h5>
-                {% if resume.courses %}
-                <ul class="mb-0">
-                    {% for course in resume.courses %}
-                    <li>
-                        <a href="{{ course.link }}" target="_blank">{{ course.name }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p class="text-muted">No specific course recommendations found.</p>
-                {% endif %}
-            </div>
-
-            <!-- ROADMAP -->
-            {% if resume.roadmap %}
-            <div class="card mt-4 shadow">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">{{ resume.roadmap.title }}</h5>
                 </div>
-                <div class="card-body">
-                    <h6>Learning Steps:</h6>
-                    <ul>
-                        {% for step in resume.roadmap.steps %}
-                        <li>{{ step }}</li>
+
+
+                <!-- Recommended Skills -->
+                <div class="section-card">
+                    <h5 class="section-title">Recommended Skills to Add</h5>
+                    <div>
+                        {% if resume.recommended_skills %}
+                        {% for skill in resume.recommended_skills %}
+                        <span class="tag">{{ skill }}</span>
+                        {% endfor %}
+                        {% else %}
+                        <span class="text-muted">No recommendations available.</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- ✅ Corrected Courses & Certifications Section -->
+                <div class="section-card">
+                    <h5 class="section-title">Courses & Certifications</h5>
+                    {% if resume.courses %}
+                    <ul class="mb-0">
+                        {% for course in resume.courses %}
+                        <li>
+                            <a href="{{ course.link }}" target="_blank">{{ course.name }}</a>
+                        </li>
                         {% endfor %}
                     </ul>
-                    <hr>
-                    {% if resume.roadmap.image %}
-                    <img src="{{ url_for('static', filename='roadmaps/' + resume.roadmap.image.split('/')[-1]) }}"
-                        alt="{{ resume.roadmap.title }}" class="img-fluid rounded shadow">
+                    {% else %}
+                    <p class="text-muted">No specific course recommendations found.</p>
                     {% endif %}
                 </div>
-            </div>
-            {% endif %}
 
-
-            <!-- Resume Tips -->
-            <div class="section-card">
-                <h5 class="section-title">Resume Tips & Ideas</h5>
-                <ul class="mb-0">
-                    {% if resume.tips %}
-                    {% for tip in resume.tips %}
-                    {% if tip.startswith('[+]') %}
-                    <li class="tip-positive">{{ tip }}</li>
-                    {% else %}
-                    <li class="tip-negative">{{ tip }}</li>
-                    {% endif %}
-                    {% endfor %}
-                    {% else %}
-                    <li>No tips generated yet.</li>
-                    {% endif %}
-                </ul>
-            </div>
-
-            <!-- Overall Resume Score -->
-            <div class="section-card">
-                <h5 class="section-title">Overall Resume Score</h5>
-                {% if resume.score is defined and resume.score is not none %}
-                <div class="score-bar mb-2">
-                    {% if resume.score < 60 %} <div class="score-fill score-low" style="width: {{ resume.score }}%;">
+                <!-- ROADMAP -->
+                {% if resume.roadmap %}
+                <div class="card mt-4 shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">{{ resume.roadmap.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Learning Steps:</h6>
+                        <ul>
+                            {% for step in resume.roadmap.steps %}
+                            <li>{{ step }}</li>
+                            {% endfor %}
+                        </ul>
+                        <hr>
+                        {% if resume.roadmap.image %}
+                        <img src="{{ url_for('static', filename='roadmaps/' + resume.roadmap.image.split('/')[-1]) }}"
+                            alt="{{ resume.roadmap.title }}" class="img-fluid rounded shadow">
+                        {% endif %}
+                    </div>
                 </div>
-                {% elif resume.score < 80 %} <div class="score-fill score-medium" style="width: {{ resume.score }}%;">
+                {% endif %}
+
+
+                <!-- Resume Tips -->
+                <div class="section-card">
+                    <h5 class="section-title">Resume Tips & Ideas</h5>
+                    <ul class="mb-0">
+                        {% if resume.tips %}
+                        {% for tip in resume.tips %}
+                        {% if tip.startswith('[+]') %}
+                        <li class="tip-positive">{{ tip }}</li>
+                        {% else %}
+                        <li class="tip-negative">{{ tip }}</li>
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <li>No tips generated yet.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Overall Resume Score -->
+                <div class="section-card">
+                    <h5 class="section-title">Overall Resume Score</h5>
+                    {% if resume.score is defined and resume.score is not none %}
+                    <div class="score-bar mb-2">
+                        {% if resume.score < 60 %} <div class="score-fill score-low"
+                            style="width: {{ resume.score }}%;">
+                    </div>
+                    {% elif resume.score < 80 %} <div class="score-fill score-medium"
+                        style="width: {{ resume.score }}%;">
+                </div>
+                {% else %}
+                <div class="score-fill score-high" style="width: {{ resume.score }}%;"></div>
+                {% endif %}
             </div>
+            <p><strong>Your Resume Score: {{ resume.score }} / 100</strong></p>
+            <small class="text-muted">This score is calculated based on the content and completeness of your
+                resume.</small>
             {% else %}
-            <div class="score-fill score-high" style="width: {{ resume.score }}%;"></div>
+            <p>No score available yet.</p>
             {% endif %}
         </div>
-        <p><strong>Your Resume Score: {{ resume.score }} / 100</strong></p>
-        <small class="text-muted">This score is calculated based on the content and completeness of your
-            resume.</small>
-        {% else %}
-        <p>No score available yet.</p>
-        {% endif %}
-    </div>
 
-    <!-- Bonus Videos Section -->
-    <div class="section-card">
-        <h5 class="section-title">Bonus Videos for Resume & Interview Tips</h5>
+        <!-- Bonus Videos Section -->
+        <div class="section-card">
+            <h5 class="section-title">Bonus Videos for Resume & Interview Tips</h5>
 
-        <div class="mb-3">
-            <p><strong>Resume Writing Tips:</strong></p>
-            <a href="https://youtu.be/ZcuziWFfpQY?si=S96yTj3_7epo5n3k" target="_blank" class="video-link">
-                Watch Resume Writing Tips on YouTube
-            </a>
+            <div class="mb-3">
+                <p><strong>Resume Writing Tips:</strong></p>
+                <a href="https://youtu.be/ZcuziWFfpQY?si=S96yTj3_7epo5n3k" target="_blank" class="video-link">
+                    Watch Resume Writing Tips on YouTube
+                </a>
+            </div>
+
+            <div>
+                <p><strong>Interview Tips:</strong></p>
+                <a href="https://youtu.be/fr-mwiyhZAo?si=09ZW7S_G9Ll_Hvae" target="_blank" class="video-link">
+                    Watch Interview Tips on YouTube
+                </a>
+            </div>
         </div>
-
-        <div>
-            <p><strong>Interview Tips:</strong></p>
-            <a href="https://youtu.be/fr-mwiyhZAo?si=09ZW7S_G9Ll_Hvae" target="_blank" class="video-link">
-                Watch Interview Tips on YouTube
-            </a>
-        </div>
-    </div>
     </div>
 
     <!-- Buttons Section -->

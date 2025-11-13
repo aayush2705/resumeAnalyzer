@@ -37,9 +37,11 @@ class Resume(db.Model):
     resume_score = db.Column(db.Float)
     tips = db.Column(db.Text)
 
+
     # ✅ Added new fields
     courses = db.Column(db.Text)
     course_links = db.Column(db.Text)
+    candidate_name = db.Column(db.String(255))
 
     def __repr__(self):
         return f"<Resume {self.file_name} for User ID {self.user_id}>"

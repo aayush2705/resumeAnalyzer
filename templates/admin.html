@@ -116,7 +116,6 @@
               <th>Role</th>
               <th>Resume File</th>
               <th>Predicted Role</th>
-              <th>Uploaded On</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -129,7 +128,6 @@
               <td>{{ r.role }}</td>
               <td>{{ r.file_name }}</td>
               <td>{{ r.predicted_role or 'Not Analyzed' }}</td>
-              <td>{{ r.created_at.strftime("%Y-%m-%d %H:%M:%S") if r.created_at else '-' }}</td>
               <td>
                 <a href="{{ url_for('export_user_excel', email=r.email) }}" class="btn btn-sm btn-user">
                   ⬇ Download User Report
