@@ -36,7 +36,7 @@ class Resume(db.Model):
     # ------------ File Storage (PostgreSQL BYTEA) ------------
     file_name = db.Column(db.String(200), nullable=False)
     file_data = db.Column(db.LargeBinary, nullable=False)     # <-- store bytes
-    file_mime = db.Column(db.String(50), nullable=False)      # <-- pdf/doc/docx
+    file_mime = db.Column(db.String(200), nullable=False)      # <-- pdf/doc/docx
 
     # ------------ Parsed & AI-generated fields ------------
     parsed_text = db.Column(db.Text)
