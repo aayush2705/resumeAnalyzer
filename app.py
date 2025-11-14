@@ -744,10 +744,6 @@ JAVA_DEV_KEYWORD = {
     'hibernate', 'servlets', 'microservices'
 }
 
-CPP_DEV_KEYWORD = {
-    'c', 'c++', 'stl', 'memory management',
-    'linux programming'
-}
 
 DOTNET_KEYWORD = {
     'c#', '.net', 'asp.net', 'entity framework', 'mvc', 'linq'
@@ -794,7 +790,6 @@ JOB_KEYWORDS = {
     # NEW ROLES
     'Python Developer': PYTHON_DEV_KEYWORD,
     'Java Developer': JAVA_DEV_KEYWORD,
-    'C/C++ Developer': CPP_DEV_KEYWORD,
     '.NET Developer': DOTNET_KEYWORD,
     'PHP Developer': PHP_DEV_KEYWORD,
     'JavaScript Developer': JAVASCRIPT_DEV_KEYWORD,
