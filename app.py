@@ -315,7 +315,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
-
 @app.route('/add_courses')
 def add_courses():
     from models import Course
@@ -890,34 +889,42 @@ def upload_resume():
         return redirect(url_for('candidate_dashboard'))
 
     filename = secure_filename(file.filename)
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(filepath)
+    file_bytes = file.read()   # <-- Read file into memory (for BYTEA)
 
     user = User.query.get(session['user_id'])
 
     try:
-        text = extract_text(filepath)
+        # Extract text from uploaded file (without saving to disk)
+        import tempfile
+        with tempfile.NamedTemporaryFile(delete=False, suffix=filename) as temp_file:
+            temp_file.write(file_bytes)
+            temp_file_path = temp_file.name
+
+        text = extract_text(temp_file_path)
         analysis = analyze_resume(text)
 
+        # Create new Resume entry (PostgreSQL bytea storage)
         new_resume = Resume(
             user_id=user.id,
             file_name=filename,
+            file_data=file_bytes,                         # <-- STORE FILE IN DB
             parsed_text=analysis.get('summary', ''),
             skills=', '.join(analysis.get('skills_found', [])),
             experience=str(analysis.get('experience', '')),
             suggested_roles=analysis.get('suggested_roles', '')
         )
+
         db.session.add(new_resume)
         db.session.commit()
 
-        flash("Resume analyzed successfully!", "success")
+        flash("Resume uploaded & analyzed successfully!", "success")
         return redirect(url_for('view_resume', resume_id=new_resume.id))
 
     except Exception as e:
         traceback.print_exc()
         flash(f"Error analyzing resume: {str(e)}", "danger")
         return redirect(url_for('candidate_dashboard'))
-    
+
 # ---------------- VIEW RESUME ---------------- #
 @app.route('/view_resume/<int:resume_id>')
 def view_resume(resume_id):
@@ -986,15 +993,43 @@ def view_resume(resume_id):
         skills_list = analysis.get("skills_found", [])
         skills_cleaned = [s.lower().strip() for s in skills_list]
 
-        # -------- BEST ROLE MATCHING -------- #
+        # -------- UNIVERSAL IMPROVED ROLE MATCHING -------- #
+
+        rt_words = set(rt_lower.split())   # tokenized resume words
+
+# -------- UNIVERSAL IMPROVED ROLE MATCHING -------- #
+
+
         role_scores = {}
 
         for role, keywords in JOB_KEYWORDS.items():
-            match_count = sum(1 for s in skills_cleaned if s in keywords)
-            role_scores[role] = match_count
+          score = 0
 
+          for kw in keywords:
+            kw = kw.lower()
+
+        # 1) Strong match → skill exactly found
+            if kw in skills_cleaned:
+              score += 3
+
+        # 2) Medium match → keyword appears anywhere in resume text
+            if kw in rt_lower:
+              score += 2
+
+        # 3) Weak match → partial overlap (e.g., "manage" in "management")
+            for word in rt_words:
+              if kw in word and len(kw) > 3:
+                score += 1
+
+          role_scores[role] = score
+
+# Pick highest-scoring role
         best_role = max(role_scores, key=role_scores.get)
-        predicted_role = best_role if role_scores[best_role] > 0 else None
+
+        predicted_role = best_role if role_scores[best_role] >= 5 else None
+        resume.predicted_role = predicted_role
+
+
 
         # ---------- ROLE DATA ----------- #
         ROLE_DATA = {
