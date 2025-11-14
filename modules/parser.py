@@ -1,6 +1,7 @@
 import re
 import docx2txt
 import PyPDF2
+import io
 SKILL_BANK = {
 
     # ------------------- PROGRAMMING LANGUAGES -------------------
@@ -132,3 +133,20 @@ def analyze_resume(text):
                    f"| Experience: {exp_val} years",
         "suggested_roles": "Auto-role handled in app.py"
     }
+
+def extract_text_bytes(file_bytes, mime):
+    if mime == "application/pdf":
+        reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() or ""
+        return text
+
+    if mime in [
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/msword"
+    ]:
+        buffer = io.BytesIO(file_bytes)
+        return docx2txt.process(buffer)
+
+    return ""

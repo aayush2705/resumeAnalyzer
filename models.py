@@ -35,7 +35,8 @@ class Resume(db.Model):
 
     # ------------ File Storage (PostgreSQL BYTEA) ------------
     file_name = db.Column(db.String(200), nullable=False)
-    file_data = db.Column(db.LargeBinary, nullable=False)     # <--- BINARY FILE STORAGE
+    file_data = db.Column(db.LargeBinary, nullable=False)     # <-- store bytes
+    file_mime = db.Column(db.String(50), nullable=False)      # <-- pdf/doc/docx
 
     # ------------ Parsed & AI-generated fields ------------
     parsed_text = db.Column(db.Text)
@@ -49,14 +50,15 @@ class Resume(db.Model):
     resume_score = db.Column(db.Float)
     tips = db.Column(db.Text)
 
-    # ------------ Extra fields ------------
+    # ------------ Additional fields ------------
     courses = db.Column(db.Text)
     course_links = db.Column(db.Text)
     candidate_name = db.Column(db.String(255))
-    candidate_level = db.Column(db.String(50))  # <-- You used this in view_resume()
+    candidate_level = db.Column(db.String(50))  
 
     def __repr__(self):
         return f"<Resume {self.file_name} for User {self.user_id}>"
+
 
 
 # =====================================================

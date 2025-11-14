@@ -20,6 +20,7 @@ from reportlab.platypus import Image as RLImage, PageBreak
 from reportlab.lib.styles import ParagraphStyle
 from models import Course
 import json
+from modules.parser import extract_text_bytes
 
 
 # ---------------- ROADMAP DATA ----------------
@@ -889,25 +890,28 @@ def upload_resume():
         return redirect(url_for('candidate_dashboard'))
 
     filename = secure_filename(file.filename)
-    file_bytes = file.read()   # <-- Read file into memory (for BYTEA)
+    file_bytes = file.read()   # Read file into memory
+
+    # Detect MIME type for parser
+    mime_type = file.mimetype  
 
     user = User.query.get(session['user_id'])
 
     try:
-        # Extract text from uploaded file (without saving to disk)
-        import tempfile
-        with tempfile.NamedTemporaryFile(delete=False, suffix=filename) as temp_file:
-            temp_file.write(file_bytes)
-            temp_file_path = temp_file.name
+        # -------------------------------
+        # Extract TEXT directly from BYTES
+        # -------------------------------
+        from modules.parser import extract_text_bytes
+        text = extract_text_bytes(file_bytes, mime_type)
 
-        text = extract_text(temp_file_path)
         analysis = analyze_resume(text)
 
-        # Create new Resume entry (PostgreSQL bytea storage)
+        # Save resume in database
         new_resume = Resume(
             user_id=user.id,
             file_name=filename,
-            file_data=file_bytes,                         # <-- STORE FILE IN DB
+            file_data=file_bytes,          # Store binary file
+            file_mime=mime_type,           # Store mime for parsing later
             parsed_text=analysis.get('summary', ''),
             skills=', '.join(analysis.get('skills_found', [])),
             experience=str(analysis.get('experience', '')),
@@ -924,6 +928,7 @@ def upload_resume():
         traceback.print_exc()
         flash(f"Error analyzing resume: {str(e)}", "danger")
         return redirect(url_for('candidate_dashboard'))
+
 
 # ---------------- VIEW RESUME ---------------- #
 @app.route('/view_resume/<int:resume_id>')
@@ -959,8 +964,7 @@ def view_resume(resume_id):
 
     # ---------- PROCESSING ----------
     try:
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.file_name)
-        text = extract_text(filepath)
+        text = extract_text_bytes(resume.file_data, resume.file_mime)
 
         extracted_name = extract_candidate_name(text)
 
@@ -978,8 +982,9 @@ def view_resume(resume_id):
 
     # ---------- ANALYZE RESUME ----------
     try:
-        text = extract_text(filepath)
+        text = extract_text_bytes(resume.file_data, resume.file_mime)
         analysis = analyze_resume(text)
+
         rt_lower = text.lower()
 
         # -------- Candidate Level -------- #
