@@ -123,13 +123,6 @@ ROADMAPS = {
         'Build REST APIs using .NET',
         'Deploy .NET Projects to Cloud'
     ],
-    'PHP Developer': [
-        'Learn Core PHP & OOP',
-        'Master Laravel Framework',
-        'Work with MySQL & REST APIs',
-        'Learn Authentication & Security',
-        'Deploy Scalable PHP Applications'
-    ],
     'JavaScript Developer': [
         'Master Core JavaScript & DOM',
         'Understand Async JS, Promises, Event Loop',

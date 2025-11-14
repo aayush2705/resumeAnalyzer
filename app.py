@@ -269,30 +269,6 @@ ROADMAPS = {
         'image': 'static/roadmaps/full_stack_developer_roadmap.png'
     },
 
-    'Software Engineer': {
-        'title': 'Software Engineer Roadmap',
-        'steps': [
-            'Learn DSA and Problem Solving',
-            'Master OOP and Design Patterns',
-            'Understand System Design',
-            'Work with APIs and Databases',
-            'Build Scalable Software Projects'
-        ],
-        'image': 'static/roadmaps/software_engineer_roadmap.png'
-    },
-
-    'ML Engineer': {
-        'title': 'ML Engineer Roadmap',
-        'steps': [
-            'Master ML Algorithms and Math',
-            'Learn TensorFlow and PyTorch',
-            'Perform Feature Engineering',
-            'Deploy ML Models (MLOps)',
-            'Build End-to-End ML Pipelines'
-        ],
-        'image': 'static/roadmaps/ml_engineer_roadmap.png'
-    },
-
     'Backend Developer': {
         'title': 'Backend Developer Roadmap',
         'steps': [
@@ -789,14 +765,6 @@ FULLSTACK_KEYWORD = {
     'full stack', 'system design', 'version control', 'git'
 }
 
-SOFTWARE_ENGINEER_KEYWORD = {
-    'data structures', 'algorithms', 'problem solving'
-}
-
-ML_ENGINEER_KEYWORD = {
-    'mlops', 'feature engineering', 'model training', 'model deployment'
-}
-
 BACKEND_DEV_KEYWORD = {
     'authentication', 'authorization', 'redis'
 }
@@ -831,8 +799,6 @@ JOB_KEYWORDS = {
     'PHP Developer': PHP_DEV_KEYWORD,
     'JavaScript Developer': JAVASCRIPT_DEV_KEYWORD,
     'Full Stack Developer': FULLSTACK_KEYWORD,
-    'Software Engineer': SOFTWARE_ENGINEER_KEYWORD,
-    'ML Engineer': ML_ENGINEER_KEYWORD,
     'Backend Developer': BACKEND_DEV_KEYWORD,
     'Frontend Developer': FRONTEND_DEV_KEYWORD
 }
@@ -1369,24 +1335,6 @@ def view_resume(resume_id):
         ]
     },
 
-    # =========================================================
-    # 18) PHP DEVELOPER
-    # =========================================================
-    "PHP Developer": {
-        "skills": ['php developer'],  # special role
-        "courses": [
-            ("PHP Full Course – freeCodeCamp", "https://youtu.be/OK_JCtrrv-c"),
-            ("Laravel From Scratch – Laracasts", "https://laracasts.com/series/laravel-8-from-scratch"),
-            ("PHP with MySQL – Udemy", "https://www.udemy.com/course/php-for-complete-beginners-includes-msql-object-oriented/"),
-            ("Object-Oriented PHP – Udemy", "https://www.udemy.com/course/php-oop-object-oriented-programming/"),
-            ("Laravel REST API – YouTube", "https://youtu.be/MT-GJQIY3EU"),
-            ("PHP Security Crash Course – Udemy", "https://www.udemy.com/course/php-security/"),
-            ("PHP MVC Framework Course – YouTube", "https://youtu.be/6ERdu4k62wI"),
-            ("Deploying PHP Apps – Udemy", "https://www.udemy.com/course/deploy-php-app/"),
-            ("MySQL Masterclass – Udemy", "https://www.udemy.com/course/the-complete-sql-bootcamp/"),
-            ("Laravel Livewire Course", "https://laravel-livewire.com/docs/2.x/quickstart")
-        ]
-    },
 
     # =========================================================
     # 19) JAVASCRIPT DEVELOPER
@@ -1968,11 +1916,8 @@ def show_roadmaps():
         {"name": "Java Developer", "image": "roadmaps/java_developer_roadmap.png"},
         {"name": "C/C++ Developer", "image": "roadmaps/c_c___developer_roadmap.png"},
         {"name": ".NET Developer", "image": "roadmaps/_net_developer_roadmap.png"},
-        {"name": "PHP Developer", "image": "roadmaps/php_developer_roadmap.png"},
         {"name": "JavaScript Developer", "image": "roadmaps/javascript_developer_roadmap.png"},
         {"name": "Full Stack Developer", "image": "roadmaps/fullstack_developer_roadmap.png"},
-        {"name": "Software Engineer", "image": "roadmaps/software_engineer_roadmap.png"},
-        {"name": "ML Engineer", "image": "roadmaps/ml_engineer_roadmap.png"},
         {"name": "Backend Developer", "image": "roadmaps/backend_developer_roadmap.png"},
         {"name": "Frontend Developer", "image": "roadmaps/frontend_developer_roadmap.png"}
     ]
