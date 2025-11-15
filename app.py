@@ -21,6 +21,7 @@ from reportlab.lib.styles import ParagraphStyle
 from models import Course
 import json
 from modules.parser import extract_text_bytes
+import re
 
 
 # ---------------- ROADMAP DATA ----------------
