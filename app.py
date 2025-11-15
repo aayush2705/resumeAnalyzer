@@ -25,30 +25,21 @@ import re
 
 
 app = Flask(__name__)
-from flask import request
 
-@app.before_request
-def fix_render_https():
-    if request.headers.get("X-Forwarded-Proto", "") == "https":
-        request.environ["wsgi.url_scheme"] = "https"
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
-
-
-
-# Read secret key from Render environment (production)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev_key_for_local")
-
-# Recommended for Render session behavior
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev_key")
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 
-
-
+@app.after_request
+def apply_cors(response):
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 
 bcrypt = Bcrypt(app)
-
-
 
 # ---------------- ROADMAP DATA ----------------
 ROADMAPS = {
