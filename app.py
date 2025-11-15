@@ -800,10 +800,19 @@ def home():
     return render_template('home.html')
 
 # ---------------- REGISTER ---------------- #
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+
+#     if request.method == 'POST':
+#         session.pop('_flashes', None)
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
+    if request.method == 'GET':
+        session.pop('_flashes', None)
+
     if request.method == 'POST':
+        session.pop('_flashes', None)
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
@@ -848,11 +857,56 @@ def register():
 
 
 # ---------------- LOGIN ---------------- #
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+
+#     if request.method == 'GET':
+#         session.pop('_flashes', None)
+
+#     if request.method == 'POST':
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         role = request.form.get('role')
+
+#         user = User.query.filter_by(email=email).first()
+
+#         if not user:
+#             flash("Email not found! Please register first.", "danger")
+#             return redirect(url_for("login"))
+
+#         if not bcrypt.check_password_hash(user.password, password):
+#             flash("Incorrect password!", "danger")
+#             return redirect(url_for("login"))
+
+#         if user.role != role:
+#             flash("Incorrect role selected!", "danger")
+#             return redirect(url_for("login"))
+
+#         # Success login
+#         session['user_id'] = user.id
+#         session['role'] = user.role
+#         session['user_name'] = user.name   # <-- ADD THIS
+
+
+#         flash(f"Welcome, {user.name}!", "success")
+
+#         # FIXED REDIRECT
+#         if user.role == "admin":
+#             return redirect(url_for("admin_dashboard"))
+#         else:
+#             return redirect(url_for("candidate_dashboard"))
+
+#     return render_template("login.html")
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    if request.method == 'GET':
+    # Only clear flashes on a NORMAL PAGE LOAD, not after redirect
+    if request.method == 'GET' and 'just_logged_out' not in session:
         session.pop('_flashes', None)
+
+    # Remove the temporary flag if exists
+    session.pop('just_logged_out', None)
 
     if request.method == 'POST':
         email = request.form.get('email')
@@ -873,15 +927,12 @@ def login():
             flash("Incorrect role selected!", "danger")
             return redirect(url_for("login"))
 
-        # Success login
+        # Success
         session['user_id'] = user.id
         session['role'] = user.role
-        session['user_name'] = user.name   # <-- ADD THIS
-
-
+        session['user_name'] = user.name
         flash(f"Welcome, {user.name}!", "success")
 
-        # FIXED REDIRECT
         if user.role == "admin":
             return redirect(url_for("admin_dashboard"))
         else:
@@ -1981,11 +2032,18 @@ def show_roadmaps():
 
 
 # ---------------- LOGOUT ---------------- #
+# @app.route('/logout')
+# def logout():
+#     session.clear()
+#     flash("You have been logged out.", "info")
+#     return redirect(url_for('login'))
 @app.route('/logout')
 def logout():
     session.clear()
+    session['just_logged_out'] = True   # Important fix
     flash("You have been logged out.", "info")
     return redirect(url_for('login'))
+
 
 # ---------------- MAIN ---------------- #
 if __name__ == "__main__":
