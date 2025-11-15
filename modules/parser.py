@@ -3,6 +3,7 @@ import docx2txt
 import PyPDF2
 import difflib
 import unicodedata
+import io
 
 # Optional: use pdfplumber if available (better PDF text extraction)
 try:
@@ -243,3 +244,20 @@ def analyze_resume(text: str) -> dict:
         "experience": experience,
         "summary": summary
     }
+
+def extract_text_bytes(file_bytes, mime):
+    if mime == "application/pdf":
+        reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() or ""
+        return text
+
+    if mime in [
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/msword"
+    ]:
+        buffer = io.BytesIO(file_bytes)
+        return docx2txt.process(buffer)
+
+    return ""
