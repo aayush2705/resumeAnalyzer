@@ -112,7 +112,6 @@
 
             <!-- Candidate Details -->
             <p><strong>Candidate Name:</strong> {{ resume.candidate_name }}</p>
-            <p><strong>Candidate Level:</strong> {{ resume.candidate_level }}</p>
 
             <!-- Analysis Summary -->
             <div class="section-card">
@@ -154,7 +153,27 @@
                     {% endif %}
 
                 </div>
+                <div class="section-card mt-4">
 
+                    <!-- Case 2: Show warning + sample download -->
+                    {% if case_flag == 2 %}
+                    <div class="alert alert-warning">
+                        <strong>{{ case_message }}</strong>
+                    </div>
+
+                    <a href="{{ url_for('download_sample_resume') }}" class="btn btn-outline-primary mt-2">
+                        Download Sample Resume Format
+                    </a>
+                    {% endif %}
+
+                    <!-- Case 1: Show sample resume quietly -->
+                    {% if case_flag == 1 %}
+                    <a href="{{ url_for('download_sample_resume') }}" class="btn btn-secondary mt-2">
+                        Sample Resume Format (Optional)
+                    </a>
+                    {% endif %}
+
+                </div>
 
                 <!-- Recommended Skills -->
                 <div class="section-card">

@@ -655,7 +655,10 @@ def add_courses():
     db.session.commit()
     return "✅ Courses added successfully!"
 
-
+@app.route("/download_sample_resume")
+def download_sample_resume():
+    sample_path = os.path.join(os.getcwd(), "Sample_Resume_Format.docx")  # or .docx
+    return send_file(sample_path, as_attachment=True)
 
 
 # ---------------- UPLOAD CONFIG ---------------- #
@@ -668,135 +671,109 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # ===============================================================
 
 # ------------------- OLD ROLES (CLEANED) ----------------------
-
-DS_KEYWORD = {
-    'tensorflow', 'keras', 'pytorch', 'scikit-learn', 'machine learning',
-    'deep learning', 'streamlit', 'opencv', 'ai', 'nlp'
-}
-
-WEB_KEYWORD = {
-    'php', 'wordpress', 'magento', 'laravel', 'express',
-    'rest api', 'mongodb', 'frontend', 'backend'
-}
-
-ANDROID_KEYWORD = {
-    'android', 'kotlin', 'jetpack compose', 'android studio', 'firebase', 'kivy'
-}
-
-IOS_KEYWORD = {
-    'ios', 'swift', 'swiftui', 'objective-c', 'xcode', 'uikit', 'cocoa'
-}
-
-UIUX_KEYWORD = {
-    'figma', 'adobe xd', 'balsamiq', 'prototyping', 'wireframes',
-    'mockups', 'usability testing', 'user interface', 'user experience'
-}
-
-DATA_ANALYST_KEYWORD = {
-    'excel', 'power bi', 'tableau', 'data cleaning', 'analytics'
-}
-
-CLOUD_DEVOPS_KEYWORD = {
-    'aws', 'gcp', 'docker', 'kubernetes', 'terraform', 'jenkins',
-    'ci/cd', 'ansible', 'infrastructure'
-}
-
-CYBER_KEYWORD = {
-    'cybersecurity', 'ethical hacking', 'penetration testing', 'network security',
-    'firewall', 'siem', 'burp suite', 'kali linux', 'vulnerability assessment'
-}
-
-QA_KEYWORD = {
-    'automation testing', 'selenium', 'cypress', 'api testing',
-    'bug tracking', 'pytest', 'quality assurance'
-}
-
-BA_KEYWORD = {
-    'business analysis', 'requirement gathering', 'documentation',
-    'stakeholder', 'project management'
-}
-
-DBA_KEYWORD = {
-    'pl/sql', 'oracle', 'postgresql', 'normalization',
-    'backup', 'performance tuning', 'rds'
-}
-
-AI_NLP_KEYWORD = {
-    'transformers', 'huggingface', 'bert', 'gpt',
-    'text classification', 'language model', 'speech recognition'
-}
-
-PRODUCT_MANAGER_KEYWORD = {
-    'product management', 'roadmap', 'market research',
-    'data-driven', 'leadership', 'notion'
-}
-
-
-# ------------------- NEW ROLES (NO OVERLAP) ----------------------
-
-PYTHON_DEV_KEYWORD = {
-    'python', 'django', 'fastapi', 'tkinter',
-    'scripting', 'automation','flask'
-}
-
-JAVA_DEV_KEYWORD = {
-    'java', 'j2ee', 'spring', 'spring boot',
-    'hibernate', 'servlets', 'microservices'
-}
-
-
-DOTNET_KEYWORD = {
-    'c#', '.net', 'asp.net', 'entity framework', 'mvc', 'linq'
-}
-
-PHP_DEV_KEYWORD = {
-    'php developer',  # different from core PHP
-}
-
-JAVASCRIPT_DEV_KEYWORD = {
-    'ecmascript', 'dom', 'event loop', 'callbacks', 'promises', 'async', 'await'
-}
-
-FULLSTACK_KEYWORD = {
-    'full stack', 'system design', 'version control', 'git'
-}
-
-BACKEND_DEV_KEYWORD = {
-    'authentication', 'authorization', 'redis'
-}
-
-FRONTEND_DEV_KEYWORD = {
-    'responsive design', 'ui design'
-}
-
-
-# ------------------- FINAL COMBINED NON-OVERLAPPING ROLES ----------------------
-
 JOB_KEYWORDS = {
-    'Data Science': DS_KEYWORD,
-    'Web Development': WEB_KEYWORD,
-    'Android Development': ANDROID_KEYWORD,
-    'iOS Development': IOS_KEYWORD,
-    'UI/UX Design': UIUX_KEYWORD,
-    'Data Analyst': DATA_ANALYST_KEYWORD,
-    'Cloud & DevOps': CLOUD_DEVOPS_KEYWORD,
-    'Cybersecurity': CYBER_KEYWORD,
-    'Quality Assurance': QA_KEYWORD,
-    'Business Analyst': BA_KEYWORD,
-    'Database Administrator': DBA_KEYWORD,
-    'AI / NLP Engineer': AI_NLP_KEYWORD,
-    'Product Manager': PRODUCT_MANAGER_KEYWORD,
+    "Data Science": {
+        "python", "pandas", "numpy", "tensorflow", "keras", "pytorch",
+        "scikit-learn", "machine learning", "deep learning", "nlp"
+    },
 
-    # NEW ROLES
-    'Python Developer': PYTHON_DEV_KEYWORD,
-    'Java Developer': JAVA_DEV_KEYWORD,
-    '.NET Developer': DOTNET_KEYWORD,
-    'PHP Developer': PHP_DEV_KEYWORD,
-    'JavaScript Developer': JAVASCRIPT_DEV_KEYWORD,
-    'Full Stack Developer': FULLSTACK_KEYWORD,
-    'Backend Developer': BACKEND_DEV_KEYWORD,
-    'Frontend Developer': FRONTEND_DEV_KEYWORD
+    "Web Development": {
+        "php", "wordpress", "magento", "laravel", "express", "mongodb",
+        "frontend", "backend", "nodejs", "react", "html", "css", "javascript"
+    },
+
+    "Android Development": {
+        "android", "kotlin", "jetpack compose", "android studio", "firebase"
+    },
+
+    "iOS Development": {
+        "ios", "swift", "objective-c", "swiftui", "xcode", "uikit"
+    },
+
+    "UI/UX Design": {
+        "figma", "adobe xd", "wireframes", "mockups", "prototyping"
+    },
+
+    "Data Analyst": {
+        "excel", "power bi", "tableau", "sql", "analytics", "data cleaning"
+    },
+
+    "Cloud & DevOps": {
+        "aws", "gcp", "docker", "kubernetes", "terraform",
+        "jenkins", "ci/cd", "ansible"
+    },
+
+    "Cybersecurity": {
+        "ethical hacking", "penetration testing", "burp suite",
+        "kali linux", "firewall", "siem"
+    },
+
+    "Quality Assurance": {
+        "selenium", "cypress", "pytest", "automation testing"
+    },
+
+    "Business Analyst": {
+        "documentation", "requirement gathering", "stakeholder"
+    },
+
+    "Database Administrator": {
+        "pl/sql", "oracle", "postgresql", "normalization", "backup",
+        "performance tuning"
+    },
+
+    "AI / NLP Engineer": {
+        "transformers", "huggingface", "bert", "gpt",
+        "text classification", "language model"
+    },
+
+    "Product Manager": {
+        "product management", "market research", "roadmap"
+    },
+
+    "Python Developer": {
+        "python", "django", "fastapi", "flask", "automation"
+    },
+
+    "Java Developer": {
+        "java", "j2ee", "spring", "spring boot", "hibernate", "microservices"
+    },
+
+    ".NET Developer": {
+        "c#", "asp.net", "entity framework", "linq", ".net"
+    },
+
+    "PHP Developer": {
+        "php developer", "php", "laravel"
+    },
+
+    "JavaScript Developer": {
+        "javascript", "ecmascript", "callbacks", "promises", "async", "await"
+    },
+
+    "Full Stack Developer": {
+        "full stack", "git", "system design", "html", "css",
+        "javascript", "backend", "frontend"
+    },
+
+    "Backend Developer": {
+        "redis", "authentication", "authorization", "nodejs", "django", "spring boot"
+    },
+
+    "Frontend Developer": {
+        "responsive design", "ui design", "react", "html", "css"
+    },
+
+    # ⭐⭐⭐ NEW ROLE ADDED HERE ⭐⭐⭐
+    "C/C++ Developer": {
+        "c", "c++", "oops", "object oriented programming",
+        "data structures", "dsa", "stl", "pointers",
+        "memory management"
+    }
 }
+
+
+
+
 
 
 
@@ -942,32 +919,25 @@ def view_resume(resume_id):
     # ---------- FETCH RESUME OWNER ----------
     candidate = User.query.get(resume.user_id)
 
-    # ---------- EXTRACT NAME FROM RESUME ----------
+    # ---------- EXTRACT NAME ----------
     def extract_candidate_name(text):
         lines = text.strip().split("\n")
 
         for line in lines[:7]:
             clean = line.strip()
-
             if not clean or len(clean.split()) > 4:
                 continue
-
             if all(w.replace(".", "").isalpha() for w in clean.split()):
                 return clean
-
         return None
 
-    # ---------- PROCESSING ----------
+    # ---------- READ RESUME FILE ----------
     try:
-        text = extract_text_bytes(resume.file_data, resume.file_mime)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.file_name)
+        text = extract_text(filepath)
 
         extracted_name = extract_candidate_name(text)
-
-        if extracted_name:
-            resume.candidate_name = extracted_name
-        else:
-            resume.candidate_name = candidate.name if candidate else "Unknown"
-
+        resume.candidate_name = extracted_name if extracted_name else (candidate.name if candidate else "Unknown")
         db.session.commit()
 
     except Exception as e:
@@ -975,58 +945,41 @@ def view_resume(resume_id):
         resume.candidate_name = candidate.name if candidate else "Unknown"
         db.session.commit()
 
-    # ---------- ANALYZE RESUME ----------
+    # ---------- ANALYZING RESUME ----------
     try:
-        text = extract_text_bytes(resume.file_data, resume.file_mime)
+        text = extract_text(filepath)
+        from modules.parser import extract_name
+        extracted_name = extract_name(text)
+        resume.candidate_name = extracted_name if extracted_name else (candidate.name if candidate else "Unknown")
+        db.session.commit()
         analysis = analyze_resume(text)
-
         rt_lower = text.lower()
 
-        # -------- Candidate Level -------- #
-        cand_level = "Fresher"
-        if "internship" in rt_lower:
-            cand_level = "Intermediate"
-        elif "experience" in rt_lower:
-            cand_level = "Experienced"
 
-        # -------- Skills from resume -------- #
+
+        # -------- SKILLS FOUND (ONLY from Skills Section) -------- #
         skills_list = analysis.get("skills_found", [])
         skills_cleaned = [s.lower().strip() for s in skills_list]
-
-        # -------- UNIVERSAL IMPROVED ROLE MATCHING -------- #
-
-        rt_words = set(rt_lower.split())   # tokenized resume words
-
-# -------- UNIVERSAL IMPROVED ROLE MATCHING -------- #
+        resume.skills = ", ".join(skills_cleaned)
 
 
+        # -------- ROLE MATCHING (ONLY SKILLS, NO FULL TEXT) -------- #
         role_scores = {}
 
         for role, keywords in JOB_KEYWORDS.items():
-          score = 0
+            score = 0
+            for kw in keywords:
+                kw = kw.lower().strip()
 
-          for kw in keywords:
-            kw = kw.lower()
+                # Strong match → ONLY if the skill is in the extracted skills section
+                if kw in skills_cleaned:
+                    score += 5
 
-        # 1) Strong match → skill exactly found
-            if kw in skills_cleaned:
-              score += 3
+            role_scores[role] = score
 
-        # 2) Medium match → keyword appears anywhere in resume text
-            if kw in rt_lower:
-              score += 2
-
-        # 3) Weak match → partial overlap (e.g., "manage" in "management")
-            for word in rt_words:
-              if kw in word and len(kw) > 3:
-                score += 1
-
-          role_scores[role] = score
-
-# Pick highest-scoring role
+        # -------- SELECT BEST ROLE -------- #
         best_role = max(role_scores, key=role_scores.get)
-
-        predicted_role = best_role if role_scores[best_role] >= 5 else None
+        predicted_role = best_role if role_scores[best_role] > 0 else None
         resume.predicted_role = predicted_role
 
 
@@ -1493,7 +1446,6 @@ def view_resume(resume_id):
         resume.recommended_skills = ", ".join(recommended_skills)
         resume.courses = json.dumps([c["name"] for c in courses])
         resume.course_links = json.dumps([c["link"] for c in courses])
-        resume.candidate_level = cand_level
 
         db.session.commit()
 
@@ -1520,25 +1472,45 @@ def view_resume(resume_id):
     tips = resume.tips.split("\n") if resume.tips else []
 
     # ---------- Roadmap ----------
+# ---------- Roadmap ----------
     roadmap = ROADMAPS.get(resume.predicted_role)
 
-    # ---------- Render ----------
-    return render_template(
-        "view_resume.html",
-        resume={
-            "id": resume.id,
-            "candidate_name": resume.candidate_name,
-            "candidate_level": resume.candidate_level,
-            "parsed_text": getattr(resume, "parsed_text", ""),
-            "skills": getattr(resume, "skills", ""),
-            "predicted_role": resume.predicted_role,
-            "recommended_skills": recommended_skills,
-            "tips": tips,
-            "score": resume.resume_score,
-            "courses": courses,
-            "roadmap": roadmap
-        }
+# ---------- SAMPLE RESUME LOGIC ----------
+    skills_list = skills_cleaned
+    predicted_role = resume.predicted_role
+
+# Default → Case 1
+    case_flag = 1
+    case_message = ""
+
+# --- Case 2: No skills + No predicted role ---
+    if not skills_list and not predicted_role:
+     case_flag = 2
+     case_message = (
+        "Either your resume does not include a Skills section or the formatting prevented skill extraction. "
+        "Please correct your resume using the sample format below."
     )
+
+
+# ---------- Render ----------
+    return render_template(
+    "view_resume.html",
+    resume={
+        "id": resume.id,
+        "candidate_name": resume.candidate_name,
+        "candidate_level": resume.candidate_level,
+        "parsed_text": getattr(resume, "parsed_text", ""),
+        "skills": getattr(resume, "skills", ""),
+        "predicted_role": resume.predicted_role,
+        "recommended_skills": recommended_skills,
+        "tips": tips,
+        "score": resume.resume_score,
+        "courses": courses,
+        "roadmap": roadmap
+    },
+    case_flag=case_flag,       # ✅ Correct — passed separately
+    case_message=case_message  # ✅ Correct — passed separately
+)
 
 
 
