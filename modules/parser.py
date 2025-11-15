@@ -5,12 +5,16 @@ import PyPDF2
 import difflib
 import unicodedata
 
-# Optional: use pdfplumber if available (better PDF text extraction)
+# pdfminer fallback
+from pdfminer.high_level import extract_text as pdfminer_extract
+
+# Optional: use pdfplumber if available
 try:
     import pdfplumber
     _HAS_PDFPLUMBER = True
 except Exception:
     _HAS_PDFPLUMBER = False
+
 
 # ---------------- SKILL BANK ----------------
 SKILL_BANK = [
@@ -37,6 +41,7 @@ SKILL_BANK = [
     "matlab", "power automate"
 ]
 
+
 def _normalize_token(s: str) -> str:
     s = s.lower().strip()
     s = unicodedata.normalize("NFKC", s)
@@ -47,21 +52,15 @@ def _normalize_token(s: str) -> str:
     s = re.sub(r"\s+", " ", s)
     return s
 
-NORMALIZED_SKILLS = { _normalize_token(s): s for s in SKILL_BANK }
 
-# ---------------- PDF TEXT EXTRACTION ----------------
-def _extract_pdf_pypdf2(file_path):
-    try:
-        with open(file_path, "rb") as f:
-            reader = PyPDF2.PdfReader(f)
-            pages = [(page.extract_text() or "") for page in reader.pages]
-            return "\n".join(pages)
-    except:
-        return ""
+NORMALIZED_SKILLS = {_normalize_token(s): s for s in SKILL_BANK}
 
+
+# ---------------- FILE TEXT EXTRACTION ----------------
 def extract_text(file_path: str) -> str:
     text = ""
 
+    # PDF extraction
     if file_path.lower().endswith(".pdf"):
         if _HAS_PDFPLUMBER:
             try:
@@ -73,58 +72,83 @@ def extract_text(file_path: str) -> str:
         else:
             text = _extract_pdf_pypdf2(file_path)
 
+    # DOCX extraction
     elif file_path.lower().endswith(".docx"):
         try:
-            text = docx2txt.process(file_path) or ""
+            text = docx2txt.process(file_path)
         except:
             text = ""
 
-    # Clean text
+    return _clean_text(text)
+
+
+def _extract_pdf_pypdf2(file_path):
+    try:
+        with open(file_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            pages = [(page.extract_text() or "") for page in reader.pages]
+            return "\n".join(pages)
+    except:
+        return ""
+
+
+def _clean_text(text):
     text = text.replace("\u2022", "•")
     text = text.replace("\u2013", "-").replace("\u2014", "-")
     text = re.sub(r"\r\n?", "\n", text)
     text = "\n".join(re.sub(r"[ \t]{2,}", " ", ln).strip() for ln in text.splitlines())
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
-
     return text
 
-# ---------------- BYTE DATA EXTRACTION (UPLOADS) ----------------
+
+# ---------------- BYTE-BASED PDF/DOCX (UPLOADS) ----------------
 def extract_text_bytes(file_bytes, mime):
     """
-    Extract text from uploaded file bytes (PDF + DOCX)
+    Extract text from uploaded file bytes (PDF + DOCX) with pdfminer fallback.
     """
-    # PDF
+
+    # ---------- PDF ----------
     if mime == "application/pdf":
+        # 1. pdfplumber
         try:
             if _HAS_PDFPLUMBER:
                 with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
                     pages = [p.extract_text() or "" for p in pdf.pages]
-                    return "\n".join(pages)
+                    text = "\n".join(pages).strip()
+                    if text:
+                        return _clean_text(text)
         except:
             pass
 
-        # fallback: PyPDF2
+        # 2. PyPDF2
         try:
             reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-            text = ""
-            for page in reader.pages:
-                text += page.extract_text() or ""
-            return text
+            pages = [(page.extract_text() or "") for page in reader.pages]
+            text = "\n".join(pages).strip()
+            if text:
+                return _clean_text(text)
+        except:
+            pass
+
+        # 3. FINAL fallback → pdfminer
+        try:
+            text = pdfminer_extract(io.BytesIO(file_bytes))
+            return _clean_text(text)
         except:
             return ""
 
-    # DOCX
+    # ---------- DOCX ----------
     if mime in [
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "application/msword"
     ]:
         try:
-            buffer = io.BytesIO(file_bytes)
-            return docx2txt.process(buffer) or ""
+            return docx2txt.process(io.BytesIO(file_bytes)) or ""
         except:
             return ""
 
     return ""
+
 
 # ---------------- NAME EXTRACTION ----------------
 def extract_name(text: str) -> str:
@@ -153,6 +177,7 @@ def extract_name(text: str) -> str:
 
     return lines[0] if lines else "Unknown"
 
+
 # ---------------- EXPERIENCE EXTRACTION ----------------
 _NUMBER_WORDS = {
     "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
@@ -165,7 +190,7 @@ def extract_experience(text):
     m = re.findall(r"(\d+)\s*(?:\+|-)?\s*(?:to\s*)?(\d+)?\s*(?:years|year|yrs|yr)\b", lowered)
     if m:
         nums = [int(n) for n in m[0] if n]
-        return max(nums) if nums else 0
+        return max(nums)
 
     m2 = re.search(r"(\d+)\s*(?:\+)?\s*(?:years|year|yrs|yr)\b", lowered)
     if m2:
@@ -177,6 +202,7 @@ def extract_experience(text):
 
     return 0
 
+
 # ---------------- SKILL EXTRACTION ----------------
 def analyze_resume(text: str) -> dict:
     lowered = (text or "").lower()
@@ -185,79 +211,69 @@ def analyze_resume(text: str) -> dict:
     skill_headers = [
         "skills", "technical skills", "key skills", "skillset", "skills & tools",
         "competencies", "software skills", "languages/tools", "skills summary",
-        "professional skills", "strengths", "skills:", "skillset:", 
+        "professional skills", "strengths", "skills:", "skillset:",
         "technical competency", "key expertise"
     ]
 
     skill_section = ""
     found_header = False
 
-    # Find "Skills" section first
+    # Detect "Skills" section
     for i, ln in enumerate(lines):
         for header in skill_headers:
             if ln.startswith(header):
-                section_lines = []
+                block = []
                 for nxt in lines[i+1:i+15]:
                     if re.search(r"(education|experience|projects|certificat|achiev|contact|declaration)", nxt):
                         break
-                    section_lines.append(nxt)
-                skill_section = "\n".join(section_lines)
+                    block.append(nxt)
+                skill_section = "\n".join(block)
                 found_header = True
                 break
         if found_header:
             break
 
-    # Fallback: find lines containing many skills
+    # Fallback scan
     if not skill_section:
         candidates = []
         for ln in lines:
-            if ("," in ln) or ("•" in ln) or (" -" in ln) or any(tok in ln for tok in NORMALIZED_SKILLS):
+            if ("," in ln) or ("•" in ln) or any(tok in ln for tok in NORMALIZED_SKILLS):
                 candidates.append(ln)
-        skill_section = "\n".join(candidates[:12])
+        skill_section = "\n".join(candidates[:10])
 
     found_skills = set()
-    section_text = _normalize_token(skill_section)
-    possible_items = re.split(r"[,\|\;/•\n]+", section_text)
+    tokens = re.split(r"[,\|\;/•\n]+", _normalize_token(skill_section))
 
-    # Matching system
-    def match_token(token: str):
-        token_n = _normalize_token(token)
+    # Matching
+    def match_token(token):
+        t = _normalize_token(token)
+        if t in NORMALIZED_SKILLS:
+            return NORMALIZED_SKILLS[t]
+        if t in ("c", "c++", "c#"):
+            return t
+        for nk, orig in NORMALIZED_SKILLS.items():
+            if len(nk) > 1 and nk in t:
+                return orig
+        close = difflib.get_close_matches(t, NORMALIZED_SKILLS.keys(), n=1, cutoff=0.85)
+        return NORMALIZED_SKILLS[close[0]] if close else None
 
-        if token_n in NORMALIZED_SKILLS:
-            return NORMALIZED_SKILLS[token_n]
-
-        if token_n in ("c", "c++", "c#"):
-            return token_n
-
-        for nk, original in NORMALIZED_SKILLS.items():
-            if len(nk) > 1 and nk in token_n:
-                return original
-
-        close = difflib.get_close_matches(token_n, NORMALIZED_SKILLS.keys(), n=1, cutoff=0.85)
-        if close:
-            return NORMALIZED_SKILLS[close[0]]
-
-        return None
-
-    for item in possible_items:
+    for item in tokens:
         match = match_token(item)
         if match:
             found_skills.add(match)
 
-    # If still empty, fallback: search entire text
+    # LAST fallback → search entire text
     if not found_skills:
         whole = _normalize_token(lowered)
-        for nk, original in NORMALIZED_SKILLS.items():
+        for nk, orig in NORMALIZED_SKILLS.items():
             if re.search(rf"\b{re.escape(nk)}\b", whole):
-                found_skills.add(original)
+                found_skills.add(orig)
 
-    # Finalize
-    found_skills = sorted(found_skills, key=lambda x: x.lower())
-    experience = extract_experience(text)
-    summary = f"Skills Found: {', '.join(found_skills) if found_skills else 'None'} | Experience: {experience} years"
+    found_skills = sorted(found_skills)
+    exp = extract_experience(text)
 
     return {
         "skills_found": found_skills,
-        "experience": experience,
-        "summary": summary
+        "experience": exp,
+        "summary": f"Skills Found: {', '.join(found_skills) if found_skills else 'None'} | Experience: {exp} years"
     }
