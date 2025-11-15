@@ -12,6 +12,26 @@ try:
 except:
     _HAS_PDFPLUMBER = False
 
+def extract_text(file_path):
+    """
+    Filepath-based extraction (used in view_resume only).
+    """
+    try:
+        if file_path.lower().endswith(".pdf"):
+            with open(file_path, "rb") as f:
+                reader = PyPDF2.PdfReader(f)
+                pages = []
+                for page in reader.pages:
+                    pages.append(page.extract_text() or "")
+                return "\n".join(pages)
+
+        if file_path.lower().endswith(".docx"):
+            return docx2txt.process(file_path)
+
+        return ""
+
+    except:
+        return ""
 
 # ---------------- NORMALIZATION ----------------
 def _normalize_token(s: str):
