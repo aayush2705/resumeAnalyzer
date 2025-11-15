@@ -27,9 +27,10 @@ import re
 app = Flask(__name__)
 from flask import request
 @app.before_request
-def enforce_https_request():
-    if request.headers.get('X-Forwarded-Proto') == 'http':
-        request.environ['wsgi.url_scheme'] = 'https'
+def fix_render_session():
+    if request.headers.get("X-Forwarded-Proto", "") == "https":
+        request.environ["wsgi.url_scheme"] = "https"
+
 
 
 # Read secret key from Render environment (production)
@@ -39,6 +40,7 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev_key_for_local")
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+
 
 
 bcrypt = Bcrypt(app)
