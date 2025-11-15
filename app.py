@@ -916,70 +916,44 @@ def view_resume(resume_id):
         flash("You do not have permission to view this resume.", "danger")
         return redirect(url_for('candidate_dashboard'))
 
-    # ---------- FETCH RESUME OWNER ----------
     candidate = User.query.get(resume.user_id)
 
-    # ---------- EXTRACT NAME ----------
-    def extract_candidate_name(text):
-        lines = text.strip().split("\n")
+    # -----------------------------------
+    # ALWAYS INITIALIZE skills_cleaned
+    # -----------------------------------
+    skills_cleaned = []
 
-        for line in lines[:7]:
-            clean = line.strip()
-            if not clean or len(clean.split()) > 4:
-                continue
-            if all(w.replace(".", "").isalpha() for w in clean.split()):
-                return clean
-        return None
-
-    # ---------- READ RESUME FILE ----------
     try:
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.file_name)
-        text = extract_text(filepath)
+        # Read text from database-stored file bytes
+        from modules.parser import extract_text_bytes, extract_name
+        file_bytes = resume.file_data
+        mime_type = resume.file_mime
 
-        extracted_name = extract_candidate_name(text)
-        resume.candidate_name = extracted_name if extracted_name else (candidate.name if candidate else "Unknown")
-        db.session.commit()
+        text = extract_text_bytes(file_bytes, mime_type)
 
-    except Exception as e:
-        print("Name extraction error:", e)
-        resume.candidate_name = candidate.name if candidate else "Unknown"
-        db.session.commit()
-
-    # ---------- ANALYZING RESUME ----------
-    try:
-        text = extract_text(filepath)
-        from modules.parser import extract_name
+        # ---------- Extract Candidate Name ----------
         extracted_name = extract_name(text)
         resume.candidate_name = extracted_name if extracted_name else (candidate.name if candidate else "Unknown")
         db.session.commit()
+
+        # ---------- Analyze Resume ----------
         analysis = analyze_resume(text)
-        rt_lower = text.lower()
 
-
-
-        # -------- SKILLS FOUND (ONLY from Skills Section) -------- #
+        # SKILLS
         skills_list = analysis.get("skills_found", [])
         skills_cleaned = [s.lower().strip() for s in skills_list]
         resume.skills = ", ".join(skills_cleaned)
 
-
-        # -------- ROLE MATCHING (ONLY SKILLS, NO FULL TEXT) -------- #
+        # ---------- Role Prediction ----------
+        rt_lower = text.lower()
         role_scores = {}
 
         for role, keywords in JOB_KEYWORDS.items():
-            score = 0
-            for kw in keywords:
-                kw = kw.lower().strip()
-
-                # Strong match → ONLY if the skill is in the extracted skills section
-                if kw in skills_cleaned:
-                    score += 5
-
+            score = sum(5 for kw in keywords if kw.lower() in skills_cleaned)
             role_scores[role] = score
 
-        # -------- SELECT BEST ROLE -------- #
-        best_role = max(role_scores, key=role_scores.get)
-        predicted_role = best_role if role_scores[best_role] > 0 else None
+        predicted_role = max(role_scores, key=role_scores.get)
+        predicted_role = predicted_role if role_scores[predicted_role] > 0 else None
         resume.predicted_role = predicted_role
 
 
@@ -1407,14 +1381,11 @@ def view_resume(resume_id):
         recommended_skills = []
         courses = []
 
-        if predicted_role in ROLE_DATA:
+        if predicted_role and predicted_role in ROLE_DATA:
             recommended_skills = ROLE_DATA[predicted_role]["skills"]
-            courses = [{"name": n, "link": l}
-                       for n, l in ROLE_DATA[predicted_role]["courses"]]
+            courses = [{"name": n, "link": l} for n, l in ROLE_DATA[predicted_role]["courses"]]
 
-        # ----------------------------------------------------
-        # RESUME SCORING
-        # ----------------------------------------------------
+        # ---------- Resume Score ----------
         sections = {
             "objective": (['objective', 'summary'], 6),
             "education": (['education', 'degree', 'college'], 12),
@@ -1439,14 +1410,12 @@ def view_resume(resume_id):
 
         resume_score = min(resume_score, 100)
 
-        # ---------- SAVE TO DATABASE ----------
-        resume.predicted_role = predicted_role
+        # ---------- Save to DB ----------
         resume.resume_score = resume_score
         resume.tips = "\n".join(tips)
         resume.recommended_skills = ", ".join(recommended_skills)
         resume.courses = json.dumps([c["name"] for c in courses])
         resume.course_links = json.dumps([c["link"] for c in courses])
-
         db.session.commit()
 
     except Exception as e:
@@ -1463,54 +1432,49 @@ def view_resume(resume_id):
         except:
             pass
 
-    # ---------- Load Recommended Skills ----------
-    recommended_skills = []
-    if resume.recommended_skills:
-        recommended_skills = [s.strip()
-                              for s in resume.recommended_skills.split(",")]
-
+    # ---------- Recommended Skills ----------
+    recommended_skills = resume.recommended_skills.split(",") if resume.recommended_skills else []
     tips = resume.tips.split("\n") if resume.tips else []
 
     # ---------- Roadmap ----------
-# ---------- Roadmap ----------
     roadmap = ROADMAPS.get(resume.predicted_role)
 
-# ---------- SAMPLE RESUME LOGIC ----------
-    skills_list = skills_cleaned
+    # -------------------------------------------------------
+    # SAMPLE RESUME LOGIC (Case detection)
+    # -------------------------------------------------------
     predicted_role = resume.predicted_role
 
-# Default → Case 1
     case_flag = 1
     case_message = ""
 
-# --- Case 2: No skills + No predicted role ---
-    if not skills_list and not predicted_role:
-     case_flag = 2
-     case_message = (
-        "Either your resume does not include a Skills section or the formatting prevented skill extraction. "
-        "Please correct your resume using the sample format below."
+    if not skills_cleaned and not predicted_role:
+        case_flag = 2
+        case_message = (
+            "Either your resume does not include a Skills section "
+            "or the formatting prevented skill extraction. "
+            "Please correct your resume using the sample format below."
+        )
+
+    # ---------- Render ----------
+    return render_template(
+        "view_resume.html",
+        resume={
+            "id": resume.id,
+            "candidate_name": resume.candidate_name,
+            "candidate_level": resume.candidate_level,
+            "parsed_text": resume.parsed_text or "",
+            "skills": resume.skills or "",
+            "predicted_role": resume.predicted_role,
+            "recommended_skills": recommended_skills,
+            "tips": tips,
+            "score": resume.resume_score,
+            "courses": courses,
+            "roadmap": roadmap
+        },
+        case_flag=case_flag,
+        case_message=case_message
     )
 
-
-# ---------- Render ----------
-    return render_template(
-    "view_resume.html",
-    resume={
-        "id": resume.id,
-        "candidate_name": resume.candidate_name,
-        "candidate_level": resume.candidate_level,
-        "parsed_text": getattr(resume, "parsed_text", ""),
-        "skills": getattr(resume, "skills", ""),
-        "predicted_role": resume.predicted_role,
-        "recommended_skills": recommended_skills,
-        "tips": tips,
-        "score": resume.resume_score,
-        "courses": courses,
-        "roadmap": roadmap
-    },
-    case_flag=case_flag,       # ✅ Correct — passed separately
-    case_message=case_message  # ✅ Correct — passed separately
-)
 
 
 
