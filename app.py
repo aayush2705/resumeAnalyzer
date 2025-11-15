@@ -805,54 +805,95 @@ def home():
 
 #     if request.method == 'POST':
 #         session.pop('_flashes', None)
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+
+#     if request.method == 'GET':
+#         session.pop('_flashes', None)
+
+#     if request.method == 'POST':
+#         session.pop('_flashes', None)
+#         name = request.form['name']
+#         email = request.form['email']
+#         password = request.form['password']
+#         confirm_password = request.form['confirm_password']
+#         role = request.form['role']
+
+#         # Match Passwords
+#         if password != confirm_password:
+#             flash("Passwords do not match!", "danger")
+#             return redirect(url_for('register'))
+
+#         # Password Strength Validation
+#         password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+
+#         if not re.match(password_pattern, password):
+#             flash("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.", "danger")
+#             return redirect(url_for('register'))
+
+#         # Existing User Validation
+#         if User.query.filter_by(email=email).first():
+#             flash("Email already registered!", "danger")
+#             return redirect(url_for('register'))
+
+#         # Admin Role Validation
+#         if role == "admin":
+#             admin_key = request.form.get('adminKey')
+#             if admin_key != "ADMIN123":
+#                 flash("Incorrect Admin Secret Key!", "danger")
+#                 return redirect(url_for('register'))
+
+#         # Save User
+#         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+#         new_user = User(name=name, email=email, password=hashed_password, role=role)
+#         db.session.add(new_user)
+#         db.session.commit()
+
+#         flash("Registration successful! Please login.", "success")
+#         return redirect(url_for('login'))
+
+#     return render_template('register.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
-    if request.method == 'GET':
-        session.pop('_flashes', None)
-
     if request.method == 'POST':
-        session.pop('_flashes', None)
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
         role = request.form['role']
 
-        # Match Passwords
+        # Password match
         if password != confirm_password:
             flash("Passwords do not match!", "danger")
             return redirect(url_for('register'))
 
-        # Password Strength Validation
-        password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
-
-        if not re.match(password_pattern, password):
-            flash("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.", "danger")
-            return redirect(url_for('register'))
-
-        # Existing User Validation
+        # Email exists
         if User.query.filter_by(email=email).first():
             flash("Email already registered!", "danger")
             return redirect(url_for('register'))
 
-        # Admin Role Validation
+        # Admin key check
         if role == "admin":
             admin_key = request.form.get('adminKey')
             if admin_key != "ADMIN123":
                 flash("Incorrect Admin Secret Key!", "danger")
                 return redirect(url_for('register'))
 
-        # Save User
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(name=name, email=email, password=hashed_password, role=role)
+        # Save user
+        hashed_pw = bcrypt.generate_password_hash(password).decode("utf-8")
+        new_user = User(name=name, email=email, password=hashed_pw, role=role)
+
         db.session.add(new_user)
         db.session.commit()
 
         flash("Registration successful! Please login.", "success")
         return redirect(url_for('login'))
 
+    # GET → show register page
     return render_template('register.html')
+
 
 
 
@@ -901,13 +942,6 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    # Only clear flashes on a NORMAL PAGE LOAD, not after redirect
-    if request.method == 'GET' and 'just_logged_out' not in session:
-        session.pop('_flashes', None)
-
-    # Remove the temporary flag if exists
-    session.pop('just_logged_out', None)
-
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -915,19 +949,22 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
+        # EMAIL CHECK
         if not user:
             flash("Email not found! Please register first.", "danger")
             return redirect(url_for("login"))
 
+        # PASSWORD CHECK
         if not bcrypt.check_password_hash(user.password, password):
             flash("Incorrect password!", "danger")
             return redirect(url_for("login"))
 
+        # ROLE CHECK
         if user.role != role:
             flash("Incorrect role selected!", "danger")
             return redirect(url_for("login"))
 
-        # Success
+        # SUCCESS
         session['user_id'] = user.id
         session['role'] = user.role
         session['user_name'] = user.name
@@ -938,7 +975,9 @@ def login():
         else:
             return redirect(url_for("candidate_dashboard"))
 
+    # GET request → Just show login page
     return render_template("login.html")
+
 
 
 # ---------------- CANDIDATE DASHBOARD ---------------- #
@@ -2040,9 +2079,9 @@ def show_roadmaps():
 @app.route('/logout')
 def logout():
     session.clear()
-    session['just_logged_out'] = True   # Important fix
     flash("You have been logged out.", "info")
     return redirect(url_for('login'))
+
 
 
 # ---------------- MAIN ---------------- #
