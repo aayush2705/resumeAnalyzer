@@ -24,6 +24,20 @@ from modules.parser import extract_text_bytes
 import re
 
 
+app = Flask(__name__)
+
+# Read secret key from Render environment (production)
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev_key_for_local")
+
+# Recommended for Render session behavior
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+bcrypt = Bcrypt(app)
+
+
+
 # ---------------- ROADMAP DATA ----------------
 ROADMAPS = {
 
@@ -298,9 +312,7 @@ ROADMAPS = {
 
 
 # ---------------- APP SETUP ---------------- #
-app = Flask(__name__)
-app.secret_key = "your_secret_key"
-bcrypt = Bcrypt(app)
+
 
 # ---------------- DATABASE CONFIG ---------------- #
 # ✅ Local fallback (for testing locally)
