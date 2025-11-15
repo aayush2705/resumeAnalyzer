@@ -786,6 +786,7 @@ def home():
 # ---------------- REGISTER ---------------- #
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
@@ -793,20 +794,31 @@ def register():
         confirm_password = request.form['confirm_password']
         role = request.form['role']
 
+        # Match Passwords
         if password != confirm_password:
             flash("Passwords do not match!", "danger")
             return redirect(url_for('register'))
 
+        # Password Strength Validation
+        password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+
+        if not re.match(password_pattern, password):
+            flash("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.", "danger")
+            return redirect(url_for('register'))
+
+        # Existing User Validation
         if User.query.filter_by(email=email).first():
             flash("Email already registered!", "danger")
             return redirect(url_for('register'))
 
+        # Admin Role Validation
         if role == "admin":
             admin_key = request.form.get('adminKey')
             if admin_key != "ADMIN123":
                 flash("Incorrect Admin Secret Key!", "danger")
                 return redirect(url_for('register'))
 
+        # Save User
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         new_user = User(name=name, email=email, password=hashed_password, role=role)
         db.session.add(new_user)
@@ -817,37 +829,92 @@ def register():
 
     return render_template('register.html')
 
+
+
 # ---------------- LOGIN ---------------- #
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    if request.method == 'GET':
+        session.pop('_flashes', None)
+
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        role = request.form['role']
+        email = request.form.get('email')
+        password = request.form.get('password')
+        role = request.form.get('role')
 
-        user = User.query.filter_by(email=email, role=role).first()
-        if user and bcrypt.check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            session['role'] = user.role
-            session['name'] = user.name
-            flash(f"Welcome, {user.name}!", "success")
-            return redirect(url_for('candidate_dashboard') if role == "candidate" else url_for('admin_dashboard'))
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            flash("Email not found! Please register first.", "danger")
+            return redirect(url_for("login"))
+
+        if not bcrypt.check_password_hash(user.password, password):
+            flash("Incorrect password!", "danger")
+            return redirect(url_for("login"))
+
+        if user.role != role:
+            flash("Incorrect role selected!", "danger")
+            return redirect(url_for("login"))
+
+        # Success login
+        session['user_id'] = user.id
+        session['role'] = user.role
+        session['user_name'] = user.name   # <-- ADD THIS
+
+
+        flash(f"Welcome, {user.name}!", "success")
+
+        # FIXED REDIRECT
+        if user.role == "admin":
+            return redirect(url_for("admin_dashboard"))
         else:
-            flash("Invalid credentials!", "danger")
-            return redirect(url_for('login'))
+            return redirect(url_for("candidate_dashboard"))
 
-    return render_template('login.html')
+    return render_template("login.html")
+
 
 # ---------------- CANDIDATE DASHBOARD ---------------- #
 @app.route('/candidate')
 def candidate_dashboard():
+
+    # -----------------------------------
+    # 1. Check Login + Role Validation
+    # -----------------------------------
     if 'user_id' not in session or session.get('role') != 'candidate':
         flash("Please login as Candidate to access this page.", "warning")
         return redirect(url_for('login'))
 
-    user = User.query.get(session['user_id'])
-    resumes = Resume.query.filter_by(user_id=user.id).all()
-    return render_template('candidate.html', user=user, resumes=resumes)
+    # -----------------------------------
+    # 2. Fetch Logged-in User
+    # -----------------------------------
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+
+    if not user:
+        # User might be deleted by admin
+        session.clear()
+        flash("Your account no longer exists. Please contact support.", "danger")
+        return redirect(url_for('login'))
+
+    # -----------------------------------
+    # 3. Fetch resumes uploaded by candidate
+    # -----------------------------------
+    resumes = (
+        Resume.query
+        .filter_by(user_id=user.id)
+        .order_by(Resume.uploaded_at.desc())  # show newest first
+        .all()
+    )
+
+    # -----------------------------------
+    # 4. Render Dashboard
+    # -----------------------------------
+    return render_template(
+        'candidate.html',
+        user=user,
+        resumes=resumes
+    )
 
 # ---------------- RESUME UPLOAD ---------------- #
 @app.route('/upload_resume', methods=['POST'])

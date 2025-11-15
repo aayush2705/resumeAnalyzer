@@ -49,6 +49,18 @@
   <div class="card shadow p-4" style="width: 360px;">
     <h4 class="text-center mb-4 fw-bold">Login</h4>
 
+    <!-- 🔥 FLASH ALERTS HERE -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} text-center py-2">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- 🔥 END ALERTS -->
+
     <form method="POST" action="{{ url_for('login') }}">
       <div class="mb-3">
         <input type="email" name="email" class="form-control" placeholder="Email" required>
