@@ -27,6 +27,11 @@ class Resume(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     file_name = db.Column(db.String(200), nullable=False)
+
+    # ⭐ REQUIRED FIELDS (add these)
+    file_data = db.Column(db.LargeBinary)         # store PDF/DOCX bytes
+    file_mime = db.Column(db.String(100))         # pdf/docx mime type
+
     parsed_text = db.Column(db.Text)
     skills = db.Column(db.Text)
     experience = db.Column(db.String(100))
@@ -37,8 +42,6 @@ class Resume(db.Model):
     resume_score = db.Column(db.Float)
     tips = db.Column(db.Text)
 
-
-    # ✅ Added new fields
     courses = db.Column(db.Text)
     course_links = db.Column(db.Text)
     candidate_name = db.Column(db.String(255))
@@ -46,6 +49,7 @@ class Resume(db.Model):
 
     def __repr__(self):
         return f"<Resume {self.file_name} for User ID {self.user_id}>"
+
 
 # ------------------- FEEDBACK MODEL ------------------- #
 class Feedback(db.Model):
