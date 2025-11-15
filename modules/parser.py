@@ -5,15 +5,21 @@ import PyPDF2
 import difflib
 import unicodedata
 
-# pdfminer fallback
-from pdfminer.high_level import extract_text as pdfminer_extract
-
-# Optional: use pdfplumber if available
+# Optional pdfplumber
 try:
     import pdfplumber
     _HAS_PDFPLUMBER = True
-except Exception:
+except:
     _HAS_PDFPLUMBER = False
+
+
+# ---------------- NORMALIZATION ----------------
+def _normalize_token(s: str):
+    s = s.lower().strip()
+    s = unicodedata.normalize("NFKC", s)
+    s = re.sub(r"[.\-/&]", " ", s)
+    s = re.sub(r"\s+", " ", s)
+    return s
 
 
 # ---------------- SKILL BANK ----------------
@@ -41,103 +47,57 @@ SKILL_BANK = [
     "matlab", "power automate"
 ]
 
-
-def _normalize_token(s: str) -> str:
-    s = s.lower().strip()
-    s = unicodedata.normalize("NFKC", s)
-    s = s.replace(".", "")
-    s = s.replace("/", " ")
-    s = s.replace("-", " ")
-    s = s.replace("&", " and ")
-    s = re.sub(r"\s+", " ", s)
-    return s
-
-
 NORMALIZED_SKILLS = {_normalize_token(s): s for s in SKILL_BANK}
 
 
-# ---------------- FILE TEXT EXTRACTION ----------------
-def extract_text(file_path: str) -> str:
-    text = ""
-
-    # PDF extraction
-    if file_path.lower().endswith(".pdf"):
-        if _HAS_PDFPLUMBER:
-            try:
-                with pdfplumber.open(file_path) as pdf:
-                    pages = [p.extract_text() or "" for p in pdf.pages]
-                    text = "\n".join(pages)
-            except:
-                text = _extract_pdf_pypdf2(file_path)
-        else:
-            text = _extract_pdf_pypdf2(file_path)
-
-    # DOCX extraction
-    elif file_path.lower().endswith(".docx"):
-        try:
-            text = docx2txt.process(file_path)
-        except:
-            text = ""
-
-    return _clean_text(text)
+# ---------------- CLEAN TEXT ----------------
+def _clean_text(text):
+    if not text:
+        return ""
+    text = text.replace("\u2022", "•")
+    text = text.replace("\u2013", "-").replace("\u2014", "-")
+    return text.strip()
 
 
-def _extract_pdf_pypdf2(file_path):
+# ---------------- OLD (RELIABLE) BYTE PDF EXTRACTOR ----------------
+def _extract_pdf_bytes_pypdf2(file_bytes):
+    """Stable extraction method that always worked for you."""
     try:
-        with open(file_path, "rb") as f:
-            reader = PyPDF2.PdfReader(f)
-            pages = [(page.extract_text() or "") for page in reader.pages]
-            return "\n".join(pages)
+        reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+        pages = []
+        for page in reader.pages:
+            pages.append(page.extract_text() or "")
+        return "\n".join(pages)
     except:
         return ""
 
 
-def _clean_text(text):
-    text = text.replace("\u2022", "•")
-    text = text.replace("\u2013", "-").replace("\u2014", "-")
-    text = re.sub(r"\r\n?", "\n", text)
-    text = "\n".join(re.sub(r"[ \t]{2,}", " ", ln).strip() for ln in text.splitlines())
-    text = re.sub(r"\n{3,}", "\n\n", text).strip()
-    return text
-
-
-# ---------------- BYTE-BASED PDF/DOCX (UPLOADS) ----------------
+# ---------------- COMBINED PDF EXTRACTOR ----------------
 def extract_text_bytes(file_bytes, mime):
     """
-    Extract text from uploaded file bytes (PDF + DOCX) with pdfminer fallback.
+    Best hybrid approach:
+    1. pdfplumber → if text is usable
+    2. PyPDF2 (OLD version) → always worked reliably
     """
 
-    # ---------- PDF ----------
     if mime == "application/pdf":
-        # 1. pdfplumber
-        try:
-            if _HAS_PDFPLUMBER:
+        # 1. Try pdfplumber (but only keep if text is valid)
+        if _HAS_PDFPLUMBER:
+            try:
                 with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
                     pages = [p.extract_text() or "" for p in pdf.pages]
                     text = "\n".join(pages).strip()
-                    if text:
+                    # pdfplumber sometimes returns garbage text, so verify:
+                    if len(text) > 40:  # valid text
                         return _clean_text(text)
-        except:
-            pass
+            except:
+                pass
 
-        # 2. PyPDF2
-        try:
-            reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
-            pages = [(page.extract_text() or "") for page in reader.pages]
-            text = "\n".join(pages).strip()
-            if text:
-                return _clean_text(text)
-        except:
-            pass
+        # 2. Your old reliable method
+        text = _extract_pdf_bytes_pypdf2(file_bytes)
+        return _clean_text(text)
 
-        # 3. FINAL fallback → pdfminer
-        try:
-            text = pdfminer_extract(io.BytesIO(file_bytes))
-            return _clean_text(text)
-        except:
-            return ""
-
-    # ---------- DOCX ----------
+    # ------------ DOCX -------------
     if mime in [
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "application/msword"
@@ -151,129 +111,41 @@ def extract_text_bytes(file_bytes, mime):
 
 
 # ---------------- NAME EXTRACTION ----------------
-def extract_name(text: str) -> str:
+def extract_name(text):
     if not text:
         return "Unknown"
-
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    lines = [ln for ln in lines if not re.search(r"\b(resume|curriculum vitae|cv)\b", ln, re.I)]
-
-    patterns = [
-        r"^[A-Z][a-z]+(?:\s[A-Z][a-z]+){0,3}$",
-        r"^[A-Z][A-Z\s\-']{1,40}$",
-        r"^[A-Za-z]{2,}\s[A-Za-z]{2,}$"
-    ]
-
-    for ln in lines[:12]:
-        for p in patterns:
-            if re.match(p, ln):
-                return ln
-
-    email = re.search(r"([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})", text)
-    if email:
-        name = email.group(1).replace(".", " ").replace("_", " ").title()
-        if len(name.split()) <= 4:
-            return name
-
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    for l in lines[:10]:
+        if re.match(r"^[A-Z][a-z]+(?:\s[A-Z][a-z]+){0,2}$", l):
+            return l
     return lines[0] if lines else "Unknown"
 
 
 # ---------------- EXPERIENCE EXTRACTION ----------------
-_NUMBER_WORDS = {
-    "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
-}
-
 def extract_experience(text):
-    lowered = text.lower()
-
-    m = re.findall(r"(\d+)\s*(?:\+|-)?\s*(?:to\s*)?(\d+)?\s*(?:years|year|yrs|yr)\b", lowered)
-    if m:
-        nums = [int(n) for n in m[0] if n]
-        return max(nums)
-
-    m2 = re.search(r"(\d+)\s*(?:\+)?\s*(?:years|year|yrs|yr)\b", lowered)
-    if m2:
-        return int(m2.group(1))
-
-    for w, val in _NUMBER_WORDS.items():
-        if re.search(rf"\b{w}\b\s*(?:year|years|yr|yrs)\b", lowered):
-            return val
-
+    nums = re.findall(r'(\d+)\+?\s*(years?|yrs?)', text, re.I)
+    if nums:
+        return max(int(n[0]) for n in nums)
     return 0
 
 
 # ---------------- SKILL EXTRACTION ----------------
-def analyze_resume(text: str) -> dict:
+def analyze_resume(text):
     lowered = (text or "").lower()
-    lines = [ln.strip() for ln in lowered.splitlines() if ln.strip()]
 
-    skill_headers = [
-        "skills", "technical skills", "key skills", "skillset", "skills & tools",
-        "competencies", "software skills", "languages/tools", "skills summary",
-        "professional skills", "strengths", "skills:", "skillset:",
-        "technical competency", "key expertise"
-    ]
+    found = []
+    for skill in SKILL_BANK:
+        sl = skill.lower()
+        if re.search(rf"\b{re.escape(sl)}\b", lowered):
+            found.append(sl)
 
-    skill_section = ""
-    found_header = False
-
-    # Detect "Skills" section
-    for i, ln in enumerate(lines):
-        for header in skill_headers:
-            if ln.startswith(header):
-                block = []
-                for nxt in lines[i+1:i+15]:
-                    if re.search(r"(education|experience|projects|certificat|achiev|contact|declaration)", nxt):
-                        break
-                    block.append(nxt)
-                skill_section = "\n".join(block)
-                found_header = True
-                break
-        if found_header:
-            break
-
-    # Fallback scan
-    if not skill_section:
-        candidates = []
-        for ln in lines:
-            if ("," in ln) or ("•" in ln) or any(tok in ln for tok in NORMALIZED_SKILLS):
-                candidates.append(ln)
-        skill_section = "\n".join(candidates[:10])
-
-    found_skills = set()
-    tokens = re.split(r"[,\|\;/•\n]+", _normalize_token(skill_section))
-
-    # Matching
-    def match_token(token):
-        t = _normalize_token(token)
-        if t in NORMALIZED_SKILLS:
-            return NORMALIZED_SKILLS[t]
-        if t in ("c", "c++", "c#"):
-            return t
-        for nk, orig in NORMALIZED_SKILLS.items():
-            if len(nk) > 1 and nk in t:
-                return orig
-        close = difflib.get_close_matches(t, NORMALIZED_SKILLS.keys(), n=1, cutoff=0.85)
-        return NORMALIZED_SKILLS[close[0]] if close else None
-
-    for item in tokens:
-        match = match_token(item)
-        if match:
-            found_skills.add(match)
-
-    # LAST fallback → search entire text
-    if not found_skills:
-        whole = _normalize_token(lowered)
-        for nk, orig in NORMALIZED_SKILLS.items():
-            if re.search(rf"\b{re.escape(nk)}\b", whole):
-                found_skills.add(orig)
-
-    found_skills = sorted(found_skills)
+    found = sorted(list(set(found)))
     exp = extract_experience(text)
+    name = extract_name(text)
 
     return {
-        "skills_found": found_skills,
+        "candidate_name": name,
+        "skills_found": found,
         "experience": exp,
-        "summary": f"Skills Found: {', '.join(found_skills) if found_skills else 'None'} | Experience: {exp} years"
+        "summary": f"Skills Found: {', '.join(found) if found else 'None'} | Experience: {exp} years"
     }
