@@ -44,7 +44,6 @@ bcrypt = Bcrypt(app)
 # ---------------- ROADMAP DATA ----------------
 ROADMAPS = {
 
-    # ================= OLD ROLES =====================
 
     'Data Science': {
         'title': 'Data Science Roadmap',
@@ -202,8 +201,6 @@ ROADMAPS = {
         'image': 'static/roadmaps/product_manager_roadmap.png'
     },
 
-    # ================= NEW ROLES =====================
-
     'Python Developer': {
         'title': 'Python Developer Roadmap',
         'steps': [
@@ -339,7 +336,7 @@ def add_courses():
     courses_data = {
 
 # ================================================================
-# OLD ROLES (10 COURSES EACH)
+#  ROLES 
 # ================================================================
 
 'Data Science': [
@@ -512,10 +509,6 @@ def add_courses():
 ],
 
 
-# ================================================================
-# NEW ROLES (10 COURSES EACH)
-# ================================================================
-
 'Python Developer': [
     ['Python for Everybody – Coursera', 'https://www.coursera.org/specializations/python'],
     ['Automate the Boring Stuff (FREE)', 'https://automatetheboringstuff.com/'],
@@ -683,10 +676,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # ===============================================================
-#                  🚀 FINAL UNIQUE JOB KEYWORDS
+#                       JOB KEYWORDS
 # ===============================================================
 
-# ------------------- OLD ROLES (CLEANED) ----------------------
 JOB_KEYWORDS = {
     "Data Science": {
         "python", "pandas", "numpy", "tensorflow", "keras", "pytorch",
@@ -778,8 +770,6 @@ JOB_KEYWORDS = {
     "Frontend Developer": {
         "responsive design", "ui design", "react", "html", "css"
     },
-
-    # ⭐⭐⭐ NEW ROLE ADDED HERE ⭐⭐⭐
     "C/C++ Developer": {
         "c", "c++", "oops", "object oriented programming",
         "data structures", "dsa", "stl", "pointers",
@@ -787,72 +777,11 @@ JOB_KEYWORDS = {
     }
 }
 
-
-
-
-
-
-
-
 # ---------------- HOME ---------------- #
 @app.route('/')
 def home():
     return render_template('home.html')
 
-# ---------------- REGISTER ---------------- #
-# @app.route('/register', methods=['GET', 'POST'])
-# def register():
-
-#     if request.method == 'POST':
-#         session.pop('_flashes', None)
-# @app.route('/register', methods=['GET', 'POST'])
-# def register():
-
-#     if request.method == 'GET':
-#         session.pop('_flashes', None)
-
-#     if request.method == 'POST':
-#         session.pop('_flashes', None)
-#         name = request.form['name']
-#         email = request.form['email']
-#         password = request.form['password']
-#         confirm_password = request.form['confirm_password']
-#         role = request.form['role']
-
-#         # Match Passwords
-#         if password != confirm_password:
-#             flash("Passwords do not match!", "danger")
-#             return redirect(url_for('register'))
-
-#         # Password Strength Validation
-#         password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
-
-#         if not re.match(password_pattern, password):
-#             flash("Password must contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.", "danger")
-#             return redirect(url_for('register'))
-
-#         # Existing User Validation
-#         if User.query.filter_by(email=email).first():
-#             flash("Email already registered!", "danger")
-#             return redirect(url_for('register'))
-
-#         # Admin Role Validation
-#         if role == "admin":
-#             admin_key = request.form.get('adminKey')
-#             if admin_key != "ADMIN123":
-#                 flash("Incorrect Admin Secret Key!", "danger")
-#                 return redirect(url_for('register'))
-
-#         # Save User
-#         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-#         new_user = User(name=name, email=email, password=hashed_password, role=role)
-#         db.session.add(new_user)
-#         db.session.commit()
-
-#         flash("Registration successful! Please login.", "success")
-#         return redirect(url_for('login'))
-
-#     return render_template('register.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -890,54 +819,9 @@ def register():
 
         flash("Registration successful! Please login.", "success")
         return redirect(url_for('login'))
-
-    # GET → show register page
     return render_template('register.html')
 
 
-
-
-# ---------------- LOGIN ---------------- #
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-
-#     if request.method == 'GET':
-#         session.pop('_flashes', None)
-
-#     if request.method == 'POST':
-#         email = request.form.get('email')
-#         password = request.form.get('password')
-#         role = request.form.get('role')
-
-#         user = User.query.filter_by(email=email).first()
-
-#         if not user:
-#             flash("Email not found! Please register first.", "danger")
-#             return redirect(url_for("login"))
-
-#         if not bcrypt.check_password_hash(user.password, password):
-#             flash("Incorrect password!", "danger")
-#             return redirect(url_for("login"))
-
-#         if user.role != role:
-#             flash("Incorrect role selected!", "danger")
-#             return redirect(url_for("login"))
-
-#         # Success login
-#         session['user_id'] = user.id
-#         session['role'] = user.role
-#         session['user_name'] = user.name   # <-- ADD THIS
-
-
-#         flash(f"Welcome, {user.name}!", "success")
-
-#         # FIXED REDIRECT
-#         if user.role == "admin":
-#             return redirect(url_for("admin_dashboard"))
-#         else:
-#             return redirect(url_for("candidate_dashboard"))
-
-#     return render_template("login.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -974,8 +858,6 @@ def login():
             return redirect(url_for("admin_dashboard"))
         else:
             return redirect(url_for("candidate_dashboard"))
-
-    # GET request → Just show login page
     return render_template("login.html")
 
 
@@ -1012,10 +894,6 @@ def candidate_dashboard():
         .order_by(Resume.uploaded_at.desc())  # show newest first
         .all()
     )
-
-    # -----------------------------------
-    # 4. Render Dashboard
-    # -----------------------------------
     return render_template(
         'candidate.html',
         user=user,
@@ -1627,8 +1505,6 @@ def view_resume(resume_id):
             "or the formatting prevented skill extraction. "
             "Please correct your resume using the sample format below."
         )
-
-    # ---------- Render ----------
     return render_template(
         "view_resume.html",
         resume={
@@ -2054,8 +1930,6 @@ def show_roadmaps():
         {"name": "Database Administrator", "image": "roadmaps/database_administrator_roadmap.png"},
         {"name": "AI / NLP Engineer", "image": "roadmaps/ai___nlp_engineer_roadmap.png"},
         {"name": "Product Manager", "image": "roadmaps/product_manager_roadmap.png"},
-
-        # ----------- NEW ROLES -----------
         {"name": "Python Developer", "image": "roadmaps/python_developer_roadmap.png"},
         {"name": "Java Developer", "image": "roadmaps/java_developer_roadmap.png"},
         {"name": "C/C++ Developer", "image": "roadmaps/c_c___developer_roadmap.png"},
@@ -2068,14 +1942,6 @@ def show_roadmaps():
 
     return render_template("roadmap.html", roadmaps=roadmaps)
 
-
-
-# ---------------- LOGOUT ---------------- #
-# @app.route('/logout')
-# def logout():
-#     session.clear()
-#     flash("You have been logged out.", "info")
-#     return redirect(url_for('login'))
 @app.route('/logout')
 def logout():
     session.clear()
